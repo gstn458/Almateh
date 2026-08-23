@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --neon-blue: #00f0ff;
+    --neon-purple: #b026ff;
+    --midnight: #0c1128;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchor targets clear of the fixed navbar. */
+    scroll-padding-top: 7rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-[#0c1128] font-sans text-white antialiased;
+    /* `clip` rather than `hidden`: `hidden` would make this a scroll container
+       and break the hero's `position: sticky` against the viewport. */
+    overflow-x: clip;
+  }
+
+  /* Elegant, always-visible focus treatment for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--neon-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background-color: rgb(59 130 246 / 0.3);
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-soft {
+    @apply bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-transparent;
+  }
+
+  .glass-panel {
+    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
