@@ -1,0 +1,21 @@
+<div class="wrap section section--flush" style="max-width:480px">
+  <p class="eyebrow">Sign in</p>
+  <h1 class="h2">Welcome back.</h1>
+  <p class="notice" id="storage-mode" hidden></p>
+
+  <form id="login-form" style="margin-top:2.5rem">
+    <p class="form-error" data-form-error hidden></p>
+    <label class="field">
+      <span class="field__label" for="email">Email</span>
+      <input class="input" id="email" name="email" type="email" required autocomplete="email" autocapitalize="off" spellcheck="false">
+    </label>
+    <label class="field">
+      <span class="field__label" for="password">Password</span>
+      <input class="input" id="password" name="password" type="password" required autocomplete="current-password">
+    </label>
+    <button class="btn btn--primary btn--block" type="submit">Sign in</button>
+  </form>
+
+  <p class="form-note">No account yet? <a href="/app/signup.html" style="color:var(--signal);text-decoration:underline">Create one</a>.</p>
+  <p class="form-note">Forgotten your password? Radar cannot email a reset link yet, so <a href="/contact.html" style="color:var(--signal);text-decoration:underline">get in touch</a> and it will be handled manually.</p>
+</div>

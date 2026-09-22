@@ -1,0 +1,57 @@
+<div class="app-head">
+  <div>
+    <p class="eyebrow">Admin</p>
+    <h1 class="h2">Catalogue health.</h1>
+  </div>
+  <button class="btn btn--quiet" type="button" id="admin-signout" hidden>Sign out</button>
+</div>
+
+<div id="admin-gate" hidden>
+  <div class="panel" style="max-width:440px">
+    <h2 class="h3">Administrator sign-in</h2>
+    <p class="lede" style="font-size:14.5px">This console needs an administrator account. Create one with <code>node server/create-admin.js</code>.</p>
+    <form id="admin-login" style="margin-top:1.5rem">
+      <p class="form-error" data-form-error hidden></p>
+      <label class="field">
+        <span class="field__label" for="admin-email">Email</span>
+        <input class="input" id="admin-email" name="email" type="email" required autocomplete="email">
+      </label>
+      <label class="field">
+        <span class="field__label" for="admin-password">Password</span>
+        <input class="input" id="admin-password" name="password" type="password" required autocomplete="current-password">
+      </label>
+      <button class="btn btn--primary btn--block" type="submit">Sign in</button>
+    </form>
+  </div>
+</div>
+
+<div id="admin-content" hidden>
+  <div class="stat-row" id="admin-stats"></div>
+
+  <section aria-labelledby="stale-heading" style="margin-bottom:3rem">
+    <h2 class="h3" id="stale-heading">Due a re-check</h2>
+    <p class="lede" style="font-size:14.5px">Listings never verified, or verified more than 90 days ago. Verifying means opening the official page and confirming the deadline, eligibility and funding.</p>
+    <div class="table-scroll" style="margin-top:1.5rem"><table id="stale-table"></table></div>
+  </section>
+
+  <section aria-labelledby="maintenance-heading" style="margin-bottom:3rem">
+    <h2 class="h3" id="maintenance-heading">Maintenance</h2>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.2rem">
+      <button class="btn btn--ghost btn--sm" type="button" id="run-expire">Run the expiry pass</button>
+      <a class="btn btn--ghost btn--sm" href="/admin/links.html">Run a link check</a>
+      <a class="btn btn--ghost btn--sm" href="/admin/opportunities.html">Edit the catalogue</a>
+    </div>
+    <p class="form-note" id="maintenance-result"></p>
+  </section>
+
+  <section aria-labelledby="usage-heading" style="margin-bottom:3rem">
+    <h2 class="h3" id="usage-heading">Are students reaching outcomes?</h2>
+    <p class="lede" style="font-size:14.5px">Anonymous counts. What matters is the ratio between finding something and actually submitting an application — not time spent on the site.</p>
+    <div class="table-scroll" style="margin-top:1.5rem"><table id="analytics-table"></table></div>
+  </section>
+
+  <section aria-labelledby="audit-heading">
+    <h2 class="h3" id="audit-heading">Recent changes</h2>
+    <div class="table-scroll" style="margin-top:1.5rem"><table id="audit-table"></table></div>
+  </section>
+</div>

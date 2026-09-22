@@ -1,0 +1,29 @@
+<div class="app-head">
+  <div>
+    <p class="eyebrow">Deadline calendar</p>
+    <h1 class="h2">Every date you are tracking.</h1>
+  </div>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+    <button class="btn btn--primary btn--sm" type="button" id="download-ics">Download .ics</button>
+    <button class="btn btn--ghost btn--sm" type="button" id="copy-subscribe">Copy feed URL</button>
+  </div>
+</div>
+
+<p class="notice" id="storage-mode" hidden></p>
+<p class="notice notice--info" id="calendar-note"></p>
+
+<section aria-labelledby="upcoming-heading" style="margin:2.5rem 0 3rem">
+  <h2 class="h3" id="upcoming-heading">Upcoming</h2>
+  <div id="calendar-upcoming"></div>
+</section>
+
+<section aria-labelledby="reminders-heading" style="margin-bottom:3rem">
+  <h2 class="h3" id="reminders-heading">Your reminders</h2>
+  <div id="calendar-reminders"></div>
+</section>
+
+<section aria-labelledby="undated-heading">
+  <h2 class="h3" id="undated-heading">No fixed date yet</h2>
+  <p class="lede" style="font-size:14.5px">These are saved but the organiser has not published a date Radar can count down to. Check the official page.</p>
+  <div id="calendar-undated" style="margin-top:1.2rem"></div>
+</section>

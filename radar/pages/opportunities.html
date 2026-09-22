@@ -1,0 +1,79 @@
+<div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Radar</a><span aria-hidden="true">/</span><span>Directory</span>
+    </nav>
+    <p class="eyebrow">Opportunity directory</p>
+    <h1 class="display">Find your signal.</h1>
+    <p class="lede">Competitions, research programmes, scholarships and fellowships, each linked back to the organisation running it. Sign in and every result is scored against your profile with the reason attached.</p>
+    <p class="notice" id="storage-mode" hidden></p>
+  </div>
+</div>
+
+<div class="wrap">
+  <form class="toolbar" id="directory-tools" role="search" aria-label="Search opportunities">
+    <div>
+      <label class="sr-only" for="q">Search opportunities</label>
+      <input class="input" id="q" name="q" type="search" placeholder="Search by programme, field or organisation" autocomplete="off">
+    </div>
+    <div>
+      <label class="sr-only" for="sort">Sort results</label>
+      <select class="select" id="sort" name="sort">
+        <option value="match">Best match</option>
+        <option value="deadline">Deadline soonest</option>
+        <option value="newest">Recently checked</option>
+        <option value="title">Name A–Z</option>
+      </select>
+    </div>
+    <button class="btn btn--ghost" type="button" id="filters-toggle" aria-expanded="false" aria-controls="filters">Filters</button>
+  </form>
+
+  <div id="filters">
+    <div class="filterbar" role="group" aria-label="Filter by type" id="type-filters"></div>
+    <div class="toolbar" style="padding-top:0">
+      <div>
+        <label class="field__label" for="level">Education level</label>
+        <select class="select" id="level"></select>
+      </div>
+      <div>
+        <label class="field__label" for="region">Region</label>
+        <select class="select" id="region"></select>
+      </div>
+      <div>
+        <label class="field__label" for="funding">Funding</label>
+        <select class="select" id="funding">
+          <option value="all">Any</option>
+          <option value="full">Fully funded</option>
+          <option value="partial">Partly funded</option>
+          <option value="award">Prize or award</option>
+          <option value="free">Free to enter</option>
+          <option value="varies">Varies</option>
+        </select>
+      </div>
+      <div>
+        <label class="field__label" for="status">Status</label>
+        <select class="select" id="status">
+          <option value="all">Any status</option>
+          <option value="open">Open</option>
+          <option value="closing-soon">Closing soon</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="pathway">Pathway</option>
+          <option value="directory">Directory</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:.5rem">
+        <button class="btn btn--quiet" type="button" id="reset-filters">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sr-only" id="results-heading">Results</h2>
+  <p class="result-count" id="result-count" role="status" aria-live="polite">Loading the catalogue…</p>
+  <div class="results" id="results" aria-labelledby="results-heading"></div>
+
+  <p class="form-note" style="margin:2rem 0 4rem">
+    Radar is not the organiser and does not decide who is eligible. Always confirm the deadline and rules on the official page before applying.
+    Something wrong with a listing? <a href="/report.html" style="color:var(--signal);text-decoration:underline">Report it</a>.
+  </p>
+</div>

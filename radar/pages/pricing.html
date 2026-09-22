@@ -1,0 +1,69 @@
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Pricing and access</p>
+    <h1 class="display">Free for students. Today, not eventually.</h1>
+    <p class="lede">Everything Radar can currently do is free and needs no payment card. The tiers below that are not built yet say so plainly, and there is nothing to buy until they exist.</p>
+  </div>
+</div>
+
+<div class="wrap section section--flush">
+  <div class="grid grid--3" style="border:1px solid var(--line);border-radius:var(--radius);overflow:hidden">
+    <div class="panel panel--flat" style="border:0;display:flex;flex-direction:column">
+      <p class="eyebrow">Student</p>
+      <p style="font-family:var(--serif);font-size:52px;line-height:1;margin:0 0 .4rem">$0</p>
+      <p class="lede" style="font-size:14px">Everything that is live today.</p>
+      <ul style="list-style:none;padding:0;margin:1.5rem 0;display:flex;flex-direction:column;gap:.7rem">
+        <li class="chip chip--ok">Full profile and matching</li>
+        <li class="chip chip--ok">Unlimited saves</li>
+        <li class="chip chip--ok">Application tracker</li>
+        <li class="chip chip--ok">Deadline reminders</li>
+        <li class="chip chip--ok">Calendar export</li>
+        <li class="chip chip--ok">Data export and deletion</li>
+      </ul>
+      <a class="btn btn--primary btn--block" href="/app/signup.html" style="margin-top:auto">Create a free account</a>
+    </div>
+
+    <div class="panel panel--flat" style="border:0;display:flex;flex-direction:column">
+      <p class="eyebrow">Student plus</p>
+      <p style="font-family:var(--serif);font-size:52px;line-height:1;margin:0 0 .4rem">Not built</p>
+      <p class="lede" style="font-size:14px">Ideas for later: email and browser notifications, a path builder that sequences applications, and richer match breakdowns.</p>
+      <ul style="list-style:none;padding:0;margin:1.5rem 0;display:flex;flex-direction:column;gap:.7rem">
+        <li class="chip">Email notifications</li>
+        <li class="chip">Path builder</li>
+        <li class="chip">Cohort-free, ad-free</li>
+      </ul>
+      <button class="btn btn--ghost btn--block" type="button" data-waitlist="student-plus" style="margin-top:auto">Tell me when it exists</button>
+    </div>
+
+    <div class="panel panel--flat" style="border:0;display:flex;flex-direction:column">
+      <p class="eyebrow">Schools</p>
+      <p style="font-family:var(--serif);font-size:52px;line-height:1;margin:0 0 .4rem">Talk to us</p>
+      <p class="lede" style="font-size:14px">For counsellors who want a cohort view. Nothing is running yet, so this is a conversation rather than a product.</p>
+      <ul style="list-style:none;padding:0;margin:1.5rem 0;display:flex;flex-direction:column;gap:.7rem">
+        <li class="chip">Cohort dashboard</li>
+        <li class="chip">Shared deadline calendar</li>
+        <li class="chip">Bulk profiles</li>
+      </ul>
+      <a class="btn btn--ghost btn--block" href="/contact.html?subject=Schools" style="margin-top:auto">Contact Radar</a>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:2rem">
+    <h2 class="h3">Join the list</h2>
+    <p class="lede" style="font-size:14.5px">One email when a paid tier actually launches. No newsletter, no drip sequence, and you can ask for the address to be deleted at any time.</p>
+    <form id="waitlist-form" style="margin-top:1.5rem;max-width:460px">
+      <p class="form-error" data-form-error hidden></p>
+      <p class="form-success" data-form-success hidden></p>
+      <input type="hidden" name="kind" value="waitlist">
+      <label class="field">
+        <span class="field__label" for="waitlist-email">Email</span>
+        <input class="input" id="waitlist-email" name="email" type="email" required autocomplete="email">
+        <span class="field__error" data-field-error="email"></span>
+      </label>
+      <input type="hidden" name="subject" id="waitlist-subject" value="Student plus waitlist">
+      <button class="btn btn--primary" type="submit">Add me to the list</button>
+    </form>
+  </div>
+
+  <p class="form-note">Radar takes no commission from any organisation it lists, and no organisation can pay to rank higher. If that ever changes it will be stated here before it happens.</p>
+</div>

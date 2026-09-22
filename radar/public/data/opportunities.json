@@ -1,0 +1,2668 @@
+[
+  {
+    "id": "regeneron-sts",
+    "slug": "regeneron-science-talent-search",
+    "title": "Regeneron Science Talent Search",
+    "org": "Society for Science",
+    "type": "competition",
+    "field": "STEM · Research",
+    "subjects": [
+      "research",
+      "engineering",
+      "mathematics",
+      "biology",
+      "physics",
+      "chemistry"
+    ],
+    "audience": "U.S. high school seniors",
+    "levels": [
+      "high-school"
+    ],
+    "location": "United States",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S. students and eligible international students at U.S. schools",
+    "funding": "award",
+    "fundingDetails": "$3.1M distributed annually; top award $250,000",
+    "benefits": [
+      "Cash awards up to $250,000",
+      "National recognition",
+      "Finalist week in Washington, D.C."
+    ],
+    "documents": [
+      "Independent research report",
+      "Research abstract",
+      "Two educator recommendations",
+      "Transcript"
+    ],
+    "steps": [
+      "Complete an independent research project",
+      "Register on the Society application portal",
+      "Upload the research report and forms",
+      "Submit before the November deadline"
+    ],
+    "summary": "A national research competition for future STEM leaders. The application distributes $3.1M in annual awards.",
+    "description": "The Regeneron Science Talent Search is the oldest science and mathematics competition for high school seniors in the United States. Entrants submit an original independent research project, which is judged on scientific rigour, originality and the student's potential as a researcher.",
+    "deadline": "2026-11-05",
+    "deadlineLabel": "Nov 5, 2026 · 8pm ET",
+    "dateType": "fixed",
+    "opensAt": "2026-06-01",
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.societyforscience.org/regeneron-sts/",
+    "applyUrl": "https://www.societyforscience.org/regeneron-sts/",
+    "sourceLabel": "Official program page",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "open",
+    "tags": [
+      "research",
+      "prestigious",
+      "stem"
+    ]
+  },
+  {
+    "id": "regeneron-isef",
+    "slug": "regeneron-isef",
+    "title": "Regeneron International Science and Engineering Fair",
+    "org": "Society for Science",
+    "type": "competition",
+    "field": "STEM · Engineering",
+    "subjects": [
+      "research",
+      "engineering",
+      "biology",
+      "physics",
+      "chemistry",
+      "computer-science"
+    ],
+    "audience": "Pre-college student researchers",
+    "levels": [
+      "high-school"
+    ],
+    "location": "International · host city rotates",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide through affiliated fairs",
+    "funding": "award",
+    "fundingDetails": "Approximately $9M in awards and scholarships across categories",
+    "benefits": [
+      "Category and grand awards",
+      "Travel to the international fair",
+      "Global researcher network"
+    ],
+    "documents": [
+      "Project abstract",
+      "Research plan",
+      "Fair approval forms",
+      "Display board"
+    ],
+    "steps": [
+      "Find your Society-affiliated regional or national fair",
+      "Qualify at the affiliated fair",
+      "Complete ISEF paperwork with your fair director",
+      "Compete at the international fair"
+    ],
+    "summary": "The global pre-college science and engineering pathway. Students qualify through a Society-affiliated fair network.",
+    "description": "ISEF is the world's largest pre-college science competition. Students do not apply directly: each affiliated regional, national or international fair selects the projects it will send, so the real deadline is your local fair's entry date.",
+    "deadline": null,
+    "deadlineLabel": "Varies by affiliated fair",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://www.societyforscience.org/isef/",
+    "applyUrl": "https://www.societyforscience.org/isef/affiliated-fairs/",
+    "sourceLabel": "Official fair page",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "pathway",
+    "tags": [
+      "research",
+      "stem",
+      "pathway"
+    ]
+  },
+  {
+    "id": "nsf-reu",
+    "slug": "nsf-reu",
+    "title": "NSF Research Experiences for Undergraduates",
+    "org": "National Science Foundation",
+    "type": "research",
+    "field": "STEM · Research",
+    "subjects": [
+      "research",
+      "engineering",
+      "biology",
+      "physics",
+      "chemistry",
+      "computer-science",
+      "mathematics"
+    ],
+    "audience": "Undergraduate students",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "United States · site-dependent",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S. citizens and permanent residents for NSF-funded places",
+    "funding": "full",
+    "fundingDetails": "Stipend, and usually housing and travel, funded by NSF",
+    "benefits": [
+      "Paid summer research stipend",
+      "Faculty mentorship",
+      "Housing at most sites"
+    ],
+    "documents": [
+      "Transcript",
+      "Personal statement",
+      "Two references"
+    ],
+    "steps": [
+      "Search the NSF REU site directory",
+      "Shortlist sites matching your subject",
+      "Apply to each site separately",
+      "Track each site's own deadline"
+    ],
+    "summary": "A searchable collection of funded undergraduate research sites across NSF-supported science and engineering fields.",
+    "description": "REU Sites are self-contained summer research programmes hosted by U.S. universities and labs. Each site runs its own application and deadline, so the directory is a starting point rather than a single form.",
+    "deadline": null,
+    "deadlineLabel": "Varies by site · most close Jan–Feb",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.nsf.gov/funding/initiatives/reu/students",
+    "applyUrl": "https://www.nsf.gov/funding/initiatives/reu/search",
+    "sourceLabel": "Official NSF student search",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "directory",
+    "tags": [
+      "research",
+      "funded",
+      "summer"
+    ]
+  },
+  {
+    "id": "goldwater",
+    "slug": "goldwater-scholarship",
+    "title": "Barry Goldwater Scholarship",
+    "org": "Goldwater Foundation",
+    "type": "scholarship",
+    "field": "STEM · Research",
+    "subjects": [
+      "research",
+      "mathematics",
+      "engineering",
+      "biology",
+      "physics",
+      "chemistry"
+    ],
+    "audience": "College sophomores and juniors",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "United States",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S. citizens, nationals and permanent residents",
+    "funding": "partial",
+    "fundingDetails": "Up to $7,500 per year toward tuition, fees, books and room and board",
+    "benefits": [
+      "Scholarship funding",
+      "Strong signal for graduate admissions",
+      "Scholar network"
+    ],
+    "documents": [
+      "Research essay",
+      "Three recommendations",
+      "Transcript",
+      "Campus nomination"
+    ],
+    "steps": [
+      "Contact your campus Goldwater representative early",
+      "Prepare the research essay",
+      "Secure your campus nomination",
+      "Submit through the campus process"
+    ],
+    "summary": "A research-focused scholarship for college sophomores and juniors pursuing natural science, mathematics and engineering careers.",
+    "description": "Goldwater is awarded through campus nomination: your university selects a limited number of candidates before the national deadline, so the internal campus deadline is usually months earlier.",
+    "deadline": "2027-01-29",
+    "deadlineLabel": "Nomination deadline · Jan 29, 2027",
+    "dateType": "fixed",
+    "opensAt": "2026-09-01",
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://goldwaterscholarship.gov/",
+    "applyUrl": "https://goldwaterscholarship.gov/students/",
+    "sourceLabel": "Official foundation page",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "open",
+    "tags": [
+      "scholarship",
+      "research",
+      "nomination"
+    ]
+  },
+  {
+    "id": "leadership-alliance",
+    "slug": "leadership-alliance-sr-eip",
+    "title": "Summer Research Early Identification Program",
+    "org": "The Leadership Alliance",
+    "type": "fellowship",
+    "field": "Research · Multidisciplinary",
+    "subjects": [
+      "research",
+      "biology",
+      "social-sciences",
+      "humanities",
+      "engineering"
+    ],
+    "audience": "U.S. undergraduates with PhD or MD-PhD goals",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "United States · 20 institutions",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S. citizens and permanent residents",
+    "funding": "full",
+    "fundingDetails": "Stipend, travel and housing support",
+    "benefits": [
+      "8–10 week mentored research",
+      "Graduate school preparation",
+      "National symposium"
+    ],
+    "documents": [
+      "Personal statement",
+      "Research interests statement",
+      "Two recommendations",
+      "Transcript"
+    ],
+    "steps": [
+      "Choose up to three host institutions",
+      "Write the research interest statement",
+      "Request recommendations early",
+      "Submit the single central application"
+    ],
+    "summary": "An 8–10 week mentored research program with stipend, travel, housing support and graduate-school preparation.",
+    "description": "SR-EIP uses one central application across a consortium of research universities, which makes it one of the highest-leverage single forms in undergraduate research.",
+    "deadline": null,
+    "deadlineLabel": "Next cycle date pending · typically early February",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://theleadershipalliance.org/summer-research-early-identification-program",
+    "applyUrl": "https://theleadershipalliance.org/summer-research-early-identification-program",
+    "sourceLabel": "Official program page",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "upcoming",
+    "tags": [
+      "research",
+      "funded",
+      "summer"
+    ]
+  },
+  {
+    "id": "mayo-surf",
+    "slug": "mayo-clinic-surf",
+    "title": "Summer Undergraduate Research Fellowship",
+    "org": "Mayo Clinic",
+    "type": "fellowship",
+    "field": "Biomedical research",
+    "subjects": [
+      "research",
+      "biology",
+      "medicine"
+    ],
+    "audience": "Undergraduate students",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "Rochester, Minnesota",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "Open to students enrolled at U.S. institutions",
+    "funding": "full",
+    "fundingDetails": "Stipend plus housing assistance for the 10-week programme",
+    "benefits": [
+      "10-week biomedical research placement",
+      "Clinical research exposure",
+      "Mentor pairing"
+    ],
+    "documents": [
+      "Personal statement",
+      "Transcript",
+      "Two letters of recommendation"
+    ],
+    "steps": [
+      "Review eligible research areas",
+      "Prepare the personal statement",
+      "Request recommendations",
+      "Apply through the Mayo portal"
+    ],
+    "summary": "A biomedical research fellowship with a defined summer window and a strong fit for students exploring clinical research careers.",
+    "description": "SURF places undergraduates in Mayo Clinic laboratories for a full-time summer of mentored biomedical research, ending in a poster symposium.",
+    "deadline": "2027-02-03",
+    "deadlineLabel": "Feb 3, 2027",
+    "dateType": "fixed",
+    "opensAt": "2026-11-01",
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://college.mayo.edu/academics/biomedical-research-training/summer-research-fellowship-surf/",
+    "applyUrl": "https://college.mayo.edu/academics/biomedical-research-training/summer-research-fellowship-surf/",
+    "sourceLabel": "Official program page",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "upcoming",
+    "tags": [
+      "research",
+      "biomedical",
+      "funded"
+    ]
+  },
+  {
+    "id": "laidlaw",
+    "slug": "laidlaw-scholars",
+    "title": "Laidlaw Scholars Research & Leadership Programme",
+    "org": "Laidlaw Foundation",
+    "type": "fellowship",
+    "field": "Research · Leadership",
+    "subjects": [
+      "research",
+      "leadership",
+      "social-sciences",
+      "humanities",
+      "business"
+    ],
+    "audience": "Undergraduate students at partner universities",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "Partner universities worldwide",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open to students enrolled at partner universities",
+    "funding": "full",
+    "fundingDetails": "Funded research summers plus leadership training",
+    "benefits": [
+      "Two funded summer projects",
+      "Leadership development",
+      "Global scholar network"
+    ],
+    "documents": [
+      "Research proposal",
+      "Personal statement",
+      "Academic reference"
+    ],
+    "steps": [
+      "Check whether your university is a partner",
+      "Develop a research proposal with a supervisor",
+      "Apply through your university",
+      "Attend selection interviews"
+    ],
+    "summary": "A long-form research and leadership programme with two summer projects, leadership training and a global scholar network.",
+    "description": "Laidlaw runs through partner universities, so the application, deadline and selection are handled locally. Availability depends entirely on whether your institution participates.",
+    "deadline": "2027-01-27",
+    "deadlineLabel": "Jan 27, 2027 · partner-dependent",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://laidlawfoundation.com/the-laidlaw-scholars-leadership-research-programme/about-the-programme/",
+    "applyUrl": "https://laidlawfoundation.com/the-laidlaw-scholars-leadership-research-programme/about-the-programme/",
+    "sourceLabel": "Official foundation page",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "open",
+    "tags": [
+      "research",
+      "leadership",
+      "funded"
+    ]
+  },
+  {
+    "id": "pathways-science",
+    "slug": "pathways-to-science",
+    "title": "Pathways to Science Opportunity Directory",
+    "org": "Pathways to Science",
+    "type": "directory",
+    "field": "STEM · Research",
+    "subjects": [
+      "research",
+      "engineering",
+      "biology",
+      "physics",
+      "chemistry",
+      "computer-science"
+    ],
+    "audience": "Undergraduate and graduate students",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "United States · searchable",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "Varies by listed programme",
+    "funding": "varies",
+    "fundingDetails": "Most listed programmes are funded; check each listing",
+    "benefits": [
+      "600+ programme listings",
+      "Filter by field and level",
+      "Deadline listings"
+    ],
+    "documents": [
+      "Varies by programme"
+    ],
+    "steps": [
+      "Search by field and student level",
+      "Open each programme's official page",
+      "Note each separate deadline",
+      "Apply individually"
+    ],
+    "summary": "A searchable directory of funded summer research programmes supported by NSF, NASA, NIH and other research organisations.",
+    "description": "A long-running aggregator of funded STEM programmes. Useful for discovery, but every listing should be confirmed on the host organisation's own page before applying.",
+    "deadline": null,
+    "deadlineLabel": "Rolling directory",
+    "dateType": "rolling",
+    "opensAt": null,
+    "recurring": "rolling",
+    "competitiveness": "low",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://pathwaystoscience.org/Undergrads.aspx",
+    "applyUrl": "https://pathwaystoscience.org/Undergrads.aspx",
+    "sourceLabel": "Official directory",
+    "verifiedAt": "2026-09-05",
+    "verificationStatus": "verified",
+    "linkCheckedAt": "2026-09-05",
+    "status": "directory",
+    "tags": [
+      "directory",
+      "research"
+    ]
+  },
+  {
+    "id": "khalifa-university-undergraduate-scholarships",
+    "slug": "khalifa-university-undergraduate-scholarships",
+    "title": "Khalifa University Undergraduate Scholarships",
+    "org": "Khalifa University",
+    "type": "scholarship",
+    "field": "Engineering · Science",
+    "subjects": [
+      "engineering",
+      "computer-science",
+      "physics",
+      "mathematics",
+      "medicine"
+    ],
+    "audience": "School leavers applying to undergraduate study",
+    "levels": [
+      "high-school",
+      "undergraduate"
+    ],
+    "location": "Abu Dhabi, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "citizenship": "UAE nationals and international students",
+    "funding": "full",
+    "fundingDetails": "Merit scholarships can cover tuition, with additional support for top applicants.",
+    "benefits": [
+      "Tuition coverage for strong applicants",
+      "Research-intensive UAE university",
+      "On-campus accommodation options"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Merit-based undergraduate scholarships at a research university in Abu Dhabi, across engineering, science and medicine.",
+    "description": "Merit-based undergraduate scholarships at a research university in Abu Dhabi, across engineering, science and medicine.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.ku.ac.ae/admissions/undergraduate-admission",
+    "applyUrl": "https://www.ku.ac.ae/admissions/undergraduate-admission",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "uae",
+      "scholarship",
+      "stem"
+    ]
+  },
+  {
+    "id": "mbzuai-scholarships-in-artificial-intelligence",
+    "slug": "mbzuai-scholarships-in-artificial-intelligence",
+    "title": "MBZUAI Scholarships in Artificial Intelligence",
+    "org": "Mohamed bin Zayed University of Artificial Intelligence",
+    "type": "scholarship",
+    "field": "AI · Computer science",
+    "subjects": [
+      "computer-science",
+      "mathematics",
+      "research"
+    ],
+    "audience": "Graduate applicants in AI fields",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Abu Dhabi, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "citizenship": "Open internationally",
+    "funding": "full",
+    "fundingDetails": "Graduate programmes are advertised as fully funded with a monthly stipend — confirm current terms.",
+    "benefits": [
+      "Full tuition for admitted students",
+      "Monthly stipend",
+      "Health insurance and accommodation support"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A graduate-level AI university in Abu Dhabi offering funded MSc and PhD places to international students.",
+    "description": "A graduate-level AI university in Abu Dhabi offering funded MSc and PhD places to international students.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://mbzuai.ac.ae/study/admissions/",
+    "applyUrl": "https://mbzuai.ac.ae/study/admissions/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "uae",
+      "ai",
+      "funded"
+    ]
+  },
+  {
+    "id": "nyu-abu-dhabi-undergraduate-admission-and-scholarship",
+    "slug": "nyu-abu-dhabi-undergraduate-admission-and-scholarship",
+    "title": "NYU Abu Dhabi Undergraduate Admission and Scholarship",
+    "org": "NYU Abu Dhabi",
+    "type": "scholarship",
+    "field": "Liberal arts · Sciences",
+    "subjects": [
+      "humanities",
+      "social-sciences",
+      "engineering",
+      "business",
+      "arts",
+      "research"
+    ],
+    "audience": "Secondary school students worldwide",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Abu Dhabi, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "citizenship": "Open worldwide",
+    "funding": "full",
+    "fundingDetails": "Admission is need-blind for many applicants with substantial need-based and merit aid.",
+    "benefits": [
+      "Need-based and merit aid",
+      "Global network of NYU campuses",
+      "Research and internship funding"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A liberal arts and science university in Abu Dhabi with substantial financial aid for international undergraduates.",
+    "description": "A liberal arts and science university in Abu Dhabi with substantial financial aid for international undergraduates.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://nyuad.nyu.edu/en/admissions/undergraduate.html",
+    "applyUrl": "https://nyuad.nyu.edu/en/admissions/undergraduate.html",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "uae",
+      "scholarship",
+      "undergraduate"
+    ]
+  },
+  {
+    "id": "american-university-of-sharjah-merit-scholarships",
+    "slug": "american-university-of-sharjah-merit-scholarships",
+    "title": "American University of Sharjah Merit Scholarships",
+    "org": "American University of Sharjah",
+    "type": "scholarship",
+    "field": "Multidisciplinary",
+    "subjects": [
+      "engineering",
+      "business",
+      "arts",
+      "humanities",
+      "social-sciences"
+    ],
+    "audience": "Undergraduate applicants",
+    "levels": [
+      "high-school",
+      "undergraduate"
+    ],
+    "location": "Sharjah, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "citizenship": "Open worldwide",
+    "funding": "partial",
+    "fundingDetails": "Merit awards are set as a percentage of tuition and depend on academic results.",
+    "benefits": [
+      "Percentage tuition awards",
+      "Architecture, design and business programmes",
+      "Regional employer network"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Tuition-percentage merit awards at a long-established liberal arts and professional university in Sharjah.",
+    "description": "Tuition-percentage merit awards at a long-established liberal arts and professional university in Sharjah.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.aus.edu/admissions/undergraduate/financial-aid-and-scholarships",
+    "applyUrl": "https://www.aus.edu/admissions/undergraduate/financial-aid-and-scholarships",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "uae",
+      "scholarship"
+    ]
+  },
+  {
+    "id": "adnoc-scholarship-programme",
+    "slug": "adnoc-scholarship-programme",
+    "title": "ADNOC Scholarship Programme",
+    "org": "ADNOC",
+    "type": "scholarship",
+    "field": "Energy · Engineering",
+    "subjects": [
+      "engineering",
+      "chemistry",
+      "business",
+      "computer-science"
+    ],
+    "audience": "UAE national students",
+    "levels": [
+      "high-school",
+      "undergraduate"
+    ],
+    "location": "United Arab Emirates and partner universities",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "citizenship": "UAE nationals",
+    "funding": "full",
+    "fundingDetails": "Sponsorship typically covers tuition and living costs with an employment pathway.",
+    "benefits": [
+      "Full sponsorship",
+      "Guaranteed career pathway",
+      "Industry mentoring"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Corporate sponsorship for Emirati students studying energy, engineering and business, with an employment pathway.",
+    "description": "Corporate sponsorship for Emirati students studying energy, engineering and business, with an employment pathway.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.adnoc.ae/en/careers/scholarships",
+    "applyUrl": "https://www.adnoc.ae/en/careers/scholarships",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "uae",
+      "scholarship",
+      "sponsored"
+    ]
+  },
+  {
+    "id": "mbrsc-space-programmes-for-students",
+    "slug": "mbrsc-space-programmes-for-students",
+    "title": "MBRSC Space Programmes for Students",
+    "org": "Mohammed Bin Rashid Space Centre",
+    "type": "research",
+    "field": "Space · Engineering",
+    "subjects": [
+      "engineering",
+      "physics",
+      "computer-science",
+      "research"
+    ],
+    "audience": "UAE students and young engineers",
+    "levels": [
+      "high-school",
+      "undergraduate"
+    ],
+    "location": "Dubai, United Arab Emirates",
+    "country": "United Arab Emirates",
+    "region": "Middle East",
+    "citizenship": "Mainly UAE nationals and residents",
+    "funding": "varies",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Work alongside national space programmes",
+      "Satellite and payload experience",
+      "Mentorship from UAE engineers"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Student and early-career space programmes run by the UAE national space centre in Dubai.",
+    "description": "Student and early-career space programmes run by the UAE national space centre in Dubai.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.mbrsc.ae/",
+    "applyUrl": "https://www.mbrsc.ae/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "uae",
+      "space",
+      "stem"
+    ]
+  },
+  {
+    "id": "kaust-gifted-student-program",
+    "slug": "kaust-gifted-student-program",
+    "title": "KAUST Gifted Student Program",
+    "org": "King Abdullah University of Science and Technology",
+    "type": "research",
+    "field": "Science · Engineering",
+    "subjects": [
+      "research",
+      "engineering",
+      "mathematics",
+      "computer-science",
+      "chemistry"
+    ],
+    "audience": "High-achieving secondary students",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Thuwal, Saudi Arabia",
+    "country": "Saudi Arabia",
+    "region": "Middle East",
+    "citizenship": "Primarily Saudi students — confirm current rules",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "University-level research exposure",
+      "Residential academic programme",
+      "Pathway to KAUST scholarships"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A long-running enrichment and research pathway for talented secondary students in Saudi Arabia.",
+    "description": "A long-running enrichment and research pathway for talented secondary students in Saudi Arabia.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.kaust.edu.sa/en/study/gifted-student-program",
+    "applyUrl": "https://www.kaust.edu.sa/en/study/gifted-student-program",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "middle-east",
+      "research",
+      "stem"
+    ]
+  },
+  {
+    "id": "injaz-al-arab-company-program-competition",
+    "slug": "injaz-al-arab-company-program-competition",
+    "title": "INJAZ Al-Arab Company Program Competition",
+    "org": "INJAZ Al-Arab",
+    "type": "competition",
+    "field": "Entrepreneurship · Business",
+    "subjects": [
+      "business",
+      "entrepreneurship",
+      "economics"
+    ],
+    "audience": "Secondary and university students across the Arab world",
+    "levels": [
+      "high-school",
+      "undergraduate"
+    ],
+    "location": "Regional · MENA",
+    "country": "Regional",
+    "region": "Middle East",
+    "citizenship": "Students in participating MENA countries",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Run a real student company",
+      "Regional finals",
+      "Mentoring from business volunteers"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A regional student-company competition across the Arab world, ending in a MENA-wide final.",
+    "description": "A regional student-company competition across the Arab world, ending in a MENA-wide final.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://injazalarab.org/",
+    "applyUrl": "https://injazalarab.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "middle-east",
+      "business",
+      "entrepreneurship"
+    ]
+  },
+  {
+    "id": "rhodes-scholarship",
+    "slug": "rhodes-scholarship",
+    "title": "Rhodes Scholarship",
+    "org": "Rhodes Trust",
+    "type": "scholarship",
+    "field": "Postgraduate · Multidisciplinary",
+    "subjects": [
+      "humanities",
+      "social-sciences",
+      "research",
+      "medicine",
+      "engineering",
+      "law"
+    ],
+    "audience": "Graduating undergraduates and recent graduates",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "University of Oxford, United Kingdom",
+    "country": "United Kingdom",
+    "region": "Europe",
+    "citizenship": "Eligible constituencies worldwide, including a Global constituency",
+    "funding": "full",
+    "fundingDetails": "Covers University of Oxford fees plus a living stipend.",
+    "benefits": [
+      "Full postgraduate funding at Oxford",
+      "Global scholar community",
+      "Leadership programme"
+    ],
+    "documents": [
+      "Personal statement",
+      "Academic transcript",
+      "Five to eight references",
+      "CV"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A fully funded postgraduate scholarship to the University of Oxford, selected through national constituencies.",
+    "description": "A fully funded postgraduate scholarship to the University of Oxford, selected through national constituencies.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+    "applyUrl": "https://www.rhodeshouse.ox.ac.uk/scholarships/the-rhodes-scholarship/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "scholarship",
+      "postgraduate",
+      "prestigious"
+    ]
+  },
+  {
+    "id": "gates-cambridge-scholarship",
+    "slug": "gates-cambridge-scholarship",
+    "title": "Gates Cambridge Scholarship",
+    "org": "University of Cambridge",
+    "type": "scholarship",
+    "field": "Postgraduate · Multidisciplinary",
+    "subjects": [
+      "research",
+      "humanities",
+      "social-sciences",
+      "engineering",
+      "biology",
+      "medicine"
+    ],
+    "audience": "International postgraduate applicants",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Cambridge, United Kingdom",
+    "country": "United Kingdom",
+    "region": "Europe",
+    "citizenship": "Applicants from outside the UK",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Full cost of postgraduate study",
+      "Maintenance allowance",
+      "Scholar development programme"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Full postgraduate funding at Cambridge for international students with a record of leadership and service.",
+    "description": "Full postgraduate funding at Cambridge for international students with a record of leadership and service.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.gatescambridge.org/apply/",
+    "applyUrl": "https://www.gatescambridge.org/apply/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "scholarship",
+      "postgraduate",
+      "prestigious"
+    ]
+  },
+  {
+    "id": "chevening-scholarships",
+    "slug": "chevening-scholarships",
+    "title": "Chevening Scholarships",
+    "org": "UK Government",
+    "type": "scholarship",
+    "field": "Postgraduate · Leadership",
+    "subjects": [
+      "social-sciences",
+      "business",
+      "law",
+      "humanities",
+      "research",
+      "economics"
+    ],
+    "audience": "Mid-career professionals and graduates",
+    "levels": [
+      "graduate"
+    ],
+    "location": "United Kingdom · any eligible university",
+    "country": "United Kingdom",
+    "region": "Europe",
+    "citizenship": "Citizens of Chevening-eligible countries, including the UAE",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "One-year master’s funded",
+      "Flights and living allowance",
+      "UK alumni network"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "UK government scholarships funding a one-year master’s for emerging leaders from eligible countries.",
+    "description": "UK government scholarships funding a one-year master’s for emerging leaders from eligible countries.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.chevening.org/scholarships/",
+    "applyUrl": "https://www.chevening.org/scholarships/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "scholarship",
+      "postgraduate",
+      "leadership"
+    ]
+  },
+  {
+    "id": "fulbright-foreign-student-program",
+    "slug": "fulbright-foreign-student-program",
+    "title": "Fulbright Foreign Student Program",
+    "org": "U.S. Department of State",
+    "type": "scholarship",
+    "field": "Postgraduate · Multidisciplinary",
+    "subjects": [
+      "research",
+      "humanities",
+      "social-sciences",
+      "arts",
+      "engineering"
+    ],
+    "audience": "Graduates outside the United States",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "United States",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "Non-U.S. citizens in participating countries",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Funded graduate study in the U.S.",
+      "Cultural exchange programme",
+      "Alumni network"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Funded U.S. graduate study for students from participating countries, administered nationally.",
+    "description": "Funded U.S. graduate study for students from participating countries, administered nationally.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://foreign.fulbrightonline.org/",
+    "applyUrl": "https://foreign.fulbrightonline.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "scholarship",
+      "postgraduate"
+    ]
+  },
+  {
+    "id": "daad-scholarship-database",
+    "slug": "daad-scholarship-database",
+    "title": "DAAD Scholarship Database",
+    "org": "German Academic Exchange Service",
+    "type": "directory",
+    "field": "Study in Germany",
+    "subjects": [
+      "engineering",
+      "research",
+      "humanities",
+      "social-sciences",
+      "arts",
+      "business"
+    ],
+    "audience": "International students at all levels",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Germany",
+    "country": "Germany",
+    "region": "Europe",
+    "citizenship": "International students",
+    "funding": "varies",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Hundreds of funded programmes",
+      "Filter by country and subject",
+      "German university pathways"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "The official searchable database of German government and university scholarships for international students.",
+    "description": "The official searchable database of German government and university scholarships for international students.",
+    "deadline": null,
+    "deadlineLabel": "Rolling directory · each programme has its own deadline",
+    "dateType": "rolling",
+    "opensAt": null,
+    "recurring": "rolling",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.daad.de/en/studying-in-germany/scholarships/daad-scholarship-database/",
+    "applyUrl": "https://www.daad.de/en/studying-in-germany/scholarships/daad-scholarship-database/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "directory",
+    "tags": [
+      "directory",
+      "scholarship",
+      "europe"
+    ]
+  },
+  {
+    "id": "daad-rise-research-internships",
+    "slug": "daad-rise-research-internships",
+    "title": "DAAD RISE Research Internships",
+    "org": "German Academic Exchange Service",
+    "type": "research",
+    "field": "Summer research",
+    "subjects": [
+      "research",
+      "engineering",
+      "physics",
+      "chemistry",
+      "biology",
+      "computer-science"
+    ],
+    "audience": "Undergraduates from outside Germany",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "Germany · host institutes",
+    "country": "Germany",
+    "region": "Europe",
+    "citizenship": "Students enrolled outside Germany",
+    "funding": "partial",
+    "fundingDetails": "A monthly stipend toward living costs; host institutes cover the placement.",
+    "benefits": [
+      "Summer research placement in Germany",
+      "Monthly stipend",
+      "Doctoral-student mentor"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Summer research placements in German university and research institutes for international undergraduates.",
+    "description": "Summer research placements in German university and research institutes for international undergraduates.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.daad.de/rise/en/",
+    "applyUrl": "https://www.daad.de/rise/en/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "summer",
+      "europe"
+    ]
+  },
+  {
+    "id": "erasmus-mundus-joint-masters-scholarships",
+    "slug": "erasmus-mundus-joint-masters-scholarships",
+    "title": "Erasmus Mundus Joint Masters Scholarships",
+    "org": "European Commission",
+    "type": "scholarship",
+    "field": "Postgraduate · Multidisciplinary",
+    "subjects": [
+      "research",
+      "engineering",
+      "humanities",
+      "social-sciences",
+      "business",
+      "arts"
+    ],
+    "audience": "Master’s applicants worldwide",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Multiple European universities",
+    "country": "International",
+    "region": "Europe",
+    "citizenship": "Open worldwide",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Study in at least two countries",
+      "Full scholarship including travel",
+      "Joint degree"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "EU-funded joint master’s programmes taught across several European universities, with full scholarships.",
+    "description": "EU-funded joint master’s programmes taught across several European universities, with full scholarships.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters-scholarships",
+    "applyUrl": "https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters-scholarships",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "scholarship",
+      "postgraduate",
+      "europe"
+    ]
+  },
+  {
+    "id": "schwarzman-scholars",
+    "slug": "schwarzman-scholars",
+    "title": "Schwarzman Scholars",
+    "org": "Tsinghua University",
+    "type": "fellowship",
+    "field": "Global affairs · Leadership",
+    "subjects": [
+      "social-sciences",
+      "business",
+      "economics",
+      "humanities",
+      "leadership"
+    ],
+    "audience": "Graduates under 29",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Beijing, China",
+    "country": "China",
+    "region": "Asia",
+    "citizenship": "Open worldwide",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Fully funded master’s year",
+      "Leadership and mentorship programme",
+      "Global cohort"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A fully funded one-year master’s in global affairs at Tsinghua University, built around leadership development.",
+    "description": "A fully funded one-year master’s in global affairs at Tsinghua University, built around leadership development.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.schwarzmanscholars.org/admissions/",
+    "applyUrl": "https://www.schwarzmanscholars.org/admissions/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "fellowship",
+      "leadership",
+      "postgraduate"
+    ]
+  },
+  {
+    "id": "uwc-scholarships",
+    "slug": "uwc-scholarships",
+    "title": "UWC Scholarships",
+    "org": "United World Colleges",
+    "type": "scholarship",
+    "field": "Pre-university · IB Diploma",
+    "subjects": [
+      "humanities",
+      "social-sciences",
+      "arts",
+      "research",
+      "sciences"
+    ],
+    "audience": "Students aged roughly 16–19",
+    "levels": [
+      "high-school"
+    ],
+    "location": "18 UWC schools worldwide",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Selected by national committees worldwide",
+    "funding": "full",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Two-year IB Diploma place",
+      "Needs-based full scholarships",
+      "International boarding community"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Two-year IB Diploma places at international schools, selected and funded through national committees.",
+    "description": "Two-year IB Diploma places at international schools, selected and funded through national committees.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.uwc.org/apply",
+    "applyUrl": "https://www.uwc.org/apply",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "scholarship",
+      "high-school",
+      "international"
+    ]
+  },
+  {
+    "id": "breakthrough-junior-challenge",
+    "slug": "breakthrough-junior-challenge",
+    "title": "Breakthrough Junior Challenge",
+    "org": "Breakthrough Prize Foundation",
+    "type": "competition",
+    "field": "Science communication",
+    "subjects": [
+      "physics",
+      "biology",
+      "mathematics",
+      "research",
+      "media"
+    ],
+    "audience": "Students aged 13–18",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Online · worldwide",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide",
+    "funding": "award",
+    "fundingDetails": "Prize package includes a university scholarship, a school science lab and a teacher award.",
+    "benefits": [
+      "Up to $250,000 scholarship",
+      "$100,000 school science lab",
+      "$50,000 teacher prize"
+    ],
+    "documents": [
+      "Original explainer video (under 3 minutes)",
+      "Entry form"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A global video competition in which students explain a big idea in science or mathematics in under three minutes.",
+    "description": "A global video competition in which students explain a big idea in science or mathematics in under three minutes.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://breakthroughjuniorchallenge.org/",
+    "applyUrl": "https://breakthroughjuniorchallenge.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "stem",
+      "creative"
+    ]
+  },
+  {
+    "id": "conrad-challenge",
+    "slug": "conrad-challenge",
+    "title": "Conrad Challenge",
+    "org": "Conrad Foundation",
+    "type": "competition",
+    "field": "Innovation · Entrepreneurship",
+    "subjects": [
+      "engineering",
+      "business",
+      "computer-science",
+      "environment"
+    ],
+    "audience": "Students aged 13–18 in teams",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Online rounds and U.S. final",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Innovation coaching",
+      "Investor-style pitch rounds",
+      "International finalist summit"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A team innovation competition where students build a commercial solution to a real-world problem.",
+    "description": "A team innovation competition where students build a commercial solution to a real-world problem.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.conradchallenge.org/",
+    "applyUrl": "https://www.conradchallenge.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "entrepreneurship",
+      "stem"
+    ]
+  },
+  {
+    "id": "first-robotics-competition",
+    "slug": "first-robotics-competition",
+    "title": "FIRST Robotics Competition",
+    "org": "FIRST",
+    "type": "competition",
+    "field": "Robotics · Engineering",
+    "subjects": [
+      "engineering",
+      "computer-science",
+      "mathematics"
+    ],
+    "audience": "School teams aged roughly 14–18",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Regional events worldwide, including the UAE",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide through registered teams",
+    "funding": "varies",
+    "fundingDetails": "Teams pay registration fees; grants and sponsorships are available.",
+    "benefits": [
+      "Build a competition robot in six weeks",
+      "Scholarship opportunities through FIRST",
+      "Mentored engineering experience"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "An international school robotics league with regional events, including events hosted in the UAE.",
+    "description": "An international school robotics league with regional events, including events hosted in the UAE.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.firstinspires.org/robotics/frc",
+    "applyUrl": "https://www.firstinspires.org/robotics/frc",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "robotics",
+      "teams"
+    ]
+  },
+  {
+    "id": "genius-olympiad",
+    "slug": "genius-olympiad",
+    "title": "Genius Olympiad",
+    "org": "Genius Olympiad",
+    "type": "competition",
+    "field": "Environment · Multidisciplinary",
+    "subjects": [
+      "environment",
+      "research",
+      "arts",
+      "business",
+      "writing"
+    ],
+    "audience": "High school students worldwide",
+    "levels": [
+      "high-school"
+    ],
+    "location": "New York, United States",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "Open worldwide",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Categories in science, writing, art, business and design",
+      "Scholarship awards",
+      "International finals"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "An international high school project competition on environmental issues, with science, art, writing and business categories.",
+    "description": "An international high school project competition on environmental issues, with science, art, writing and business categories.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.geniusolympiad.org/",
+    "applyUrl": "https://www.geniusolympiad.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "environment",
+      "creative"
+    ]
+  },
+  {
+    "id": "international-mathematical-olympiad",
+    "slug": "international-mathematical-olympiad",
+    "title": "International Mathematical Olympiad",
+    "org": "IMO Foundation",
+    "type": "competition",
+    "field": "Mathematics",
+    "subjects": [
+      "mathematics"
+    ],
+    "audience": "Secondary students selected by national teams",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Host country rotates annually",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Through your country’s national olympiad",
+    "funding": "full",
+    "fundingDetails": "National teams are funded by their own olympiad organisations.",
+    "benefits": [
+      "World championship in mathematics",
+      "National team training",
+      "University recognition"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Enter your national mathematics olympiad",
+      "Progress through national selection rounds",
+      "Join the national training camp",
+      "Represent your country at the IMO"
+    ],
+    "summary": "The world championship of secondary school mathematics, entered through your national olympiad.",
+    "description": "The world championship of secondary school mathematics, entered through your national olympiad.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.imo-official.org/",
+    "applyUrl": "https://www.imo-official.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "mathematics",
+      "pathway"
+    ]
+  },
+  {
+    "id": "john-locke-institute-essay-competition",
+    "slug": "john-locke-institute-essay-competition",
+    "title": "John Locke Institute Essay Competition",
+    "org": "John Locke Institute",
+    "type": "competition",
+    "field": "Humanities · Essay",
+    "subjects": [
+      "humanities",
+      "philosophy",
+      "economics",
+      "politics",
+      "history",
+      "law",
+      "writing"
+    ],
+    "audience": "Students under 19",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Online · worldwide",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide",
+    "funding": "award",
+    "fundingDetails": "Prizes include scholarships toward Institute programmes.",
+    "benefits": [
+      "Subject prizes across seven humanities fields",
+      "Academic conference invitation",
+      "Scholarship awards"
+    ],
+    "documents": [
+      "Essay of up to 2,000 words",
+      "Entry form with teacher details"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "An international essay competition across philosophy, politics, economics, history, psychology, theology and law.",
+    "description": "An international essay competition across philosophy, politics, economics, history, psychology, theology and law.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://www.johnlockeinstitute.com/essay-competition",
+    "applyUrl": "https://www.johnlockeinstitute.com/essay-competition",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "humanities",
+      "writing"
+    ]
+  },
+  {
+    "id": "wharton-global-high-school-investment-competition",
+    "slug": "wharton-global-high-school-investment-competition",
+    "title": "Wharton Global High School Investment Competition",
+    "org": "The Wharton School, University of Pennsylvania",
+    "type": "competition",
+    "field": "Finance · Business",
+    "subjects": [
+      "business",
+      "economics",
+      "finance",
+      "mathematics"
+    ],
+    "audience": "High school teams with an advisor",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Online, with a U.S. final",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Manage a simulated portfolio",
+      "Written investment strategy judging",
+      "Global finals at Wharton"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A team investment competition where students manage a simulated portfolio for a fictional client.",
+    "description": "A team investment competition where students manage a simulated portfolio for a fictional client.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://globalyouth.wharton.upenn.edu/investment-competition/",
+    "applyUrl": "https://globalyouth.wharton.upenn.edu/investment-competition/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "business",
+      "teams"
+    ]
+  },
+  {
+    "id": "diamond-challenge-for-high-school-entrepreneurs",
+    "slug": "diamond-challenge-for-high-school-entrepreneurs",
+    "title": "Diamond Challenge for High School Entrepreneurs",
+    "org": "University of Delaware",
+    "type": "competition",
+    "field": "Entrepreneurship",
+    "subjects": [
+      "business",
+      "entrepreneurship",
+      "social-impact"
+    ],
+    "audience": "Students aged 14–18 in teams",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Online rounds and U.S. summit",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Business concept and social innovation tracks",
+      "Cash prizes",
+      "Entrepreneurship curriculum"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A global high school entrepreneurship competition with separate business and social-innovation tracks.",
+    "description": "A global high school entrepreneurship competition with separate business and social-innovation tracks.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://diamondchallenge.org/",
+    "applyUrl": "https://diamondchallenge.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "entrepreneurship",
+      "business"
+    ]
+  },
+  {
+    "id": "world-scholar-s-cup",
+    "slug": "world-scholar-s-cup",
+    "title": "World Scholar’s Cup",
+    "org": "World Scholar’s Cup",
+    "type": "competition",
+    "field": "Academic · Debate",
+    "subjects": [
+      "humanities",
+      "social-sciences",
+      "writing",
+      "debate",
+      "arts"
+    ],
+    "audience": "Students in junior and senior divisions",
+    "levels": [
+      "middle-school",
+      "high-school"
+    ],
+    "location": "Regional rounds worldwide, including Dubai",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Open worldwide",
+    "funding": "varies",
+    "fundingDetails": "Teams pay event fees; scholarships are offered at some rounds.",
+    "benefits": [
+      "Debate, writing, quiz and team rounds",
+      "Global round and Tournament of Champions",
+      "Regional events in the UAE"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A team academic tournament combining debate, collaborative writing and quiz rounds, with regional events in the UAE.",
+    "description": "A team academic tournament combining debate, collaborative writing and quiz rounds, with regional events in the UAE.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.scholarscup.org/",
+    "applyUrl": "https://www.scholarscup.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "debate",
+      "teams"
+    ]
+  },
+  {
+    "id": "bafta-young-game-designers",
+    "slug": "bafta-young-game-designers",
+    "title": "BAFTA Young Game Designers",
+    "org": "BAFTA",
+    "type": "competition",
+    "field": "Games · Design",
+    "subjects": [
+      "arts",
+      "computer-science",
+      "design",
+      "media"
+    ],
+    "audience": "Students aged 10–18",
+    "levels": [
+      "middle-school",
+      "high-school"
+    ],
+    "location": "United Kingdom",
+    "country": "United Kingdom",
+    "region": "Europe",
+    "citizenship": "UK residents — check current rules",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Game concept and game-making categories",
+      "Industry mentoring",
+      "BAFTA awards ceremony"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A games design and development competition for young people, run by BAFTA with industry mentoring.",
+    "description": "A games design and development competition for young people, run by BAFTA with industry mentoring.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://ygd.bafta.org/",
+    "applyUrl": "https://ygd.bafta.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "creative",
+      "design"
+    ]
+  },
+  {
+    "id": "sony-world-photography-awards-student-competition",
+    "slug": "sony-world-photography-awards-student-competition",
+    "title": "Sony World Photography Awards — Student Competition",
+    "org": "World Photography Organisation",
+    "type": "competition",
+    "field": "Photography · Arts",
+    "subjects": [
+      "arts",
+      "media",
+      "design"
+    ],
+    "audience": "Students at registered institutions",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "Online · worldwide",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Students at eligible institutions worldwide",
+    "funding": "award",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Exhibition in London",
+      "Photography equipment for the winner’s institution",
+      "International profile"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A student photography competition with an international exhibition and equipment prizes for the winning institution.",
+    "description": "A student photography competition with an international exhibition and equipment prizes for the winning institution.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://www.worldphoto.org/sony-world-photography-awards/student",
+    "applyUrl": "https://www.worldphoto.org/sony-world-photography-awards/student",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "competition",
+      "creative",
+      "arts"
+    ]
+  },
+  {
+    "id": "mit-primes",
+    "slug": "mit-primes",
+    "title": "MIT PRIMES",
+    "org": "Massachusetts Institute of Technology",
+    "type": "research",
+    "field": "Mathematics · Research",
+    "subjects": [
+      "mathematics",
+      "computer-science",
+      "research"
+    ],
+    "audience": "High school students near Boston, plus remote tracks",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Cambridge, Massachusetts and remote",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S.-based students for most tracks",
+    "funding": "free",
+    "fundingDetails": "Free to participate; no stipend.",
+    "benefits": [
+      "Year-long mentored mathematics research",
+      "MIT graduate student mentors",
+      "Conference presentation"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A year-long mentored mathematics and computer science research programme for high school students.",
+    "description": "A year-long mentored mathematics and computer science research programme for high school students.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://math.mit.edu/research/highschool/primes/",
+    "applyUrl": "https://math.mit.edu/research/highschool/primes/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "mathematics"
+    ]
+  },
+  {
+    "id": "research-science-institute-rsi",
+    "slug": "research-science-institute-rsi",
+    "title": "Research Science Institute (RSI)",
+    "org": "Center for Excellence in Education",
+    "type": "research",
+    "field": "STEM · Research",
+    "subjects": [
+      "research",
+      "mathematics",
+      "physics",
+      "biology",
+      "engineering",
+      "computer-science"
+    ],
+    "audience": "High school students entering their final year",
+    "levels": [
+      "high-school"
+    ],
+    "location": "MIT campus, United States",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S. and international students",
+    "funding": "full",
+    "fundingDetails": "Tuition-free, including accommodation and meals.",
+    "benefits": [
+      "Five-week research placement at MIT",
+      "Mentored original project",
+      "Cost-free participation"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A cost-free five-week summer research programme at MIT for high school students, run by CEE.",
+    "description": "A cost-free five-week summer research programme at MIT for high school students, run by CEE.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "advanced",
+    "officialUrl": "https://www.cee.org/programs/research-science-institute",
+    "applyUrl": "https://www.cee.org/programs/research-science-institute",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "summer",
+      "prestigious"
+    ]
+  },
+  {
+    "id": "cern-summer-student-programme",
+    "slug": "cern-summer-student-programme",
+    "title": "CERN Summer Student Programme",
+    "org": "CERN",
+    "type": "research",
+    "field": "Physics · Engineering",
+    "subjects": [
+      "physics",
+      "engineering",
+      "computer-science",
+      "mathematics",
+      "research"
+    ],
+    "audience": "Undergraduate and master’s students",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Geneva, Switzerland",
+    "country": "Switzerland",
+    "region": "Europe",
+    "citizenship": "Students from CERN Member and Associate Member States, plus a limited non-member programme",
+    "funding": "full",
+    "fundingDetails": "Subsistence allowance, travel and health insurance.",
+    "benefits": [
+      "Work on a real CERN project",
+      "Lecture programme by CERN physicists",
+      "Paid allowance and travel"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Paid summer placements at CERN combining project work with a physics lecture programme.",
+    "description": "Paid summer placements at CERN combining project work with a physics lecture programme.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://careers.cern/summer",
+    "applyUrl": "https://careers.cern/summer",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "physics",
+      "summer"
+    ]
+  },
+  {
+    "id": "eth-zurich-student-summer-research-fellowship",
+    "slug": "eth-zurich-student-summer-research-fellowship",
+    "title": "ETH Zurich Student Summer Research Fellowship",
+    "org": "ETH Zurich",
+    "type": "fellowship",
+    "field": "Computer science · Data science",
+    "subjects": [
+      "computer-science",
+      "mathematics",
+      "research",
+      "data-science"
+    ],
+    "audience": "Undergraduate and master’s students",
+    "levels": [
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Zurich, Switzerland",
+    "country": "Switzerland",
+    "region": "Europe",
+    "citizenship": "Open internationally",
+    "funding": "full",
+    "fundingDetails": "Monthly salary plus travel and accommodation support.",
+    "benefits": [
+      "Two to three months of paid research",
+      "Supervision by ETH research groups",
+      "Accommodation support"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A paid summer research fellowship in computer and data science at ETH Zurich.",
+    "description": "A paid summer research fellowship in computer and data science at ETH Zurich.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
+    "applyUrl": "https://inf.ethz.ch/studies/summer-research-fellowship.html",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "summer",
+      "europe"
+    ]
+  },
+  {
+    "id": "amgen-scholars-program",
+    "slug": "amgen-scholars-program",
+    "title": "Amgen Scholars Program",
+    "org": "Amgen Foundation",
+    "type": "research",
+    "field": "Biotechnology · Research",
+    "subjects": [
+      "biology",
+      "chemistry",
+      "medicine",
+      "research",
+      "engineering"
+    ],
+    "audience": "Undergraduate students",
+    "levels": [
+      "undergraduate"
+    ],
+    "location": "Host universities in the U.S., Europe, Japan, Australia and Canada",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Varies by host region",
+    "funding": "full",
+    "fundingDetails": "Stipend, housing and travel at most host institutions.",
+    "benefits": [
+      "Summer research at a major university",
+      "Scientific symposium",
+      "Funded placement"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "Funded summer biotechnology research placements at leading universities across several regions.",
+    "description": "Funded summer biotechnology research placements at leading universities across several regions.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://amgenscholars.com/",
+    "applyUrl": "https://amgenscholars.com/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "summer",
+      "funded"
+    ]
+  },
+  {
+    "id": "perimeter-institute-issyp",
+    "slug": "perimeter-institute-issyp",
+    "title": "Perimeter Institute ISSYP",
+    "org": "Perimeter Institute for Theoretical Physics",
+    "type": "research",
+    "field": "Theoretical physics",
+    "subjects": [
+      "physics",
+      "mathematics",
+      "research"
+    ],
+    "audience": "Students in their final years of secondary school",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Waterloo, Canada and online",
+    "country": "Canada",
+    "region": "North America",
+    "citizenship": "Open worldwide",
+    "funding": "full",
+    "fundingDetails": "The programme is offered at no cost to selected students.",
+    "benefits": [
+      "Theoretical physics mentoring",
+      "Research skills workshops",
+      "International cohort"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "An international summer school in theoretical physics for senior secondary students, offered at no cost.",
+    "description": "An international summer school in theoretical physics for senior secondary students, offered at no cost.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "medium",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://perimeterinstitute.ca/issyp",
+    "applyUrl": "https://perimeterinstitute.ca/issyp",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "physics",
+      "summer"
+    ]
+  },
+  {
+    "id": "simons-summer-research-program",
+    "slug": "simons-summer-research-program",
+    "title": "Simons Summer Research Program",
+    "org": "Stony Brook University",
+    "type": "research",
+    "field": "STEM · Research",
+    "subjects": [
+      "research",
+      "biology",
+      "chemistry",
+      "physics",
+      "engineering",
+      "computer-science"
+    ],
+    "audience": "High school juniors",
+    "levels": [
+      "high-school"
+    ],
+    "location": "Stony Brook, New York",
+    "country": "United States",
+    "region": "North America",
+    "citizenship": "U.S. students — check current rules",
+    "funding": "partial",
+    "fundingDetails": "Participants receive a stipend at the end of the programme.",
+    "benefits": [
+      "Faculty-mentored laboratory research",
+      "Stipend",
+      "Poster symposium"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A mentored laboratory research programme placing high school juniors in university research groups.",
+    "description": "A mentored laboratory research programme placing high school juniors in university research groups.",
+    "deadline": null,
+    "deadlineLabel": "Annual cycle · confirm the date on the official page",
+    "dateType": "variable",
+    "opensAt": null,
+    "recurring": "annual",
+    "competitiveness": "high",
+    "experienceLevel": "intermediate",
+    "officialUrl": "https://www.stonybrook.edu/simons/",
+    "applyUrl": "https://www.stonybrook.edu/simons/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "pathway",
+    "tags": [
+      "research",
+      "summer"
+    ]
+  },
+  {
+    "id": "opportunity-desk",
+    "slug": "opportunity-desk",
+    "title": "Opportunity Desk",
+    "org": "Opportunity Desk",
+    "type": "directory",
+    "field": "Global opportunities",
+    "subjects": [
+      "humanities",
+      "business",
+      "research",
+      "social-impact",
+      "arts"
+    ],
+    "audience": "Students and young professionals worldwide",
+    "levels": [
+      "high-school",
+      "undergraduate",
+      "graduate"
+    ],
+    "location": "Online · worldwide",
+    "country": "International",
+    "region": "Global",
+    "citizenship": "Varies by listing",
+    "funding": "varies",
+    "fundingDetails": "Funding details are set by the organiser — confirm on the official page.",
+    "benefits": [
+      "Daily listings of global opportunities",
+      "Non-STEM coverage",
+      "Regional filters"
+    ],
+    "documents": [
+      "Check the official page for the current document list"
+    ],
+    "steps": [
+      "Open the official page and read the current eligibility rules",
+      "Note the deadline published by the organiser",
+      "Prepare the documents the organiser lists",
+      "Apply through the organiser’s own portal"
+    ],
+    "summary": "A widely used aggregator of scholarships, fellowships and competitions, including many non-STEM listings.",
+    "description": "A widely used aggregator of scholarships, fellowships and competitions, including many non-STEM listings.",
+    "deadline": null,
+    "deadlineLabel": "Rolling directory · each listing has its own deadline",
+    "dateType": "rolling",
+    "opensAt": null,
+    "recurring": "rolling",
+    "competitiveness": "medium",
+    "experienceLevel": "beginner",
+    "officialUrl": "https://opportunitydesk.org/",
+    "applyUrl": "https://opportunitydesk.org/",
+    "sourceLabel": "Official organisation page",
+    "verifiedAt": null,
+    "verificationStatus": "needs-review",
+    "linkCheckedAt": null,
+    "status": "directory",
+    "tags": [
+      "directory"
+    ]
+  }
+]

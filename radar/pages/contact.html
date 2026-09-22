@@ -1,0 +1,60 @@
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h1 class="display">Ask, suggest, or correct.</h1>
+    <p class="lede">This form reaches the person who maintains the catalogue. Reporting a problem with a specific listing is faster through <a href="/report.html" style="color:var(--signal);text-decoration:underline">the report form</a>.</p>
+  </div>
+</div>
+
+<div class="wrap section section--flush">
+  <div class="grid grid--2" style="gap:2.5rem;background:transparent">
+    <div>
+      <form id="contact-form">
+        <p class="form-error" data-form-error hidden></p>
+        <p class="form-success" data-form-success hidden></p>
+        <input type="hidden" name="kind" value="contact">
+        <label class="field">
+          <span class="field__label" for="contact-name">Your name</span>
+          <input class="input" id="contact-name" name="name" type="text" autocomplete="name" maxlength="120">
+        </label>
+        <label class="field">
+          <span class="field__label" for="contact-email">Email</span>
+          <input class="input" id="contact-email" name="email" type="email" required autocomplete="email">
+          <span class="field__hint">Only used to reply to you.</span>
+          <span class="field__error" data-field-error="email"></span>
+        </label>
+        <label class="field">
+          <span class="field__label" for="contact-subject">Subject</span>
+          <select class="select" id="contact-subject" name="subject">
+            <option>General question</option>
+            <option>Suggest an opportunity</option>
+            <option>Correct a listing</option>
+            <option>Schools and counsellors</option>
+            <option>Privacy or data request</option>
+            <option>Something else</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label" for="contact-body">Message</span>
+          <textarea class="textarea" id="contact-body" name="body" required maxlength="5000"></textarea>
+          <span class="field__error" data-field-error="body"></span>
+        </label>
+        <button class="btn btn--primary" type="submit">Send message</button>
+      </form>
+    </div>
+    <div>
+      <div class="panel">
+        <h2 class="h4">Suggesting an opportunity</h2>
+        <p class="lede" style="font-size:14.5px">Send the link to the organiser's own page. Radar does not add listings sourced only from another directory, and a listing is not marked verified until a person has read the source.</p>
+      </div>
+      <div class="panel">
+        <h2 class="h4">Privacy and data requests</h2>
+        <p class="lede" style="font-size:14.5px">You can export or delete everything yourself from <a href="/app/settings.html" style="color:var(--signal);text-decoration:underline">account settings</a> without asking. Use this form if something is not working or if you are asking on behalf of a student.</p>
+      </div>
+      <div class="panel">
+        <h2 class="h4">If you are under 16</h2>
+        <p class="lede" style="font-size:14.5px">Ask a parent, guardian or teacher before sending personal details through any form, including this one.</p>
+      </div>
+    </div>
+  </div>
+</div>

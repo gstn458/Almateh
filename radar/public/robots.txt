@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /app/dashboard.html
+Disallow: /app/saved.html
+Disallow: /app/tracker.html
+Disallow: /app/calendar.html
+Disallow: /app/settings.html
+Disallow: /app/onboarding.html
+
+Sitemap: https://radar.example.com/sitemap.xml

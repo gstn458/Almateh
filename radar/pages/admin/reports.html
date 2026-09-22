@@ -1,0 +1,23 @@
+<div class="app-head">
+  <div>
+    <p class="eyebrow">Admin</p>
+    <h1 class="h2">Reports and messages</h1>
+  </div>
+</div>
+
+<div id="admin-gate" hidden>
+  <p class="notice">Sign in on the <a href="/admin/index.html">admin overview</a> first.</p>
+</div>
+
+<div id="admin-content" hidden>
+  <section aria-labelledby="reports-heading" style="margin-bottom:3rem">
+    <h2 class="h3" id="reports-heading">Listing reports</h2>
+    <p class="lede" style="font-size:14.5px">A report about a deadline or a broken link is the fastest signal that a listing has rotted. Resolve it by fixing the listing, then closing the report.</p>
+    <div class="table-scroll" style="margin-top:1.5rem"><table id="reports-table"></table></div>
+  </section>
+
+  <section aria-labelledby="messages-heading">
+    <h2 class="h3" id="messages-heading">Contact and waitlist</h2>
+    <div class="table-scroll" style="margin-top:1.5rem"><table id="messages-table"></table></div>
+  </section>
+</div>

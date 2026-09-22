@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060809">
+<title>Build your profile — Radar</title>
+<meta name="description" content="Six short steps that teach Radar what to match you with.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://radar.example.com/app/onboarding.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Radar">
+<meta property="og:title" content="Build your profile — Radar">
+<meta property="og:description" content="Six short steps that teach Radar what to match you with.">
+<meta property="og:url" content="https://radar.example.com/app/onboarding.html">
+<meta property="og:image" content="https://radar.example.com/assets/img/og-cover.png">
+<meta property="og:image:alt" content="Radar — every opportunity you were never told about">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build your profile — Radar">
+<meta name="twitter:description" content="Six short steps that teach Radar what to match you with.">
+<meta name="twitter:image" content="https://radar.example.com/assets/img/og-cover.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
+<link rel="stylesheet" href="/assets/css/radar.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://radar.example.com/#website","name":"Radar","url":"https://radar.example.com","description":"Radar finds the competitions, research programmes, scholarships and fellowships students are never told about — verified, matched to you, and tracked to the deadline.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://radar.example.com/opportunities.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"Organization","@id":"https://radar.example.com/#organization","name":"Radar","url":"https://radar.example.com","description":"A verified opportunity directory and application tracker for students.","foundingLocation":{"@type":"Place","name":"Dubai, United Arab Emirates"}},{"@type":"WebPage","@id":"https://radar.example.com/app/onboarding.html#page","url":"https://radar.example.com/app/onboarding.html","name":"Build your profile","description":"Six short steps that teach Radar what to match you with.","isPartOf":{"@id":"https://radar.example.com/#website"}}]}</script>
+</head>
+<body class="page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-panel">
+        <span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i>
+      </button>
+      <div class="site-header__nav" id="site-nav-panel">
+        <nav class="site-nav" aria-label="Main">
+          <a href="/opportunities.html">Opportunities</a>
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/verification.html">Verification</a>
+          <a href="/pricing.html">Pricing</a>
+          <a href="/about.html">About</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="btn btn--quiet" href="/app/login.html" data-when="signed-out" hidden>Sign in</a>
+          <a class="btn btn--primary btn--sm" href="/app/signup.html" data-when="signed-out" hidden>Create account</a>
+          <a class="btn btn--ghost btn--sm" href="/app/dashboard.html" data-when="signed-in" hidden>Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </header>
+<main class="page__main" id="main-content" tabindex="-1"><div class="wrap section section--flush" style="max-width:720px">
+  <p class="eyebrow">Build your profile</p>
+  <h1 class="h2" id="step-heading">Six steps. Change any answer later.</h1>
+  <p class="lede" style="font-size:15px">Radar uses these answers to score every opportunity and to tell you why it scored that way.</p>
+  <p class="notice" id="storage-mode" hidden></p>
+
+  <div class="progress" aria-hidden="true" style="margin:2rem 0"><span id="onboard-progress" style="width:0%"></span></div>
+  <p class="meta" id="step-counter" role="status" aria-live="polite">Step 1 of 6</p>
+
+  <!-- novalidate: steps are validated one at a time in JS; the browser's own
+       pass cannot submit a form whose invalid control is on a hidden step. -->
+  <form id="onboarding-form" novalidate style="margin-top:2rem">
+    <p class="form-error" data-form-error hidden></p>
+
+    <fieldset class="onboard-step" data-step="1" style="border:0;padding:0;margin:0">
+      <legend class="h3">Where are you in your education?</legend>
+      <div class="options" id="level-options" role="radiogroup" aria-label="Education level"></div>
+      <label class="field" style="margin-top:1.5rem">
+        <span class="field__label" for="yearOrGrade">Year or grade</span>
+        <input class="input" id="yearOrGrade" name="yearOrGrade" type="text" placeholder="Year 12, or second-year undergraduate" maxlength="60">
+      </label>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="2" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">What are you actually interested in?</legend>
+      <p class="field__hint" style="margin-bottom:1rem">Pick as many as apply. These carry the most weight in matching.</p>
+      <div class="options" id="subject-options"></div>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="3" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">What are you building toward?</legend>
+      <p class="field__hint" style="margin-bottom:1rem">Your long-term goal decides which opportunities are worth your time, not just which ones you qualify for.</p>
+      <div class="options" id="goal-options"></div>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="4" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">Where are you, and where would you go?</legend>
+      <label class="field">
+        <span class="field__label" for="country">Country you live in</span>
+        <input class="input" id="country" name="country" type="text" list="country-list" autocomplete="country-name" required>
+        <datalist id="country-list"></datalist>
+      </label>
+      <label class="field">
+        <span class="field__label" for="citizenship">Citizenship</span>
+        <input class="input" id="citizenship" name="citizenship" type="text" list="country-list">
+        <span class="field__hint">Used to flag opportunities with citizenship restrictions before you waste time on them.</span>
+      </label>
+      <p class="field__label">Regions you would travel to</p>
+      <div class="options" id="region-options"></div>
+      <label class="checkbox" style="margin-top:1.2rem">
+        <input type="checkbox" name="willingToTravel" value="1" checked>
+        <span>I am open to opportunities outside my own country.</span>
+      </label>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="5" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">How much does funding matter?</legend>
+      <div class="options" id="funding-options" role="radiogroup" aria-label="Funding need"></div>
+      <p class="field__label" style="margin-top:2rem">How much have you done so far?</p>
+      <div class="options" id="experience-options" role="radiogroup" aria-label="Experience level"></div>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="6" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">What are you looking for?</legend>
+      <div class="options" id="type-options"></div>
+      <label class="field" style="margin-top:2rem">
+        <span class="field__label" for="availability">When are you free?</span>
+        <select class="select" id="availability" name="availability">
+          <option value="">No particular constraint</option>
+          <option value="summer">Summer only</option>
+          <option value="term-time">Term time</option>
+          <option value="year-round">Year round</option>
+          <option value="gap-year">A full gap year</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label" for="notes">Anything else Radar should know?</span>
+        <textarea class="textarea" id="notes" name="notes" maxlength="2000" placeholder="A specific programme you are aiming at, a subject you are set on, a constraint that matters."></textarea>
+      </label>
+    </fieldset>
+
+    <div style="display:flex;gap:.75rem;margin-top:2.5rem;flex-wrap:wrap">
+      <button class="btn btn--ghost" type="button" id="onboard-back" hidden>Back</button>
+      <button class="btn btn--primary" type="submit" id="onboard-next">Continue</button>
+      <a class="btn btn--quiet" href="/app/dashboard.html" id="onboard-skip">Skip for now</a>
+    </div>
+  </form>
+</div>
+</main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__grid">
+        <div>
+          <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+          <p class="site-footer__note">A verified directory and application tracker for students. Built in Dubai.</p>
+          <p class="site-footer__note"><strong>Radar is not the organiser.</strong> Every deadline, rule and decision belongs to the organisation running the opportunity.</p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/opportunities.html">Opportunity directory</a></li>
+            <li><a href="/how-it-works.html">How Radar works</a></li>
+            <li><a href="/pricing.html">Pricing and access</a></li>
+            <li><a href="/app/signup.html">Create an account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/verification.html">Verification policy</a></li>
+            <li><a href="/report.html">Report a listing</a></li>
+            <li><a href="/privacy.html">Privacy policy</a></li>
+            <li><a href="/terms.html">Terms of use</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Radar</h2>
+          <ul>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/app/settings.html">Your data</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span id="year">2026</span> Radar</span>
+        <span>Deadlines shown are the organiser's. Confirm before you apply.</span>
+      </div>
+    </div>
+  </footer>
+<script type="module" src="/assets/js/ui.js"></script>
+<script type="module" src="/assets/js/onboarding.js"></script>
+</body>
+</html>

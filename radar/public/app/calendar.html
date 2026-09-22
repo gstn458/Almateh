@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060809">
+<title>Deadline calendar — Radar</title>
+<meta name="description" content="Every deadline you are tracking, with reminders and calendar export.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://radar.example.com/app/calendar.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Radar">
+<meta property="og:title" content="Deadline calendar — Radar">
+<meta property="og:description" content="Every deadline you are tracking, with reminders and calendar export.">
+<meta property="og:url" content="https://radar.example.com/app/calendar.html">
+<meta property="og:image" content="https://radar.example.com/assets/img/og-cover.png">
+<meta property="og:image:alt" content="Radar — every opportunity you were never told about">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Deadline calendar — Radar">
+<meta name="twitter:description" content="Every deadline you are tracking, with reminders and calendar export.">
+<meta name="twitter:image" content="https://radar.example.com/assets/img/og-cover.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
+<link rel="stylesheet" href="/assets/css/radar.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://radar.example.com/#website","name":"Radar","url":"https://radar.example.com","description":"Radar finds the competitions, research programmes, scholarships and fellowships students are never told about — verified, matched to you, and tracked to the deadline.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://radar.example.com/opportunities.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"Organization","@id":"https://radar.example.com/#organization","name":"Radar","url":"https://radar.example.com","description":"A verified opportunity directory and application tracker for students.","foundingLocation":{"@type":"Place","name":"Dubai, United Arab Emirates"}},{"@type":"WebPage","@id":"https://radar.example.com/app/calendar.html#page","url":"https://radar.example.com/app/calendar.html","name":"Deadline calendar","description":"Every deadline you are tracking, with reminders and calendar export.","isPartOf":{"@id":"https://radar.example.com/#website"}}]}</script>
+</head>
+<body class="page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-panel">
+        <span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i>
+      </button>
+      <div class="site-header__nav" id="site-nav-panel">
+        <nav class="site-nav" aria-label="Main">
+          <a href="/opportunities.html">Opportunities</a>
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/verification.html">Verification</a>
+          <a href="/pricing.html">Pricing</a>
+          <a href="/about.html">About</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="btn btn--quiet" href="/app/login.html" data-when="signed-out" hidden>Sign in</a>
+          <a class="btn btn--primary btn--sm" href="/app/signup.html" data-when="signed-out" hidden>Create account</a>
+          <a class="btn btn--ghost btn--sm" href="/app/dashboard.html" data-when="signed-in" hidden>Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </header>
+<div class="app-shell">
+      <nav class="app-side" aria-label="Your Radar">
+        <ul>
+          <li><a href="/app/dashboard.html">Dashboard</a></li>
+          <li><a href="/app/saved.html">Saved</a></li>
+          <li><a href="/app/tracker.html">Tracker</a></li>
+          <li><a href="/app/calendar.html">Calendar</a></li>
+          <li><a href="/app/settings.html">Settings</a></li>
+        </ul>
+      </nav><div class="app-main" id="main-content" tabindex="-1"><div class="app-head">
+  <div>
+    <p class="eyebrow">Deadline calendar</p>
+    <h1 class="h2">Every date you are tracking.</h1>
+  </div>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+    <button class="btn btn--primary btn--sm" type="button" id="download-ics">Download .ics</button>
+    <button class="btn btn--ghost btn--sm" type="button" id="copy-subscribe">Copy feed URL</button>
+  </div>
+</div>
+
+<p class="notice" id="storage-mode" hidden></p>
+<p class="notice notice--info" id="calendar-note"></p>
+
+<section aria-labelledby="upcoming-heading" style="margin:2.5rem 0 3rem">
+  <h2 class="h3" id="upcoming-heading">Upcoming</h2>
+  <div id="calendar-upcoming"></div>
+</section>
+
+<section aria-labelledby="reminders-heading" style="margin-bottom:3rem">
+  <h2 class="h3" id="reminders-heading">Your reminders</h2>
+  <div id="calendar-reminders"></div>
+</section>
+
+<section aria-labelledby="undated-heading">
+  <h2 class="h3" id="undated-heading">No fixed date yet</h2>
+  <p class="lede" style="font-size:14.5px">These are saved but the organiser has not published a date Radar can count down to. Check the official page.</p>
+  <div id="calendar-undated" style="margin-top:1.2rem"></div>
+</section>
+</div></div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__grid">
+        <div>
+          <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+          <p class="site-footer__note">A verified directory and application tracker for students. Built in Dubai.</p>
+          <p class="site-footer__note"><strong>Radar is not the organiser.</strong> Every deadline, rule and decision belongs to the organisation running the opportunity.</p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/opportunities.html">Opportunity directory</a></li>
+            <li><a href="/how-it-works.html">How Radar works</a></li>
+            <li><a href="/pricing.html">Pricing and access</a></li>
+            <li><a href="/app/signup.html">Create an account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/verification.html">Verification policy</a></li>
+            <li><a href="/report.html">Report a listing</a></li>
+            <li><a href="/privacy.html">Privacy policy</a></li>
+            <li><a href="/terms.html">Terms of use</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Radar</h2>
+          <ul>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/app/settings.html">Your data</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span id="year">2026</span> Radar</span>
+        <span>Deadlines shown are the organiser's. Confirm before you apply.</span>
+      </div>
+    </div>
+  </footer>
+<script type="module" src="/assets/js/ui.js"></script>
+<script type="module" src="/assets/js/calendar.js"></script>
+</body>
+</html>

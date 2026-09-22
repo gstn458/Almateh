@@ -1,0 +1,79 @@
+<div class="app-head">
+  <div>
+    <p class="eyebrow">Settings</p>
+    <h1 class="h2">Your account and your data.</h1>
+  </div>
+</div>
+
+<p class="notice" id="storage-mode" hidden></p>
+
+<section class="panel" id="profile" style="margin-bottom:1rem">
+  <h2 class="h3">Matching profile</h2>
+  <p class="lede" style="font-size:14.5px">These answers decide what Radar shows you. Change them whenever your plans change — the ranking updates immediately.</p>
+  <div id="profile-summary" style="margin:1.5rem 0"></div>
+  <a class="btn btn--primary btn--sm" href="/app/onboarding.html">Edit profile answers</a>
+</section>
+
+<section class="panel" id="account" style="margin-bottom:1rem">
+  <h2 class="h3">Account</h2>
+  <dl class="opp__facts" id="account-summary" style="margin:1.2rem 0"></dl>
+  <form id="password-form" style="max-width:420px;margin-top:1.5rem">
+    <p class="form-error" data-form-error hidden></p>
+    <p class="form-success" data-form-success hidden></p>
+    <label class="field">
+      <span class="field__label" for="current">Current password</span>
+      <input class="input" id="current" name="current" type="password" autocomplete="current-password" required>
+      <span class="field__error" data-field-error="current"></span>
+    </label>
+    <label class="field">
+      <span class="field__label" for="next">New password</span>
+      <input class="input" id="next" name="next" type="password" autocomplete="new-password" minlength="10" required>
+      <span class="field__hint">At least 10 characters. Changing it signs out your other devices.</span>
+      <span class="field__error" data-field-error="next"></span>
+    </label>
+    <button class="btn btn--ghost btn--sm" type="submit">Change password</button>
+  </form>
+</section>
+
+<section class="panel" id="privacy" style="margin-bottom:1rem">
+  <h2 class="h3">Privacy</h2>
+  <label class="checkbox" style="margin-top:1rem">
+    <input type="checkbox" id="analytics-toggle">
+    <span>Count my anonymous product events.
+      <span style="display:block;color:var(--muted-dim);font-size:13px;margin-top:.2rem">Event names only — no identifier, no page trail, nothing that points back to you. Used to see which features actually help.</span>
+    </span>
+  </label>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem">
+    <button class="btn btn--ghost btn--sm" type="button" id="export-data">Export my data</button>
+    <a class="btn btn--quiet" href="/privacy.html">Read the privacy policy</a>
+  </div>
+</section>
+
+<section class="panel" id="danger">
+  <h2 class="h3">Delete your account</h2>
+  <p class="lede" style="font-size:14.5px">Your profile, saves, applications, notes and reminders are deleted immediately and cannot be recovered. Export first if you want a copy.</p>
+  <button class="btn btn--danger btn--sm" type="button" id="delete-account" style="margin-top:1.5rem">Delete my account</button>
+</section>
+
+<div style="margin-top:2rem">
+  <button class="btn btn--quiet" type="button" id="sign-out">Sign out</button>
+</div>
+
+<dialog id="delete-dialog" aria-labelledby="delete-title">
+  <div class="dialog__head">
+    <h2 class="h3" id="delete-title" style="margin:0">Delete everything?</h2>
+  </div>
+  <div class="dialog__body">
+    <p class="lede" style="font-size:14.5px">This removes your profile, saved opportunities, tracked applications, notes and reminders. It cannot be undone.</p>
+    <form id="delete-form" style="margin-top:1.5rem">
+      <label class="field">
+        <span class="field__label" for="delete-confirm">Type DELETE to confirm</span>
+        <input class="input" id="delete-confirm" name="confirm" type="text" autocomplete="off" required>
+      </label>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <button class="btn btn--danger" type="submit">Delete my account</button>
+        <button class="btn btn--quiet" type="button" data-close-dialog>Keep my account</button>
+      </div>
+    </form>
+  </div>
+</dialog>

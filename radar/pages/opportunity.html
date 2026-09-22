@@ -1,0 +1,35 @@
+<div class="wrap" id="opportunity-root">
+  <div class="page-head" style="border-bottom:0">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Radar</a><span aria-hidden="true">/</span>
+      <a href="/opportunities.html">Directory</a><span aria-hidden="true">/</span>
+      <span id="crumb-title">Loading</span>
+    </nav>
+    <h1 class="display" id="opportunity-title">Loading…</h1>
+  </div>
+  <div id="opportunity-body" aria-busy="true">
+    <p class="lede">Fetching this listing.</p>
+  </div>
+</div>
+
+<dialog id="reminder-dialog" aria-labelledby="reminder-title">
+  <form method="dialog" class="dialog__head">
+    <h2 class="h3" id="reminder-title" style="margin:0">Set a reminder</h2>
+    <button class="btn btn--quiet" value="cancel" aria-label="Close">Close</button>
+  </form>
+  <div class="dialog__body">
+    <form id="reminder-form">
+      <p class="form-error" data-form-error hidden></p>
+      <label class="field">
+        <span class="field__label" for="remind-on">Remind me on</span>
+        <input class="input" id="remind-on" name="remindOn" type="date" required>
+        <span class="field__hint">Reminders appear on your dashboard when you next open Radar. Email reminders are not sent yet.</span>
+      </label>
+      <label class="field">
+        <span class="field__label" for="remind-label">What should it say?</span>
+        <input class="input" id="remind-label" name="label" type="text" placeholder="Start the research statement" maxlength="120">
+      </label>
+      <button class="btn btn--primary btn--block" type="submit">Save reminder</button>
+    </form>
+  </div>
+</dialog>

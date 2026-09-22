@@ -1,0 +1,88 @@
+<div class="wrap section section--flush" style="max-width:720px">
+  <p class="eyebrow">Build your profile</p>
+  <h1 class="h2" id="step-heading">Six steps. Change any answer later.</h1>
+  <p class="lede" style="font-size:15px">Radar uses these answers to score every opportunity and to tell you why it scored that way.</p>
+  <p class="notice" id="storage-mode" hidden></p>
+
+  <div class="progress" aria-hidden="true" style="margin:2rem 0"><span id="onboard-progress" style="width:0%"></span></div>
+  <p class="meta" id="step-counter" role="status" aria-live="polite">Step 1 of 6</p>
+
+  <!-- novalidate: steps are validated one at a time in JS; the browser's own
+       pass cannot submit a form whose invalid control is on a hidden step. -->
+  <form id="onboarding-form" novalidate style="margin-top:2rem">
+    <p class="form-error" data-form-error hidden></p>
+
+    <fieldset class="onboard-step" data-step="1" style="border:0;padding:0;margin:0">
+      <legend class="h3">Where are you in your education?</legend>
+      <div class="options" id="level-options" role="radiogroup" aria-label="Education level"></div>
+      <label class="field" style="margin-top:1.5rem">
+        <span class="field__label" for="yearOrGrade">Year or grade</span>
+        <input class="input" id="yearOrGrade" name="yearOrGrade" type="text" placeholder="Year 12, or second-year undergraduate" maxlength="60">
+      </label>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="2" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">What are you actually interested in?</legend>
+      <p class="field__hint" style="margin-bottom:1rem">Pick as many as apply. These carry the most weight in matching.</p>
+      <div class="options" id="subject-options"></div>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="3" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">What are you building toward?</legend>
+      <p class="field__hint" style="margin-bottom:1rem">Your long-term goal decides which opportunities are worth your time, not just which ones you qualify for.</p>
+      <div class="options" id="goal-options"></div>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="4" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">Where are you, and where would you go?</legend>
+      <label class="field">
+        <span class="field__label" for="country">Country you live in</span>
+        <input class="input" id="country" name="country" type="text" list="country-list" autocomplete="country-name" required>
+        <datalist id="country-list"></datalist>
+      </label>
+      <label class="field">
+        <span class="field__label" for="citizenship">Citizenship</span>
+        <input class="input" id="citizenship" name="citizenship" type="text" list="country-list">
+        <span class="field__hint">Used to flag opportunities with citizenship restrictions before you waste time on them.</span>
+      </label>
+      <p class="field__label">Regions you would travel to</p>
+      <div class="options" id="region-options"></div>
+      <label class="checkbox" style="margin-top:1.2rem">
+        <input type="checkbox" name="willingToTravel" value="1" checked>
+        <span>I am open to opportunities outside my own country.</span>
+      </label>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="5" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">How much does funding matter?</legend>
+      <div class="options" id="funding-options" role="radiogroup" aria-label="Funding need"></div>
+      <p class="field__label" style="margin-top:2rem">How much have you done so far?</p>
+      <div class="options" id="experience-options" role="radiogroup" aria-label="Experience level"></div>
+    </fieldset>
+
+    <fieldset class="onboard-step" data-step="6" hidden style="border:0;padding:0;margin:0">
+      <legend class="h3">What are you looking for?</legend>
+      <div class="options" id="type-options"></div>
+      <label class="field" style="margin-top:2rem">
+        <span class="field__label" for="availability">When are you free?</span>
+        <select class="select" id="availability" name="availability">
+          <option value="">No particular constraint</option>
+          <option value="summer">Summer only</option>
+          <option value="term-time">Term time</option>
+          <option value="year-round">Year round</option>
+          <option value="gap-year">A full gap year</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label" for="notes">Anything else Radar should know?</span>
+        <textarea class="textarea" id="notes" name="notes" maxlength="2000" placeholder="A specific programme you are aiming at, a subject you are set on, a constraint that matters."></textarea>
+      </label>
+    </fieldset>
+
+    <div style="display:flex;gap:.75rem;margin-top:2.5rem;flex-wrap:wrap">
+      <button class="btn btn--ghost" type="button" id="onboard-back" hidden>Back</button>
+      <button class="btn btn--primary" type="submit" id="onboard-next">Continue</button>
+      <a class="btn btn--quiet" href="/app/dashboard.html" id="onboard-skip">Skip for now</a>
+    </div>
+  </form>
+</div>

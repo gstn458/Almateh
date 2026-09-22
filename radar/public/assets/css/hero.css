@@ -1,0 +1,230 @@
+/* ==========================================================================
+   Homepage: loading curtain, hero stage, globe, scroll narrative.
+   Loaded only by index.html so no other page pays for it.
+   ========================================================================== */
+
+/* ------------------------------------------------------- loading curtain */
+html.is-loading,html.is-loading body{overflow:hidden}
+.page-loader{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;overflow:hidden;
+  background:#060809;color:#fff;isolation:isolate;clip-path:inset(0 0 0 0);
+  transition:clip-path 900ms cubic-bezier(.77,0,.18,1),opacity 500ms ease;
+}
+.page-loader::before{
+  content:"";position:absolute;inset:0;z-index:-2;opacity:.56;
+  background-image:linear-gradient(rgba(74,222,128,.055) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(74,222,128,.055) 1px,transparent 1px);
+  background-size:clamp(36px,5vw,78px) clamp(36px,5vw,78px);
+  mask-image:radial-gradient(ellipse at center,black 0%,transparent 75%);
+}
+.page-loader::after{
+  content:"";position:absolute;inset:-20%;z-index:-1;
+  background:radial-gradient(circle at 50% 48%,rgba(74,222,128,.13),transparent 22%,rgba(6,8,9,0) 48%);
+  animation:loaderBreath 2.6s ease-in-out infinite;
+}
+.page-loader.is-done{opacity:0;clip-path:inset(0 0 100% 0);pointer-events:none}
+.loader__corner{position:absolute;top:3.4dvh;left:4.5vw;right:4.5vw;display:flex;justify-content:space-between;align-items:flex-start;font:10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.60)}
+.loader__brand{display:flex;align-items:center;gap:12px;color:#fff;font-size:11px;letter-spacing:.24em}
+.loader__mark{position:relative;width:24px;height:24px;display:block}
+.loader__mark::before,.loader__mark::after{content:"";position:absolute;left:50%;top:0;width:1px;height:100%;background:var(--signal);transform:translateX(-50%) rotate(45deg)}
+.loader__mark::after{transform:translateX(-50%) rotate(-45deg)}
+.loader__status{color:var(--signal)}
+.loader__center{text-align:center;transform:translateY(-3vh);padding:0 6vw}
+.loader__kicker{margin:0 0 1.15rem;color:var(--signal);font:10px/1 var(--mono);letter-spacing:.35em;text-transform:uppercase}
+.loader__title{margin:0;font-family:var(--serif);font-size:clamp(60px,13vw,190px);font-weight:400;line-height:.78;letter-spacing:-.05em}
+.loader__title span{display:block}
+.loader__title span:last-child{color:var(--signal)}
+.loader__hint{margin:2rem 0 0;color:rgba(255,255,255,.60);font:10px/1 var(--mono);letter-spacing:.28em;text-transform:uppercase}
+.loader__bottom{position:absolute;left:4.5vw;right:4.5vw;bottom:4.4dvh;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;color:rgba(255,255,255,.62);font:10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase}
+.loader__counter{color:#fff;font-size:12px}
+.loader__track{position:absolute;left:4.5vw;right:4.5vw;bottom:2.6dvh;height:1px;background:rgba(255,255,255,.18);overflow:hidden}
+.loader__bar{display:block;width:7%;height:100%;background:var(--signal);box-shadow:0 0 16px rgba(74,222,128,.8);transition:width 120ms linear}
+.loader__cursor{display:inline-block;width:7px;height:13px;margin-left:7px;vertical-align:-2px;background:var(--signal);animation:loaderBlink 800ms steps(1) infinite}
+@keyframes loaderBreath{0%,100%{transform:scale(.88);opacity:.55}50%{transform:scale(1.16);opacity:1}}
+@keyframes loaderBlink{0%,45%{opacity:1}46%,100%{opacity:0}}
+
+/* -------------------------------------------------------------- the hero */
+.hero{
+  position:relative;height:170svh;min-height:100svh;isolation:isolate;
+  background:
+    radial-gradient(circle at 64% 42%,rgba(74,222,128,.10),transparent 22%),
+    radial-gradient(circle at 10% 92%,rgba(22,163,74,.08),transparent 26%),
+    #060809;
+}
+.stage{
+  position:sticky;top:0;width:100%;height:100svh;overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 18%);
+}
+.stage::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:clamp(44px,6vw,92px) clamp(44px,6vw,92px);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 75%);
+}
+
+.hero-brand{position:absolute;top:3.6dvh;left:4.5vw;z-index:4;display:flex;align-items:center;gap:.65rem;min-height:44px;font:500 12px/1 var(--mono);letter-spacing:.26em;text-transform:uppercase}
+.hero-nav{position:absolute;top:3.4dvh;left:16vw;z-index:4;display:flex;gap:clamp(1.4rem,3.4vw,3.4rem);list-style:none;margin:0;padding:0}
+.hero-nav a{color:rgba(255,255,255,.66);font:10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;padding:6px 0;transition:color 220ms ease}
+.hero-nav a:hover{color:var(--signal)}
+.hero-pill{
+  position:absolute;top:3.1dvh;right:7vw;z-index:4;display:flex;align-items:center;gap:.6em;
+  padding:11px 15px;border:1px solid rgba(255,255,255,.20);border-radius:999px;
+  color:rgba(255,255,255,.72);font:10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+}
+.hero-pill i{width:5px;height:5px;border-radius:50%;background:var(--signal-deep);animation:beat 2s var(--soft) infinite}
+@keyframes beat{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}
+
+.word{position:absolute;top:15.8dvh;left:4.5vw;z-index:1;margin:0;line-height:.73}
+.word__mask{display:block;overflow:hidden;padding-top:.14em;margin-top:-.14em}
+.word__inner{
+  display:block;font-family:var(--serif);font-weight:400;letter-spacing:.015em;
+  /* RADAR sets about 3.67x its font-size in Instrument Serif at this tracking,
+     so 23.5vw keeps the whole word inside the viewport from the 4.5vw margin
+     instead of relying on the page clipping its overflow. */
+  font-size:min(23.5vw,62dvh);
+}
+.word__white{color:#fff}
+.word__signal{background:linear-gradient(180deg,#4ADE80 0%,#16A34A 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* The globe blends at this level so the wordmark shows through it. */
+.globe{
+  position:absolute;top:13dvh;left:57vw;height:108dvh;z-index:2;
+  transform:translateX(-50%);pointer-events:none;mix-blend-mode:screen;
+}
+.globe__sizer{visibility:hidden;height:100%;width:auto;max-width:none;display:block}
+.globe__3d{position:absolute;inset:0;perspective:1450px;transform-style:preserve-3d;pointer-events:none}
+.globe__sphere{position:absolute;inset:0;border-radius:50%;transform-style:preserve-3d;will-change:transform;filter:drop-shadow(0 35px 70px rgba(0,0,0,.55))}
+.globe__texture{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;border-radius:50%;backface-visibility:hidden;user-select:none;mix-blend-mode:screen;transform:translateZ(2px)}
+.globe__texture--back{transform:rotateY(180deg) translateZ(0);filter:brightness(.34) saturate(.82)}
+.globe__sphere::before{
+  content:"";position:absolute;inset:0;border-radius:50%;z-index:3;pointer-events:none;
+  backface-visibility:hidden;transform:translateZ(9px);
+  background:radial-gradient(circle at 31% 25%,rgba(255,255,255,.22),transparent 17%,rgba(0,0,0,0) 47%,rgba(0,0,0,.27) 76%,rgba(0,0,0,.72) 100%);
+}
+.globe__sphere::after{
+  content:"";position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;
+  backface-visibility:hidden;transform:translateZ(12px);border:1px solid rgba(255,255,255,.16);
+  box-shadow:inset 10px 12px 24px rgba(255,255,255,.08),inset -18px -20px 36px rgba(0,0,0,.42);
+}
+/* Dropped entirely on low-power devices; the page must still read as Radar. */
+.globe.is-disabled{display:none}
+
+.hero-actions{position:absolute;left:4.5vw;top:44dvh;z-index:18;display:flex;flex-wrap:wrap;gap:10px;max-width:min(92vw,460px)}
+.hero-actions__note{flex-basis:100%;margin:.3rem 0 0;color:rgba(255,255,255,.62);font:9px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.corners{position:absolute;bottom:4.2dvh;left:0;right:0;z-index:3;display:flex;justify-content:space-between;padding:0 4.5vw;pointer-events:none}
+.corner{margin:0;color:rgba(255,255,255,.68);font:11px/1.55 var(--mono);letter-spacing:.05em}
+.corner span{display:block}
+
+/* ------------------------------------------------------- entrance motion */
+@keyframes riseWord{from{transform:translateY(118%)}to{transform:translateY(0)}}
+@keyframes riseSubject{from{opacity:0;transform:translateX(-50%) translateY(3.4dvh)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes riseSoft{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.anim .word__inner{animation:riseWord 1150ms var(--reveal) 300ms both}
+.anim .globe{animation:riseSubject 1150ms var(--reveal) 660ms both}
+.anim .hero-brand{animation:riseSoft 620ms var(--soft) 100ms both}
+.anim .hero-pill{animation:riseSoft 620ms var(--soft) 340ms both}
+.anim .hero-nav a{animation:fadeIn 550ms var(--soft) 220ms both}
+.anim .hero-actions{animation:riseSoft 700ms var(--soft) 800ms both}
+.anim .corner span{animation:riseSoft 720ms var(--soft) 980ms both}
+@keyframes radarNoticeReveal{0%{opacity:0;transform:translateY(18px);filter:blur(6px)}100%{opacity:1;transform:none;filter:blur(0)}}
+html.chapter-reveal .hero{animation:radarNoticeReveal 900ms var(--reveal) both}
+
+/* ------------------------------------------------------- scroll narrative */
+.story-system{position:fixed;inset:0;z-index:18;pointer-events:none;color:#fff;transition:opacity 400ms ease}
+.story-system[hidden]{display:none}
+.story-system.is-dormant{opacity:0;pointer-events:none}
+.story-system::after{content:"";position:absolute;right:4.5vw;top:17dvh;bottom:12dvh;width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.18) 12%,rgba(255,255,255,.18) 88%,transparent)}
+.story-caption{position:absolute;left:4.5vw;bottom:10dvh;width:min(23vw,300px);transition:opacity 360ms ease,transform 360ms ease}
+.story-caption.is-changing{opacity:.2;transform:translateY(12px)}
+.story-caption__kicker{margin:0 0 1rem;color:var(--signal);font:10px/1 var(--mono);letter-spacing:.25em;text-transform:uppercase}
+.story-caption__title{margin:0 0 .8rem;font-family:var(--serif);font-size:clamp(28px,3.1vw,50px);font-weight:400;line-height:.95;letter-spacing:-.04em}
+.story-caption__copy{margin:0;color:rgba(255,255,255,.66);font-size:12px;line-height:1.5;max-width:30ch}
+.story-progress{position:absolute;top:17dvh;right:4.5vw;bottom:12dvh;width:118px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:auto}
+.story-progress__bar{position:absolute;top:0;left:0;width:1px;height:0;background:var(--signal);box-shadow:0 0 14px rgba(74,222,128,.65);transition:height 260ms var(--reveal)}
+.story-chapter{
+  display:flex;align-items:center;gap:14px;width:100%;padding:6px 0 6px 10px;
+  background:none;border:0;text-align:left;cursor:pointer;color:rgba(255,255,255,.58);
+  font:9px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+  transition:color 250ms ease;
+}
+.story-chapter::before{content:"";flex:0 0 7px;width:7px;height:7px;border:1px solid currentColor;background:#060809;transition:all 250ms ease}
+.story-chapter.is-active{color:var(--signal);font-weight:700;text-shadow:0 0 9px rgba(74,222,128,.42)}
+.story-chapter.is-active::before{background:var(--signal);border-color:var(--signal);transform:rotate(45deg)}
+.story-audio{
+  /* Sits between the live-count pill and the top of the chapter rail. */
+  position:absolute;top:10dvh;right:4.5vw;pointer-events:auto;min-height:38px;
+  border:1px solid rgba(74,222,128,.32);background:rgba(6,8,9,.72);color:rgba(255,255,255,.65);
+  padding:8px 11px;font:10px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  transition:color 220ms ease,border-color 220ms ease,background 220ms ease;
+}
+.story-audio[aria-pressed="true"]{color:#060809;background:var(--signal);border-color:var(--signal)}
+.story-scanline{position:fixed;left:0;right:0;top:0;height:1px;z-index:19;background:var(--signal);transform-origin:left center;transform:scaleX(0);opacity:.7;pointer-events:none}
+
+/* Story sections reserve the left rail so the caption never covers text. */
+.story-section{position:relative;min-height:100svh;padding:16svh 0;transition:background 500ms ease}
+.story-section::after{content:attr(data-story-label);position:absolute;top:6dvh;left:var(--gutter);color:rgba(255,255,255,.35);font:10px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase}
+.story-section .wrap{transition:transform 700ms var(--reveal),opacity 700ms ease}
+.story-section:not(.is-story-active) .wrap{opacity:.55;transform:translateY(14px)}
+.story-section.is-story-active{background:radial-gradient(circle at 78% 42%,rgba(74,222,128,.055),transparent 28%)}
+.story-section.is-story-active .wrap{opacity:1;transform:none}
+@media (min-width:901px){
+  .story-section .wrap{padding-left:clamp(300px,30vw,440px);padding-right:170px}
+}
+
+.app-scroll-progress{position:fixed;left:0;right:0;top:0;height:2px;z-index:1600;background:rgba(255,255,255,.08);pointer-events:none}
+.app-scroll-progress__bar{display:block;width:0;height:100%;background:var(--signal);box-shadow:0 0 12px rgba(74,222,128,.75)}
+.back-to-top{
+  position:fixed;right:4.5vw;bottom:3dvh;z-index:100;width:44px;height:44px;
+  border:1px solid rgba(74,222,128,.35);background:rgba(5,7,7,.82);color:var(--signal);
+  font:14px/1 var(--mono);cursor:pointer;opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:opacity 220ms ease,transform 220ms ease,background 220ms ease;
+}
+.back-to-top.is-visible{opacity:1;transform:none;pointer-events:auto}
+.back-to-top:hover{background:var(--signal);color:#050707}
+
+/* ------------------------------------------------------------- responsive */
+@media (max-width:1200px){
+  .hero-nav{left:18vw;gap:1.8rem}
+  .globe{left:58vw;height:102dvh}
+  .word__inner{font-size:min(24vw,58dvh)}
+}
+@media (max-width:900px){
+  .hero{height:150svh}
+  .hero-nav,.hero-pill{display:none}
+  .word{top:13dvh}
+  .word__inner{font-size:min(26vw,19dvh)}
+  /* Sized to sit inside the viewport rather than bleeding past its edge. */
+  .globe{left:50%;top:auto;bottom:26dvh;height:min(52dvh,92vw);max-height:400px}
+  .globe__3d{perspective:1100px}
+  .hero-actions{left:var(--gutter);right:var(--gutter);top:auto;bottom:22dvh;max-width:none}
+  .hero-actions .btn{flex:1 1 150px}
+  .corners{display:none}
+
+  /* Mobile: the chapter rail is decorative, so it is dropped rather than
+     squeezed next to the text. The caption becomes a slim bottom bar. */
+  .story-progress,.story-system::after{display:none}
+  .story-audio{top:auto;bottom:calc(3dvh + 56px);right:var(--gutter)}
+  .story-caption{
+    left:var(--gutter);right:var(--gutter);bottom:2.2dvh;width:auto;
+    padding:10px 13px;border:1px solid rgba(74,222,128,.22);background:rgba(6,8,9,.92);
+  }
+  .story-caption__kicker{margin:0 0 .3rem;font-size:8px;letter-spacing:.18em}
+  .story-caption__title{margin:0;font-size:clamp(18px,5.2vw,26px);line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .story-caption__copy{display:none}
+  .story-section{min-height:auto;padding:12svh 0 calc(12svh + 72px)}
+  .story-section::after{top:4dvh}
+  .back-to-top{right:var(--gutter);bottom:3dvh}
+}
+@media (max-aspect-ratio:4/5){
+  .word{text-align:center;left:0;width:100%}
+  .hero-actions{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  .anim .word__inner,.anim .globe,.anim .hero-brand,.anim .hero-pill,
+  .anim .hero-nav a,.anim .hero-actions,.anim .corner span,
+  html.chapter-reveal .hero,.page-loader::after,.loader__cursor{animation:none}
+  .story-section:not(.is-story-active) .wrap{opacity:1;transform:none}
+  .globe__sphere{transform:none!important}
+}

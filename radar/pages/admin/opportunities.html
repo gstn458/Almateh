@@ -1,0 +1,77 @@
+<div class="app-head">
+  <div>
+    <p class="eyebrow">Admin</p>
+    <h1 class="h2">Catalogue</h1>
+  </div>
+  <button class="btn btn--primary btn--sm" type="button" id="new-opportunity">Add a listing</button>
+</div>
+
+<div id="admin-gate" hidden>
+  <p class="notice">Sign in on the <a href="/admin/index.html">admin overview</a> first.</p>
+</div>
+
+<div id="admin-content" hidden>
+  <div class="toolbar">
+    <div>
+      <label class="sr-only" for="admin-search">Search the catalogue</label>
+      <input class="input" id="admin-search" type="search" placeholder="Search by title or organisation">
+    </div>
+    <div>
+      <label class="sr-only" for="admin-filter">Filter</label>
+      <select class="select" id="admin-filter">
+        <option value="all">All listings</option>
+        <option value="needs-review">Needs review</option>
+        <option value="verified">Verified</option>
+        <option value="expired">Expired</option>
+        <option value="broken">Broken links</option>
+      </select>
+    </div>
+  </div>
+  <p class="result-count" id="admin-count" role="status" aria-live="polite"></p>
+  <div class="table-scroll"><table id="catalogue-table"></table></div>
+</div>
+
+<dialog id="edit-dialog" aria-labelledby="edit-title">
+  <div class="dialog__head">
+    <h2 class="h3" id="edit-title" style="margin:0">Edit listing</h2>
+    <button class="btn btn--quiet" type="button" data-close-dialog>Close</button>
+  </div>
+  <div class="dialog__body">
+    <form id="edit-form">
+      <p class="form-error" data-form-error hidden></p>
+      <input type="hidden" name="id">
+      <label class="field"><span class="field__label" for="f-title">Title</span><input class="input" id="f-title" name="title" required></label>
+      <label class="field"><span class="field__label" for="f-org">Organisation</span><input class="input" id="f-org" name="org" required></label>
+      <label class="field"><span class="field__label" for="f-type">Type</span>
+        <select class="select" id="f-type" name="type">
+          <option value="competition">Competition</option>
+          <option value="research">Research</option>
+          <option value="scholarship">Scholarship</option>
+          <option value="fellowship">Fellowship</option>
+          <option value="directory">Directory</option>
+        </select>
+      </label>
+      <label class="field"><span class="field__label" for="f-summary">Summary</span><textarea class="textarea" id="f-summary" name="summary" maxlength="400"></textarea></label>
+      <label class="field"><span class="field__label" for="f-deadline">Deadline</span><input class="input" id="f-deadline" name="deadline" type="date">
+        <span class="field__hint">Leave empty when the organiser publishes no fixed date. Never guess one.</span>
+      </label>
+      <label class="field"><span class="field__label" for="f-deadline-label">Deadline label</span><input class="input" id="f-deadline-label" name="deadlineLabel"></label>
+      <label class="field"><span class="field__label" for="f-official">Official URL</span><input class="input" id="f-official" name="officialUrl" type="url" required></label>
+      <label class="field"><span class="field__label" for="f-apply">Application URL</span><input class="input" id="f-apply" name="applyUrl" type="url"></label>
+      <label class="field"><span class="field__label" for="f-location">Location</span><input class="input" id="f-location" name="location"></label>
+      <label class="field"><span class="field__label" for="f-region">Region</span><input class="input" id="f-region" name="region"></label>
+      <label class="field"><span class="field__label" for="f-verification">Verification status</span>
+        <select class="select" id="f-verification" name="verificationStatus">
+          <option value="needs-review">Needs review</option>
+          <option value="verified">Verified</option>
+        </select>
+      </label>
+      <label class="checkbox"><input type="checkbox" name="isExpired" value="1"><span>Mark as expired</span></label>
+      <label class="checkbox"><input type="checkbox" name="isFeatured" value="1"><span>Feature on the homepage</span></label>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem">
+        <button class="btn btn--primary" type="submit">Save listing</button>
+        <button class="btn btn--ghost" type="button" id="verify-now">Mark verified today</button>
+      </div>
+    </form>
+  </div>
+</dialog>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060809">
+<title>Opportunity directory — Radar</title>
+<meta name="description" content="Search verified competitions, research programmes, scholarships and fellowships. Filter by level, region, funding and deadline.">
+<link rel="canonical" href="https://radar.example.com/opportunities.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Radar">
+<meta property="og:title" content="Opportunity directory — Radar">
+<meta property="og:description" content="Search verified competitions, research programmes, scholarships and fellowships. Filter by level, region, funding and deadline.">
+<meta property="og:url" content="https://radar.example.com/opportunities.html">
+<meta property="og:image" content="https://radar.example.com/assets/img/og-cover.png">
+<meta property="og:image:alt" content="Radar — every opportunity you were never told about">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Opportunity directory — Radar">
+<meta name="twitter:description" content="Search verified competitions, research programmes, scholarships and fellowships. Filter by level, region, funding and deadline.">
+<meta name="twitter:image" content="https://radar.example.com/assets/img/og-cover.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
+<link rel="stylesheet" href="/assets/css/radar.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://radar.example.com/#website","name":"Radar","url":"https://radar.example.com","description":"Radar finds the competitions, research programmes, scholarships and fellowships students are never told about — verified, matched to you, and tracked to the deadline.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://radar.example.com/opportunities.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"Organization","@id":"https://radar.example.com/#organization","name":"Radar","url":"https://radar.example.com","description":"A verified opportunity directory and application tracker for students.","foundingLocation":{"@type":"Place","name":"Dubai, United Arab Emirates"}},{"@type":"WebPage","@id":"https://radar.example.com/opportunities.html#page","url":"https://radar.example.com/opportunities.html","name":"Opportunity directory","description":"Search verified competitions, research programmes, scholarships and fellowships. Filter by level, region, funding and deadline.","isPartOf":{"@id":"https://radar.example.com/#website"}}]}</script>
+</head>
+<body class="page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-panel">
+        <span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i>
+      </button>
+      <div class="site-header__nav" id="site-nav-panel">
+        <nav class="site-nav" aria-label="Main">
+          <a href="/opportunities.html">Opportunities</a>
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/verification.html">Verification</a>
+          <a href="/pricing.html">Pricing</a>
+          <a href="/about.html">About</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="btn btn--quiet" href="/app/login.html" data-when="signed-out" hidden>Sign in</a>
+          <a class="btn btn--primary btn--sm" href="/app/signup.html" data-when="signed-out" hidden>Create account</a>
+          <a class="btn btn--ghost btn--sm" href="/app/dashboard.html" data-when="signed-in" hidden>Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </header>
+<main class="page__main" id="main-content" tabindex="-1"><div class="page-head">
+  <div class="wrap">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Radar</a><span aria-hidden="true">/</span><span>Directory</span>
+    </nav>
+    <p class="eyebrow">Opportunity directory</p>
+    <h1 class="display">Find your signal.</h1>
+    <p class="lede">Competitions, research programmes, scholarships and fellowships, each linked back to the organisation running it. Sign in and every result is scored against your profile with the reason attached.</p>
+    <p class="notice" id="storage-mode" hidden></p>
+  </div>
+</div>
+
+<div class="wrap">
+  <form class="toolbar" id="directory-tools" role="search" aria-label="Search opportunities">
+    <div>
+      <label class="sr-only" for="q">Search opportunities</label>
+      <input class="input" id="q" name="q" type="search" placeholder="Search by programme, field or organisation" autocomplete="off">
+    </div>
+    <div>
+      <label class="sr-only" for="sort">Sort results</label>
+      <select class="select" id="sort" name="sort">
+        <option value="match">Best match</option>
+        <option value="deadline">Deadline soonest</option>
+        <option value="newest">Recently checked</option>
+        <option value="title">Name A–Z</option>
+      </select>
+    </div>
+    <button class="btn btn--ghost" type="button" id="filters-toggle" aria-expanded="false" aria-controls="filters">Filters</button>
+  </form>
+
+  <div id="filters">
+    <div class="filterbar" role="group" aria-label="Filter by type" id="type-filters"></div>
+    <div class="toolbar" style="padding-top:0">
+      <div>
+        <label class="field__label" for="level">Education level</label>
+        <select class="select" id="level"></select>
+      </div>
+      <div>
+        <label class="field__label" for="region">Region</label>
+        <select class="select" id="region"></select>
+      </div>
+      <div>
+        <label class="field__label" for="funding">Funding</label>
+        <select class="select" id="funding">
+          <option value="all">Any</option>
+          <option value="full">Fully funded</option>
+          <option value="partial">Partly funded</option>
+          <option value="award">Prize or award</option>
+          <option value="free">Free to enter</option>
+          <option value="varies">Varies</option>
+        </select>
+      </div>
+      <div>
+        <label class="field__label" for="status">Status</label>
+        <select class="select" id="status">
+          <option value="all">Any status</option>
+          <option value="open">Open</option>
+          <option value="closing-soon">Closing soon</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="pathway">Pathway</option>
+          <option value="directory">Directory</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:.5rem">
+        <button class="btn btn--quiet" type="button" id="reset-filters">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sr-only" id="results-heading">Results</h2>
+  <p class="result-count" id="result-count" role="status" aria-live="polite">Loading the catalogue…</p>
+  <div class="results" id="results" aria-labelledby="results-heading"></div>
+
+  <p class="form-note" style="margin:2rem 0 4rem">
+    Radar is not the organiser and does not decide who is eligible. Always confirm the deadline and rules on the official page before applying.
+    Something wrong with a listing? <a href="/report.html" style="color:var(--signal);text-decoration:underline">Report it</a>.
+  </p>
+</div>
+</main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__grid">
+        <div>
+          <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+          <p class="site-footer__note">A verified directory and application tracker for students. Built in Dubai.</p>
+          <p class="site-footer__note"><strong>Radar is not the organiser.</strong> Every deadline, rule and decision belongs to the organisation running the opportunity.</p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/opportunities.html">Opportunity directory</a></li>
+            <li><a href="/how-it-works.html">How Radar works</a></li>
+            <li><a href="/pricing.html">Pricing and access</a></li>
+            <li><a href="/app/signup.html">Create an account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/verification.html">Verification policy</a></li>
+            <li><a href="/report.html">Report a listing</a></li>
+            <li><a href="/privacy.html">Privacy policy</a></li>
+            <li><a href="/terms.html">Terms of use</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Radar</h2>
+          <ul>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/app/settings.html">Your data</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span id="year">2026</span> Radar</span>
+        <span>Deadlines shown are the organiser's. Confirm before you apply.</span>
+      </div>
+    </div>
+  </footer>
+<script type="module" src="/assets/js/ui.js"></script>
+<script type="module" src="/assets/js/directory.js"></script>
+</body>
+</html>

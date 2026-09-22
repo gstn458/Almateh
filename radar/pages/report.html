@@ -1,0 +1,37 @@
+<div class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Report a listing</p>
+    <h1 class="display">Tell Radar what is wrong.</h1>
+    <p class="lede">Wrong deadlines are the failure that costs students the most, so reports go straight to the review queue. You do not need an account.</p>
+  </div>
+</div>
+
+<div class="wrap section section--flush">
+  <form id="report-form" style="max-width:620px">
+    <p class="form-error" data-form-error hidden></p>
+    <p class="form-success" data-form-success hidden></p>
+    <label class="field">
+      <span class="field__label" for="report-opportunity">Which listing?</span>
+      <select class="select" id="report-opportunity" name="opportunityId">
+        <option value="">Loading the catalogue…</option>
+      </select>
+      <span class="field__hint">Leave blank if the problem is not about one specific listing.</span>
+    </label>
+    <fieldset style="border:0;padding:0;margin:0 0 1.2rem">
+      <legend class="field__label" style="padding:0">What is wrong?</legend>
+      <div class="options" id="report-reasons"></div>
+      <span class="field__error" data-field-error="reason"></span>
+    </fieldset>
+    <label class="field">
+      <span class="field__label" for="report-detail">Details</span>
+      <textarea class="textarea" id="report-detail" name="detail" maxlength="4000" placeholder="If you have the correct date or a working link, paste it here."></textarea>
+    </label>
+    <label class="field">
+      <span class="field__label" for="report-email">Your email (optional)</span>
+      <input class="input" id="report-email" name="contactEmail" type="email" autocomplete="email">
+      <span class="field__hint">Only used to follow up on this report, and deleted once it is closed.</span>
+      <span class="field__error" data-field-error="contactEmail"></span>
+    </label>
+    <button class="btn btn--primary" type="submit">Send report</button>
+  </form>
+</div>

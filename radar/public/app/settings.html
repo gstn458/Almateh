@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#060809">
+<title>Account settings — Radar</title>
+<meta name="description" content="Your profile, preferences, data export and account deletion.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://radar.example.com/app/settings.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Radar">
+<meta property="og:title" content="Account settings — Radar">
+<meta property="og:description" content="Your profile, preferences, data export and account deletion.">
+<meta property="og:url" content="https://radar.example.com/app/settings.html">
+<meta property="og:image" content="https://radar.example.com/assets/img/og-cover.png">
+<meta property="og:image:alt" content="Radar — every opportunity you were never told about">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Account settings — Radar">
+<meta name="twitter:description" content="Your profile, preferences, data export and account deletion.">
+<meta name="twitter:image" content="https://radar.example.com/assets/img/og-cover.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
+<link rel="stylesheet" href="/assets/css/radar.css">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://radar.example.com/#website","name":"Radar","url":"https://radar.example.com","description":"Radar finds the competitions, research programmes, scholarships and fellowships students are never told about — verified, matched to you, and tracked to the deadline.","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://radar.example.com/opportunities.html?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"Organization","@id":"https://radar.example.com/#organization","name":"Radar","url":"https://radar.example.com","description":"A verified opportunity directory and application tracker for students.","foundingLocation":{"@type":"Place","name":"Dubai, United Arab Emirates"}},{"@type":"WebPage","@id":"https://radar.example.com/app/settings.html#page","url":"https://radar.example.com/app/settings.html","name":"Account settings","description":"Your profile, preferences, data export and account deletion.","isPartOf":{"@id":"https://radar.example.com/#website"}}]}</script>
+</head>
+<body class="page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav-panel">
+        <span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i>
+      </button>
+      <div class="site-header__nav" id="site-nav-panel">
+        <nav class="site-nav" aria-label="Main">
+          <a href="/opportunities.html">Opportunities</a>
+          <a href="/how-it-works.html">How it works</a>
+          <a href="/verification.html">Verification</a>
+          <a href="/pricing.html">Pricing</a>
+          <a href="/about.html">About</a>
+        </nav>
+        <div class="site-header__actions">
+          <a class="btn btn--quiet" href="/app/login.html" data-when="signed-out" hidden>Sign in</a>
+          <a class="btn btn--primary btn--sm" href="/app/signup.html" data-when="signed-out" hidden>Create account</a>
+          <a class="btn btn--ghost btn--sm" href="/app/dashboard.html" data-when="signed-in" hidden>Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </header>
+<div class="app-shell">
+      <nav class="app-side" aria-label="Your Radar">
+        <ul>
+          <li><a href="/app/dashboard.html">Dashboard</a></li>
+          <li><a href="/app/saved.html">Saved</a></li>
+          <li><a href="/app/tracker.html">Tracker</a></li>
+          <li><a href="/app/calendar.html">Calendar</a></li>
+          <li><a href="/app/settings.html">Settings</a></li>
+        </ul>
+      </nav><div class="app-main" id="main-content" tabindex="-1"><div class="app-head">
+  <div>
+    <p class="eyebrow">Settings</p>
+    <h1 class="h2">Your account and your data.</h1>
+  </div>
+</div>
+
+<p class="notice" id="storage-mode" hidden></p>
+
+<section class="panel" id="profile" style="margin-bottom:1rem">
+  <h2 class="h3">Matching profile</h2>
+  <p class="lede" style="font-size:14.5px">These answers decide what Radar shows you. Change them whenever your plans change — the ranking updates immediately.</p>
+  <div id="profile-summary" style="margin:1.5rem 0"></div>
+  <a class="btn btn--primary btn--sm" href="/app/onboarding.html">Edit profile answers</a>
+</section>
+
+<section class="panel" id="account" style="margin-bottom:1rem">
+  <h2 class="h3">Account</h2>
+  <dl class="opp__facts" id="account-summary" style="margin:1.2rem 0"></dl>
+  <form id="password-form" style="max-width:420px;margin-top:1.5rem">
+    <p class="form-error" data-form-error hidden></p>
+    <p class="form-success" data-form-success hidden></p>
+    <label class="field">
+      <span class="field__label" for="current">Current password</span>
+      <input class="input" id="current" name="current" type="password" autocomplete="current-password" required>
+      <span class="field__error" data-field-error="current"></span>
+    </label>
+    <label class="field">
+      <span class="field__label" for="next">New password</span>
+      <input class="input" id="next" name="next" type="password" autocomplete="new-password" minlength="10" required>
+      <span class="field__hint">At least 10 characters. Changing it signs out your other devices.</span>
+      <span class="field__error" data-field-error="next"></span>
+    </label>
+    <button class="btn btn--ghost btn--sm" type="submit">Change password</button>
+  </form>
+</section>
+
+<section class="panel" id="privacy" style="margin-bottom:1rem">
+  <h2 class="h3">Privacy</h2>
+  <label class="checkbox" style="margin-top:1rem">
+    <input type="checkbox" id="analytics-toggle">
+    <span>Count my anonymous product events.
+      <span style="display:block;color:var(--muted-dim);font-size:13px;margin-top:.2rem">Event names only — no identifier, no page trail, nothing that points back to you. Used to see which features actually help.</span>
+    </span>
+  </label>
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem">
+    <button class="btn btn--ghost btn--sm" type="button" id="export-data">Export my data</button>
+    <a class="btn btn--quiet" href="/privacy.html">Read the privacy policy</a>
+  </div>
+</section>
+
+<section class="panel" id="danger">
+  <h2 class="h3">Delete your account</h2>
+  <p class="lede" style="font-size:14.5px">Your profile, saves, applications, notes and reminders are deleted immediately and cannot be recovered. Export first if you want a copy.</p>
+  <button class="btn btn--danger btn--sm" type="button" id="delete-account" style="margin-top:1.5rem">Delete my account</button>
+</section>
+
+<div style="margin-top:2rem">
+  <button class="btn btn--quiet" type="button" id="sign-out">Sign out</button>
+</div>
+
+<dialog id="delete-dialog" aria-labelledby="delete-title">
+  <div class="dialog__head">
+    <h2 class="h3" id="delete-title" style="margin:0">Delete everything?</h2>
+  </div>
+  <div class="dialog__body">
+    <p class="lede" style="font-size:14.5px">This removes your profile, saved opportunities, tracked applications, notes and reminders. It cannot be undone.</p>
+    <form id="delete-form" style="margin-top:1.5rem">
+      <label class="field">
+        <span class="field__label" for="delete-confirm">Type DELETE to confirm</span>
+        <input class="input" id="delete-confirm" name="confirm" type="text" autocomplete="off" required>
+      </label>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        <button class="btn btn--danger" type="submit">Delete my account</button>
+        <button class="btn btn--quiet" type="button" data-close-dialog>Keep my account</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+</div></div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="site-footer__grid">
+        <div>
+          <a class="brandmark" href="/"><span class="brandmark__mark" aria-hidden="true"></span>Radar</a>
+          <p class="site-footer__note">A verified directory and application tracker for students. Built in Dubai.</p>
+          <p class="site-footer__note"><strong>Radar is not the organiser.</strong> Every deadline, rule and decision belongs to the organisation running the opportunity.</p>
+        </div>
+        <div>
+          <h2>Product</h2>
+          <ul>
+            <li><a href="/opportunities.html">Opportunity directory</a></li>
+            <li><a href="/how-it-works.html">How Radar works</a></li>
+            <li><a href="/pricing.html">Pricing and access</a></li>
+            <li><a href="/app/signup.html">Create an account</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Trust</h2>
+          <ul>
+            <li><a href="/verification.html">Verification policy</a></li>
+            <li><a href="/report.html">Report a listing</a></li>
+            <li><a href="/privacy.html">Privacy policy</a></li>
+            <li><a href="/terms.html">Terms of use</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Radar</h2>
+          <ul>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/app/settings.html">Your data</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; <span id="year">2026</span> Radar</span>
+        <span>Deadlines shown are the organiser's. Confirm before you apply.</span>
+      </div>
+    </div>
+  </footer>
+<script type="module" src="/assets/js/ui.js"></script>
+<script type="module" src="/assets/js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<div class="wrap section section--flush" style="max-width:520px">
+  <p class="eyebrow">Create an account</p>
+  <h1 class="h2">Start with a profile, not a search box.</h1>
+  <p class="lede" style="font-size:15px">Free, no payment card, and you can export or delete everything at any time.</p>
+  <p class="notice" id="storage-mode" hidden></p>
+
+  <form id="signup-form" style="margin-top:2.5rem">
+    <p class="form-error" data-form-error hidden></p>
+    <label class="field">
+      <span class="field__label" for="name">Your name</span>
+      <input class="input" id="name" name="name" type="text" autocomplete="name" maxlength="120">
+      <span class="field__hint">Optional. Only used to greet you.</span>
+    </label>
+    <label class="field">
+      <span class="field__label" for="email">Email</span>
+      <input class="input" id="email" name="email" type="email" required autocomplete="email" autocapitalize="off" spellcheck="false">
+      <span class="field__error" data-field-error="email"></span>
+    </label>
+    <label class="field">
+      <span class="field__label" for="password">Password</span>
+      <input class="input" id="password" name="password" type="password" required autocomplete="new-password" minlength="10"
+             aria-describedby="password-hint">
+      <span class="field__hint" id="password-hint">At least 10 characters. A short phrase you will remember beats a clever password you will not.</span>
+      <span class="field__error" data-field-error="password"></span>
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" name="isMinor" value="1">
+      <span>I am under 18. <span style="display:block;color:var(--muted-dim);font-size:13px;margin-top:.2rem">Radar asks for less information and applies stricter data handling. Ask a parent, guardian or teacher first if you are under 16.</span></span>
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" name="acceptedTerms" value="1" required>
+      <span>I accept the <a href="/terms.html">terms of use</a> and the <a href="/privacy.html">privacy policy</a>.</span>
+    </label>
+    <span class="field__error" data-field-error="acceptedTerms"></span>
+    <button class="btn btn--primary btn--block" type="submit" style="margin-top:.5rem">Create account</button>
+  </form>
+
+  <p class="form-note">Already have an account? <a href="/app/login.html" style="color:var(--signal);text-decoration:underline">Sign in</a>.</p>
+</div>

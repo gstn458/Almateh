@@ -1,0 +1,17 @@
+<div class="app-head">
+  <div>
+    <p class="eyebrow">Admin</p>
+    <h1 class="h2">Link checks</h1>
+  </div>
+  <button class="btn btn--primary btn--sm" type="button" id="run-link-check">Run a check now</button>
+</div>
+
+<div id="admin-gate" hidden>
+  <p class="notice">Sign in on the <a href="/admin/index.html">admin overview</a> first.</p>
+</div>
+
+<div id="admin-content" hidden>
+  <p class="lede" style="font-size:14.5px">Every application URL in the catalogue is fetched and the response recorded. A failure does not delete the listing — it flags it for a person to look at, because a site can be down for an hour without the programme being gone.</p>
+  <p class="result-count" id="link-status" role="status" aria-live="polite">No check has been run in this session.</p>
+  <div class="table-scroll"><table id="links-table"></table></div>
+</div>
