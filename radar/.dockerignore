@@ -1,0 +1,6 @@
+# Never bake a local database into an image — the volume supplies the real one.
+data/*.db
+data/*.db-shm
+data/*.db-wal
+node_modules
+.git

@@ -4,7 +4,9 @@
   "private": true,
   "description": "A verified opportunity directory, matching engine and application tracker for students.",
   "type": "module",
-  "engines": { "node": ">=22.5.0" },
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "build": "node scripts/build-site.mjs",
     "start": "node server/index.js",
@@ -13,6 +15,7 @@
     "assets": "node scripts/render-assets.mjs",
     "test": "node scripts/journey-test.mjs && node scripts/admin-test.mjs",
     "test:browser": "node scripts/browser-test.mjs",
-    "test:all": "npm run test && npm run test:browser"
+    "test:all": "npm run test && npm run test:browser",
+    "domain": "node scripts/set-domain.mjs"
   }
 }

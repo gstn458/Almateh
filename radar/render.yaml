@@ -1,0 +1,23 @@
+# Render blueprint. Push this repo, then New → Blueprint and point it here.
+#
+# The disk is what makes accounts persist. Render's free tier has no disks and
+# wipes the filesystem on every restart, so a free instance loses every account
+# it creates — fine for a demo, not for real students.
+services:
+  - type: web
+    name: radar
+    runtime: node
+    plan: starter
+    rootDir: radar
+    buildCommand: node scripts/build-site.mjs
+    startCommand: node server/index.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: RADAR_DB
+        value: /var/data/radar.db
+    disk:
+      name: radar-data
+      mountPath: /var/data
+      sizeGB: 1

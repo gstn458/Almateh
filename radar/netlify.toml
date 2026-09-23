@@ -1,0 +1,32 @@
+# Static hosting (Netlify, and the same settings work on Cloudflare Pages).
+#
+# There is no server here, so Radar runs in its offline mode: the directory,
+# matching, saving and the tracker all work, but only inside one browser, and
+# the contact and report forms say so instead of pretending to send. Use this
+# to put the site online today; move to fly.toml or render.yaml when you want
+# real accounts.
+[build]
+  base = "radar"
+  command = "node scripts/build-site.mjs"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
