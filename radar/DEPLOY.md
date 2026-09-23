@@ -8,9 +8,14 @@ Pick one of two. The difference is whether students get real accounts.
 | Cost | Free | A few dollars a month |
 | Directory, search, filters | Yes | Yes |
 | Matching with explanations | Yes | Yes |
-| Accounts, saves, tracker | In one browser only | Real, across devices |
-| Contact and report forms | Disabled, and say so | Working |
+| Accounts, saves, tracker | In one browser only, or real with Firebase | Real, across devices |
+| Google sign-in | With Firebase | No |
+| Contact and report forms | With Firebase | Working |
 | Admin console | No | Yes |
+
+**Static plus Firebase is the sweet spot for most people**: free hosting, free
+accounts, Google sign-in, no server to keep alive. Deploy static first, then
+follow `FIREBASE.md` — about ten minutes in the Firebase console.
 
 You can start static today and move to the full product later without changing
 any code — it is the same `public/` directory either way.
@@ -42,10 +47,11 @@ Netlify reads it — just set the branch to `claude/adoring-hamilton-dfktne`.
 Works too, but you must commit the built `public/` (already committed) and
 point Pages at it. Cloudflare or Netlify is less fiddly.
 
-**What visitors get:** the whole site, the directory, matching and the tracker —
-but everything they save lives in their own browser, and Radar tells them so on
-every page that stores anything. The contact and report forms refuse politely
-rather than pretending to send.
+**What visitors get:** the whole site, the directory, matching and the tracker.
+Without Firebase, everything they save lives in their own browser and Radar
+tells them so on every page that stores anything, and the contact and report
+forms refuse politely rather than pretending to send. With Firebase configured
+(`FIREBASE.md`), all of that becomes real and syncs across devices.
 
 ---
 
@@ -148,6 +154,8 @@ Do this before any deploy that changes `server/schema.sql`.
 ## Before you tell people about it
 
 - [ ] Run `node scripts/set-domain.mjs` with your real domain.
+- [ ] If using Firebase: publish `firestore.rules` and add your domain to
+      Authentication → Authorized domains.
 - [ ] Create the admin account and verify the seeded listings.
 - [ ] Run a link check from the admin console.
 - [ ] Work through the 36 listings marked "needs review" — open each official

@@ -39,8 +39,10 @@ const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.json', '.svg', '.txt', '
 /**
  * Content Security Policy.
  *
- * `script-src 'self'` is the line that matters for XSS: no inline scripts, no
- * eval, no third-party JavaScript at all. `style-src` permits inline style
+ * `script-src` allows first-party code and Google's CDN, which is where the
+ * Firebase SDK comes from; still no inline scripts and no eval. The Google and
+ * Firebase hosts in `connect-src` and `frame-src` are what sign-in and
+ * Firestore need. `style-src` permits inline style
  * attributes, which the layout uses; a style attribute cannot execute code,
  * and every value interpolated into markup is escaped before it gets there.
  * Tightening this further means moving the remaining style attributes into
@@ -48,11 +50,12 @@ const COMPRESSIBLE = new Set(['.html', '.css', '.js', '.json', '.svg', '.txt', '
  */
 const CSP = [
   "default-src 'self'",
-  "script-src 'self'",
+  "script-src 'self' https://www.gstatic.com",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
-  "img-src 'self' data:",
-  "connect-src 'self'",
+  "img-src 'self' data: https://*.googleusercontent.com",
+  "connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebaseio.com",
+  "frame-src https://*.firebaseapp.com https://accounts.google.com",
   "form-action 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",

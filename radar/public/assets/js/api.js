@@ -1,35 +1,45 @@
 /**
  * One way to talk to Radar's data.
  *
- * Calls go to the API when it answers, and to the in-browser backend when it
- * does not, so pages never branch on which is running. `api.mode` says which
- * one served the last call; the UI uses it to be honest about where a save
- * actually went.
+ * Three backends answer the same routes, so no page ever branches on which is
+ * running: the Node API when it is there, Firebase when the site is deployed
+ * statically with a project configured, and the browser's own storage when
+ * neither is. `api.mode` says which one served the last call, and the UI uses
+ * it to be honest about where a save actually went.
  */
 import * as local from './local-backend.js';
+import { firebaseReady } from './firebase-config.js';
 
 export const api = {
-  mode: 'unknown',        // 'server' | 'local'
+  mode: 'unknown',        // 'server' | 'firebase' | 'local'
   onModeChange: null,
 };
 
 let probe = null;
 
-/** One probe per page load, cached: is the API there? */
+/**
+ * One probe per page load, cached. The Node API wins when it answers, because
+ * it is the fuller product — it carries the admin console with it.
+ */
 function detect() {
   probe ||= fetch('/api/auth/me', { credentials: 'same-origin', headers: { accept: 'application/json' } })
     .then((response) => {
       if (!response.ok && response.status >= 500) throw new Error('server error');
       if (!(response.headers.get('content-type') || '').includes('json')) throw new Error('not the api');
       setMode('server');
-      return true;
+      return 'server';
     })
     .catch(() => {
-      setMode('local');
-      return false;
+      const mode = firebaseReady() ? 'firebase' : 'local';
+      setMode(mode);
+      return mode;
     });
   return probe;
 }
+
+/** Loaded only when a Firebase project is actually configured. */
+let firebaseModule = null;
+const loadFirebase = () => (firebaseModule ||= import('./firebase-backend.js'));
 
 function setMode(mode) {
   if (api.mode === mode) return;
@@ -55,9 +65,17 @@ function toQuery(query) {
 }
 
 async function request(method, path, { body, query, raw } = {}) {
-  const online = await detect();
+  const mode = await detect();
 
-  if (online) {
+  if (mode === 'firebase') {
+    try {
+      return await (await loadFirebase()).handle(method, path, { body, query });
+    } catch (error) {
+      throw new ApiError(error.status || 500, error.message, error.field);
+    }
+  }
+
+  if (mode === 'server') {
     try {
       const response = await fetch(path + toQuery(query), {
         method,

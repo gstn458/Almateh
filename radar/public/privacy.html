@@ -60,7 +60,7 @@
     <p class="eyebrow">Privacy policy</p>
     <h1 class="display">What Radar keeps, and what you can take back.</h1>
     <p class="lede">Radar is used by students, some of whom are under 18. This policy is written to be read by them, not only by lawyers.</p>
-    <p class="meta" style="margin-top:1.5rem">Last updated 22 September 2026</p>
+    <p class="meta" style="margin-top:1.5rem">Last updated 23 September 2026</p>
   </div>
 </div>
 
@@ -90,8 +90,10 @@
     <h3>Server logs</h3>
     <p>The web server keeps standard request logs for operating and securing the service. They are not used to build profiles.</p>
 
-    <h2>Cookies</h2>
-    <p>Radar sets one cookie: a session token that keeps you signed in. It is HttpOnly, so page scripts cannot read it, and it expires after 30 days or when you sign out. There are no advertising or analytics cookies, which is why there is no cookie banner asking for consent Radar does not need.</p>
+    <h2>Cookies and sign-in state</h2>
+    <p>Running on its own server, Radar sets one cookie: a session token that keeps you signed in. It is HttpOnly, so page scripts cannot read it, and it expires after 30 days or when you sign out.</p>
+    <p>Running on Firebase, there is no Radar cookie at all. Firebase keeps your sign-in state in your browser's own storage instead, and it is cleared when you sign out.</p>
+    <p>Either way there are no advertising cookies and no third-party trackers, which is why there is no banner asking for consent Radar does not need.</p>
     <p>Some preferences — a remembered filter, whether you muted the homepage sound — are stored in your browser's own storage and never sent to the server.</p>
 
     <h2>Students under 18</h2>
@@ -109,7 +111,7 @@
       <li><strong>Saves, applications and reminders:</strong> until you delete them or the account.</li>
       <li><strong>Reports you file:</strong> kept while open; the contact email is removed once the report is closed.</li>
       <li><strong>Contact messages:</strong> kept up to 12 months so a conversation can be picked up again.</li>
-      <li><strong>Anonymous counts:</strong> kept indefinitely because they contain nothing personal.</li>
+      <li><strong>Anonymous counts:</strong> kept indefinitely because they contain nothing personal. On Firebase they are not collected at all.</li>
       <li><strong>Inactive accounts:</strong> after 24 months without a sign-in, Radar will contact you before deleting the account.</li>
     </ul>
 
@@ -123,7 +125,17 @@
     </ul>
 
     <h2>Who else sees your data</h2>
-    <p>Nobody. Radar does not share personal data with organisers, schools, advertisers or data brokers. When you follow a link to an organiser's site you leave Radar, and that organisation's own privacy policy applies to whatever you do there — including any application you submit.</p>
+    <p>No organiser, school, advertiser or data broker. Radar does not sell or share personal data with any of them. When you follow a link to an organiser's site you leave Radar, and that organisation's own privacy policy applies to whatever you do there — including any application you submit.</p>
+    <p>One company does hold data on Radar's behalf, and you should know who:</p>
+
+    <h3>Google Firebase</h3>
+    <p>Where this copy of Radar runs on Firebase, your account and everything under it — profile answers, saved opportunities, tracked applications, notes, checklists and reminders — are stored in Google's Firebase Authentication and Cloud Firestore. Google processes that data to run the service; it is not theirs to use for anything else, and Radar sends them nothing beyond what you typed into Radar.</p>
+    <p>Which storage a given copy of Radar uses is shown to you in <a href="/app/settings.html">account settings</a>, under <strong>Storage</strong>.</p>
+
+    <h3>Signing in with Google</h3>
+    <p>If you choose <strong>Continue with Google</strong>, Google tells Radar three things about you: your email address, your display name and your account's unique identifier. Radar does not receive your Google password, and it asks for no access to Gmail, Drive, Contacts or anything else in your Google account.</p>
+    <p>Google will know that you signed in to Radar, in the same way it knows about any site you use Google to sign in to. If you would rather it did not, use the email and password option instead — the two accounts are identical in every other respect.</p>
+    <p>Deleting your Radar account deletes it from Firebase too, including the sign-in record. It does not touch your Google account, which is yours and is managed at <a href="https://myaccount.google.com/" rel="noopener noreferrer">myaccount.google.com</a>.</p>
 
     <h2>Security</h2>
     <p>Passwords are hashed with scrypt and a per-account salt. Sessions are random tokens in HttpOnly cookies. The site sets a strict content security policy, and traffic is served over HTTPS in production. No system is perfect; if a breach affected your data you would be told what happened and what to do.</p>

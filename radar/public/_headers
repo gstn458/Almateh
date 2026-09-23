@@ -1,0 +1,17 @@
+# Security headers for static hosting (Cloudflare Workers/Pages, Netlify).
+#
+# The Node server sends these itself; a static deploy has no server, so without
+# this file the site ships with none of them. Keep the two in step.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.gstatic.com https://*.firebaseio.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebaseio.com; frame-src https://*.firebaseapp.com https://accounts.google.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+
+/assets/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/data/*
+  Cache-Control: public, max-age=3600

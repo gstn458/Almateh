@@ -1,0 +1,61 @@
+rules_version = '2';
+
+/**
+ * Radar's Firestore rules.
+ *
+ * These are the only thing standing between one student's plans and another's,
+ * because the Firebase config in the page is public by design. The shape is
+ * deliberately narrow: a signed-in person owns exactly the documents under
+ * their own uid, reports and messages can be written but never read back, and
+ * nothing else in the database is reachable from a browser at all.
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // A student's profile and everything they create under it.
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+
+      match /{collection}/{docId} {
+        allow read, write: if isOwner(uid);
+      }
+    }
+
+    // Reports about a listing. Anyone may file one, including someone who is
+    // not signed in — a wrong deadline is worth hearing about either way — but
+    // nobody can read the queue from a browser, because reports carry the
+    // contact address of whoever sent them.
+    match /reports/{reportId} {
+      allow create: if request.resource.data.keys().hasOnly(
+                        ['opportunityId', 'reason', 'detail', 'contactEmail',
+                         'userId', 'status', 'createdAt'])
+                    && request.resource.data.reason is string
+                    && request.resource.data.reason.size() > 0
+                    && request.resource.data.reason.size() <= 120
+                    && request.resource.data.detail.size() <= 4000
+                    && request.resource.data.status == 'open';
+      allow read, update, delete: if false;
+    }
+
+    // Contact and waitlist messages. Same reasoning: write-only.
+    match /messages/{messageId} {
+      allow create: if request.resource.data.keys().hasOnly(
+                        ['kind', 'name', 'email', 'subject', 'body', 'status', 'createdAt'])
+                    && request.resource.data.email is string
+                    && request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]{2,}$')
+                    && request.resource.data.body.size() <= 5000
+                    && request.resource.data.kind in ['contact', 'waitlist']
+                    && request.resource.data.status == 'new';
+      allow read, update, delete: if false;
+    }
+
+    // Anything not named above is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

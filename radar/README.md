@@ -32,9 +32,11 @@ radar/
   public/                the built site; this directory is what gets deployed
     assets/css/          radar.css (system) + hero.css (homepage only)
     assets/js/           one module per page, plus api/ui/config/matching
+                         and the three backends: server (fetch), firebase, local
     data/                the catalogue, published so static hosting works
     app/  admin/         student application and administrative console
   server/                HTTP server, API, SQLite schema, auth, iCalendar
+  firestore.rules        who may read and write what, when running on Firebase
   data/                  opportunities.json (seed) and radar.db (runtime)
   scripts/               build, asset rendering, and the three test suites
 ```
@@ -55,12 +57,24 @@ reachability, experience and preferred type — produce a percentage, and every
 score carries the reasons that made it and the blockers that count against it.
 A number without an explanation never reaches the interface.
 
-**One data layer, two backends.** `api.js` probes for the API once. When it
-answers, everything goes to the server and the SQLite database. When it does
-not — static hosting, a dropped connection — `local-backend.js` answers the same
-routes from the catalogue JSON and the browser's storage, and the interface says
-plainly that the data is staying in this browser. Pages never branch on which is
-running.
+**One data layer, three backends.** `api.js` probes once and picks:
+
+| Mode | When | Accounts |
+| --- | --- | --- |
+| `server` | the Node API answers | Real, in SQLite, plus the admin console |
+| `firebase` | a Firebase project is configured and no server is running | Real, in Firestore, with Google sign-in |
+| `local` | neither | This browser only, and the page says so |
+
+All three answer the same routes, so no page branches on which is running.
+`firebase-backend.js` is what makes accounts real on static hosting: no server
+to run, yet a student signs in on their phone and finds what they saved on a
+school computer. See `FIREBASE.md` to switch it on.
+
+The catalogue stays out of Firestore — it is the same file for everyone and
+costs nothing from the edge, so only what belongs to a person is stored there,
+under `users/{uid}`, with `firestore.rules` keeping it there. If Firebase is
+unreachable, reading the catalogue still works; only the personal layer is
+missing.
 
 **Honesty as a design constraint.** A listing shows `verified` with the date a
 person last read the official page, or `needs review` on its face. No deadline
@@ -128,6 +142,7 @@ without it. Assets are served gzipped with a week of cache; HTML revalidates.
 | --- | --- |
 | `node scripts/journey-test.mjs` | The full student journey, auth, authorisation, privacy, calendar, security headers |
 | `node scripts/admin-test.mjs` | Catalogue editing, verification, expiry, reports, audit |
+| `node scripts/firebase-test.mjs` | The Firebase backend's routes against a fake SDK: auth, profile, saves, tracker, reminders, export, deletion, Google sign-in, and that nothing is written outside `users/`, `reports/` and `messages/` |
 | `node scripts/browser-test.mjs` | Console errors, overflow, headings, labels, touch targets, focus, the journey in a real browser, reduced motion, no-JavaScript |
 
 The browser suite needs Chromium and `playwright-core`; the other two need
@@ -135,7 +150,8 @@ nothing but a running server.
 
 ## What is deliberately not built
 
-Email delivery (so no password reset by email, and reminders surface in-app),
+Email delivery (so no password reset by email, and reminders surface in-app —
+Firebase can send both later from its own templates),
 browser push notifications, continuous monitoring of organiser pages, payments,
 and counsellor cohort views. Each is either absent from the interface or
 labelled as not yet built. See `DEPLOY.md` for the launch checklist.

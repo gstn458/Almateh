@@ -13,9 +13,10 @@
     "dev": "node scripts/build-site.mjs && node server/index.js",
     "admin": "node server/create-admin.js",
     "assets": "node scripts/render-assets.mjs",
-    "test": "node scripts/journey-test.mjs && node scripts/admin-test.mjs",
+    "test": "node scripts/journey-test.mjs && node scripts/admin-test.mjs && node scripts/firebase-test.mjs",
     "test:browser": "node scripts/browser-test.mjs",
     "test:all": "npm run test && npm run test:browser",
-    "domain": "node scripts/set-domain.mjs"
+    "domain": "node scripts/set-domain.mjs",
+    "test:firebase": "node scripts/firebase-test.mjs"
   }
 }

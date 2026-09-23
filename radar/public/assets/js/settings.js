@@ -28,14 +28,32 @@ function paintProfile(profile) {
     `<div><dt>${esc(term)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>`;
 }
 
+const STORAGE_LABEL = {
+  server: 'Your Radar account, on the Radar server (syncs across devices)',
+  firebase: 'Your Radar account, in Firebase (syncs across devices)',
+  local: 'This browser only — no server or Firebase project is reachable',
+};
+
+const SIGN_IN_LABEL = {
+  'google.com': 'Google',
+  password: 'Email and password',
+};
+
 function paintAccount(user) {
+  /* A Google account has no Radar password, so offering to change one would
+     be a form that can only fail. */
+  const viaGoogle = user.provider === 'google.com';
+  $('#google-account-note').hidden = !viaGoogle;
+  $('#password-form').hidden = viaGoogle;
+
   const rows = [
     ['Email', user.email],
     ['Name', user.name || 'Not set'],
     ['Account type', user.role === 'admin' ? 'Administrator' : 'Student'],
+    ['Signs in with', SIGN_IN_LABEL[user.provider] || 'Email and password'],
     ['Under 18', user.isMinor ? 'Yes' : 'No'],
     ['Created', formatDate(user.createdAt)],
-    ['Storage', api.mode === 'server' ? 'Your Radar account (syncs across devices)' : 'This browser only — the server is not reachable'],
+    ['Storage', STORAGE_LABEL[api.mode] || STORAGE_LABEL.local],
   ];
   $('#account-summary').innerHTML = rows.map(([term, value]) =>
     `<div><dt>${esc(term)}</dt><dd>${esc(value)}</dd></div>`).join('');

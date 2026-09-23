@@ -201,14 +201,57 @@ function paintModeNotice() {
     if (!node) return;
     if (api.mode === 'local') {
       node.hidden = false;
-      node.innerHTML = `<strong>Offline mode.</strong> The Radar server is not reachable, so your profile,
-        saves and tracker are being kept in this browser only. They will not appear on another device.`;
+      node.innerHTML = `<strong>Offline mode.</strong> Neither the Radar server nor a Firebase project is
+        reachable, so your profile, saves and tracker are being kept in this browser only. They will not
+        appear on another device.`;
     } else {
+      /* Server and Firebase both mean a real account, so there is nothing to
+         warn about — saying "you are signed in" on every page is just noise. */
       node.hidden = true;
     }
   };
   api.onModeChange = render;
   render();
+}
+
+/**
+ * The "Continue with Google" buttons.
+ *
+ * Shown only when Firebase is the backend actually serving this page. A
+ * configured project is not enough: when the Node API answers it owns the
+ * session, and it has no idea what a Google credential is. A button that
+ * cannot work should not be on the page at all.
+ */
+async function wireGoogleButtons() {
+  const buttons = $$('[data-google-signin]');
+  if (!buttons.length) return;
+
+  const { FIREBASE } = await import('./firebase-config.js');
+  await loadSession();          // settles api.mode before anything is shown
+  const available = api.mode === 'firebase' && FIREBASE.providers.google;
+  buttons.forEach((button) => { button.closest('[data-google-block]')?.toggleAttribute('hidden', !available); });
+  if (!available) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', async () => {
+      const original = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Opening Google…';
+      try {
+        const result = await post('/api/auth/google');
+        if (result?.redirecting) return;   // the page is navigating away
+        await loadSession({ force: true });
+        const params = new URLSearchParams(location.search);
+        const next = params.get('next');
+        const safe = next && next.startsWith('/') && !next.startsWith('//') ? next : null;
+        location.href = safe || (result.profile?.completedAt ? '/app/dashboard.html' : '/app/onboarding.html');
+      } catch (error) {
+        if (error.status !== 499) toast(error.message || 'Google sign-in did not work.', { tone: 'error' });
+        button.disabled = false;
+        button.textContent = original;
+      }
+    });
+  });
 }
 
 /* --------------------------------------------------- opportunity rendering */
@@ -356,6 +399,7 @@ export function initShell() {
   setupNav();
   markCurrentPage();
   paintModeNotice();
+  wireGoogleButtons();
   wireSaveButtons(document);
   paintAuthState();
   $('#year') && ($('#year').textContent = String(new Date().getFullYear()));
