@@ -1,0 +1,17 @@
+# Cloudflare Workers deployment (static assets only — no Worker code).
+#
+# Radar's front end is plain files, so Cloudflare serves public/ directly from
+# its edge. This is the same offline mode described in DEPLOY.md: the directory,
+# matching and the tracker work, but per browser, with no accounts and no admin.
+#
+# In the Cloudflare "Create an app" flow set:
+#   Root directory   radar
+#   Build command    node scripts/build-site.mjs
+#   Deploy command   npx wrangler deploy
+name = "radar"
+compatibility_date = "2026-09-23"
+
+[assets]
+directory = "./public"
+# Unknown paths get Radar's own 404 page rather than Cloudflare's.
+not_found_handling = "404-page"
