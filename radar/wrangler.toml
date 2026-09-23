@@ -5,11 +5,13 @@
 # matching and the tracker work, but per browser, with no accounts and no admin.
 #
 # In the Cloudflare "Create an app" flow set:
-#   Root directory   radar
-#   Build command    node scripts/build-site.mjs
-#   Deploy command   npx wrangler deploy
-name = "radar"
-compatibility_date = "2026-09-23"
+#   Path (Advanced settings)   /radar
+#   Build command              npm run build
+#   Deploy command             npx wrangler deploy
+#
+# `name` has to match the Worker service Cloudflare created for this repo.
+name = "almateh"
+compatibility_date = "2026-08-01"
 
 [assets]
 directory = "./public"
