@@ -282,9 +282,18 @@ step('Security headers and caching');
   check('framing denied', page.headers.get('x-frame-options') === 'DENY');
   check('html revalidates', page.headers.get('cache-control') === 'no-cache');
 
-  const asset = await fetch(BASE + '/assets/css/radar.css');
-  check('assets cache long', (asset.headers.get('cache-control') || '').includes('max-age=604800'));
-  check('assets are compressed', Boolean(asset.headers.get('content-encoding')) || asset.headers.get('content-length'));
+  /* Code keeps its filename across deploys, so it must revalidate rather than
+     sit in a cache; images are renamed when they change, so they can persist. */
+  const css = await fetch(BASE + '/assets/css/radar.css');
+  check('code revalidates', (css.headers.get('cache-control') || '').includes('must-revalidate'));
+  check('assets are compressed', Boolean(css.headers.get('content-encoding')) || css.headers.get('content-length'));
+
+  const image = await fetch(BASE + '/assets/img/globe-live.webp');
+  check('images cache long', (image.headers.get('cache-control') || '').includes('max-age=31536000'));
+
+  const etag = css.headers.get('etag');
+  const revalidated = await fetch(BASE + '/assets/css/radar.css', { headers: { 'if-none-match': etag } });
+  check('revalidation is cheap (304)', revalidated.status === 304);
 
   const traversal = await fetch(BASE + '/../server/db.js');
   check('path traversal blocked', traversal.status === 404 || traversal.status === 403);
