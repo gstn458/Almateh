@@ -197,10 +197,17 @@ async function serveStatic(req, res, url, secure) {
     return;
   }
 
-  /* HTML must revalidate so a deploy is picked up; assets can sit in cache. */
+  /**
+   * Only images get a long cache. Scripts and styles keep their filenames
+   * across deploys, so caching them hard would leave visitors running old code
+   * until it expired. They revalidate against the ETag instead, which costs
+   * one 304 per file and makes a deploy take effect on the next reload.
+   */
   const cacheControl = ext === '.html'
     ? 'no-cache'
-    : 'public, max-age=604800, stale-while-revalidate=86400';
+    : /^\/assets\/img\//.test(pathname)
+      ? 'public, max-age=31536000, immutable'
+      : 'public, max-age=0, must-revalidate';
 
   const headers = {
     'content-type': MIME[ext] || 'application/octet-stream',
