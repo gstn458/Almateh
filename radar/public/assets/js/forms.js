@@ -2,9 +2,9 @@
  * The public forms: report a listing, contact, and the waitlist.
  * Each one says plainly what happens to the information it collects.
  */
-import { get, post, track } from './api.js';
-import { $, $$, esc, handleForm, announce } from './ui.js';
-import { REPORT_REASONS } from './config.js';
+import { get, post, track } from './api.js?v=1ed1068b03';
+import { $, $$, esc, handleForm, announce } from './ui.js?v=1ed1068b03';
+import { REPORT_REASONS } from './config.js?v=1ed1068b03';
 
 /* ------------------------------------------------------ report a listing */
 const reportForm = $('#report-form');

@@ -7,8 +7,8 @@
  * neither is. `api.mode` says which one served the last call, and the UI uses
  * it to be honest about where a save actually went.
  */
-import * as local from './local-backend.js';
-import { firebaseReady } from './firebase-config.js';
+import * as local from './local-backend.js?v=1ed1068b03';
+import { firebaseReady } from './firebase-config.js?v=1ed1068b03';
 
 export const api = {
   mode: 'unknown',        // 'server' | 'firebase' | 'local'
@@ -39,7 +39,7 @@ function detect() {
 
 /** Loaded only when a Firebase project is actually configured. */
 let firebaseModule = null;
-const loadFirebase = () => (firebaseModule ||= import('./firebase-backend.js'));
+const loadFirebase = () => (firebaseModule ||= import('./firebase-backend.js?v=1ed1068b03'));
 
 function setMode(mode) {
   if (api.mode === mode) return;

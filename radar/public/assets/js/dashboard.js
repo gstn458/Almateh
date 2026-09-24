@@ -2,9 +2,9 @@
  * The personal dashboard: what is due, what matched, what is in flight.
  * Ordered by urgency rather than by recency — the deadline is the product.
  */
-import { get, post, track } from './api.js';
-import { $, esc, opportunityCard, formatDate, relativeDays, stageLabel, requireAuth, toast } from './ui.js';
-import { daysUntil } from './matching.js';
+import { get, post, track } from './api.js?v=1ed1068b03';
+import { $, esc, opportunityCard, formatDate, relativeDays, stageLabel, requireAuth, toast } from './ui.js?v=1ed1068b03';
+import { daysUntil } from './matching.js?v=1ed1068b03';
 
 const stats = $('#dashboard-stats');
 const deadlines = $('#dashboard-deadlines');

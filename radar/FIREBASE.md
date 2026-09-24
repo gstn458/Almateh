@@ -125,6 +125,13 @@ so a half-finished setup never shows a button that cannot work.
 | "Firestore refused that write" | Step 5 — rules not published, or still the locked defaults. |
 | "Could not reach Firebase" | The SDK could not load. Check the network, or a blocker stopping `gstatic.com`. |
 | The Google button never appears | `enabled` is still `false`, the config is empty, or the Node API is answering — the server owns the session when it is running, and Google sign-in belongs to Firebase mode. |
+| `auth/internal-error` | The popup flow could not finish. Radar retries with a redirect automatically. If it persists, open `/app/diagnostics.html` and follow the sign-in handler link: **"Site Not Found" means Firebase Hosting was never initialised**, and the handler that Google returns to does not exist. Fix it under Build → Hosting → Get started. |
+
+## Diagnosing it from the site itself
+
+`/app/diagnostics.html` reports the deployed build, the active backend, the
+Firebase config in use, whether the SDK loaded, and the full error from a real
+sign-in attempt. Start there rather than guessing.
 
 ## What this does and does not change
 

@@ -14,7 +14,7 @@ import {
   deleteAccount, publicUser, validateEmail, validatePassword, setPassword,
 } from './auth.js';
 import { buildIcs } from './ics.js';
-import { rankOpportunities, scoreOpportunity, similarOpportunities, deriveStatus } from '../public/assets/js/matching.js';
+import { rankOpportunities, scoreOpportunity, similarOpportunities, deriveStatus } from '../src/js/matching.js';
 
 class HttpError extends Error {
   constructor(status, message, field) {

@@ -5,10 +5,10 @@
  * application: stage, notes, document checklist, contacts, dates, outcome and
  * the history of how it got here.
  */
-import { get, patch, post, del, track } from './api.js';
-import { $, $$, esc, formatDate, relativeDays, stageLabel, requireAuth, toast, announce } from './ui.js';
-import { STAGES } from './config.js';
-import { daysUntil } from './matching.js';
+import { get, patch, post, del, track } from './api.js?v=1ed1068b03';
+import { $, $$, esc, formatDate, relativeDays, stageLabel, requireAuth, toast, announce } from './ui.js?v=1ed1068b03';
+import { STAGES } from './config.js?v=1ed1068b03';
+import { daysUntil } from './matching.js?v=1ed1068b03';
 
 const listNode = $('#tracker-list');
 const countNode = $('#tracker-count');

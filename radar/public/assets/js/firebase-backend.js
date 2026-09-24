@@ -11,9 +11,9 @@
  * bill a Firestore read for it. Only what belongs to a person lives in
  * Firestore, under `users/{uid}`, and firestore.rules keeps it there.
  */
-import { FIREBASE } from './firebase-config.js';
-import { loadCatalogue, handle as localHandle } from './local-backend.js';
-import { rankOpportunities, scoreOpportunity, similarOpportunities, deriveStatus } from './matching.js';
+import { FIREBASE } from './firebase-config.js?v=1ed1068b03';
+import { loadCatalogue, handle as localHandle } from './local-backend.js?v=1ed1068b03';
+import { rankOpportunities, scoreOpportunity, similarOpportunities, deriveStatus } from './matching.js?v=1ed1068b03';
 
 class FirebaseError extends Error {
   constructor(status, message, field) {

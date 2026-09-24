@@ -6,9 +6,9 @@
  * navigation works with JavaScript switched off. This module only adds the
  * behaviour on top.
  */
-import { api, get, post, del, track } from './api.js';
-import { SITE, STAGES } from './config.js';
-import { daysUntil, STATUS_LABEL } from './matching.js';
+import { api, get, post, del, track } from './api.js?v=1ed1068b03';
+import { SITE, STAGES } from './config.js?v=1ed1068b03';
+import { daysUntil, STATUS_LABEL } from './matching.js?v=1ed1068b03';
 
 /* --------------------------------------------------------------- helpers */
 
@@ -246,11 +246,16 @@ async function wireGoogleButtons() {
   const buttons = $$('[data-google-signin]');
   if (!buttons.length) return;
 
-  const { FIREBASE } = await import('./firebase-config.js');
+  const { FIREBASE } = await import('./firebase-config.js?v=1ed1068b03');
   await loadSession();          // settles api.mode before anything is shown
   const available = api.mode === 'firebase' && FIREBASE.providers.google;
   buttons.forEach((button) => { button.closest('[data-google-block]')?.toggleAttribute('hidden', !available); });
   if (!available) return;
+
+  /* Warm the backend now. Loading the SDK takes long enough that a popup
+     opened after it can fall outside the click's activation window and be
+     blocked — so the click itself should have nothing left to wait for. */
+  import('./firebase-backend.js?v=1ed1068b03').catch(() => {});
 
   buttons.forEach((button) => {
     button.addEventListener('click', async () => {

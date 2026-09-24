@@ -6,8 +6,8 @@
  * This needs the Radar server — there is nothing to administer in a browser's
  * own storage, and the module says so rather than failing quietly.
  */
-import { get, post, put, del, api } from './api.js';
-import { $, $$, esc, formatDate, handleForm, toast, announce, loadSession } from './ui.js';
+import { get, post, put, del, api } from './api.js?v=1ed1068b03';
+import { $, $$, esc, formatDate, handleForm, toast, announce, loadSession } from './ui.js?v=1ed1068b03';
 
 const gate = $('#admin-gate');
 const content = $('#admin-content');

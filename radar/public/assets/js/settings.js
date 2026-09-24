@@ -2,10 +2,10 @@
  * Account settings: the profile summary, password, privacy controls, data
  * export and account deletion. Everything a person needs to leave cleanly.
  */
-import { get, post, del, getRaw } from './api.js';
-import { api } from './api.js';
-import { $, esc, formatDate, handleForm, requireAuth, toast, announce } from './ui.js';
-import { LEVELS, GOALS, FUNDING_NEEDS, EXPERIENCE } from './config.js';
+import { get, post, del, getRaw } from './api.js?v=1ed1068b03';
+import { api } from './api.js?v=1ed1068b03';
+import { $, esc, formatDate, handleForm, requireAuth, toast, announce } from './ui.js?v=1ed1068b03';
+import { LEVELS, GOALS, FUNDING_NEEDS, EXPERIENCE } from './config.js?v=1ed1068b03';
 
 const labelFor = (options, value) => options.find((o) => o.value === value)?.label || value || 'Not set';
 const titleCase = (value) => String(value).replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());

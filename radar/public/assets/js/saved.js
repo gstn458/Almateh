@@ -1,6 +1,6 @@
 /** Saved opportunities, newest first, with a one-click calendar export. */
-import { get, track } from './api.js';
-import { $, opportunityCard, requireAuth, toast, announce } from './ui.js';
+import { get, track } from './api.js?v=1ed1068b03';
+import { $, opportunityCard, requireAuth, toast, announce } from './ui.js?v=1ed1068b03';
 
 const results = $('#saved-results');
 const count = $('#saved-count');

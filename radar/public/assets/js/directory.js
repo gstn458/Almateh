@@ -4,9 +4,9 @@
  * Filter state lives in the URL, so a filtered view can be shared, bookmarked
  * and reached with the back button.
  */
-import { get, track } from './api.js';
-import { $, $$, opportunityCard, announce, loadSession } from './ui.js';
-import { TYPES, LEVELS, REGIONS } from './config.js';
+import { get, track } from './api.js?v=1ed1068b03';
+import { $, $$, opportunityCard, announce, loadSession } from './ui.js?v=1ed1068b03';
+import { TYPES, LEVELS, REGIONS } from './config.js?v=1ed1068b03';
 
 const results = $('#results');
 const countNode = $('#result-count');

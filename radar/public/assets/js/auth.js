@@ -2,8 +2,8 @@
  * Sign-up and sign-in. Both land people somewhere useful: a new account goes
  * to onboarding, a returning one to wherever they were headed.
  */
-import { post, track } from './api.js';
-import { $, handleForm, loadSession, toast } from './ui.js';
+import { post, track } from './api.js?v=1ed1068b03';
+import { $, handleForm, loadSession, toast } from './ui.js?v=1ed1068b03';
 
 const params = new URLSearchParams(location.search);
 const next = params.get('next');

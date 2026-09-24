@@ -2,13 +2,13 @@
  * A full opportunity page: everything a student needs to decide whether to
  * spend a weekend on this, before they leave for the organiser's site.
  */
-import { get, post, del, track } from './api.js';
+import { get, post, del, track } from './api.js?v=1ed1068b03';
 import {
   $, esc, opportunityCard, deadlineText, formatDate, relativeDays,
   verificationText, statusChip, announce, toast, loadSession, handleForm,
-} from './ui.js';
-import { daysUntil, STATUS_LABEL } from './matching.js';
-import { SITE } from './config.js';
+} from './ui.js?v=1ed1068b03';
+import { daysUntil, STATUS_LABEL } from './matching.js?v=1ed1068b03';
+import { SITE } from './config.js?v=1ed1068b03';
 
 const root = $('#opportunity-root');
 const body = $('#opportunity-body');

@@ -9,12 +9,37 @@
  *   node scripts/build-site.mjs
  */
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, statSync, copyFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PAGES = join(ROOT, 'pages');
+const JS_SRC = join(ROOT, 'src', 'js');
 const OUT = join(ROOT, 'public');
+const JS_OUT = join(OUT, 'assets', 'js');
+
+const VERSION = buildId();
+
+/**
+ * Every asset URL carries this, and it changes whenever any script does.
+ *
+ * The scripts keep their filenames between deploys, so without it a browser
+ * that has the site cached keeps running old code — including, once, a copy
+ * that still believed Firebase was switched off. A version on the URL makes an
+ * updated file a different URL, which no cache can confuse with the old one.
+ */
+function buildId() {
+  const hash = createHash('sha256');
+  for (const file of readdirSync(JS_SRC).sort()) {
+    if (file === 'build.js') continue;   // holds the previous id
+    if (file.endsWith('.js')) hash.update(readFileSync(join(JS_SRC, file)));
+  }
+  for (const file of readdirSync(join(OUT, 'assets', 'css')).sort()) {
+    if (file.endsWith('.css')) hash.update(readFileSync(join(OUT, 'assets', 'css', file)));
+  }
+  return hash.digest('hex').slice(0, 10);
+}
 
 const SITE_NAME = 'Radar';
 const ORIGIN = 'https://radar.example.com';
@@ -59,6 +84,7 @@ const META = {
   'app/tracker.html': { title: 'Application tracker', description: 'Track every application from saved through to the outcome.', noindex: true, app: true },
   'app/calendar.html': { title: 'Deadline calendar', description: 'Every deadline you are tracking, with reminders and calendar export.', noindex: true, app: true },
   'app/settings.html': { title: 'Account settings', description: 'Your profile, preferences, data export and account deletion.', noindex: true, app: true },
+  'app/diagnostics.html': { title: 'Diagnostics', description: 'What this browser is running, and what Firebase actually returned.', noindex: true, exclude: true },
 
   'admin/index.html': { title: 'Radar admin', description: 'Administrator console.', noindex: true, exclude: true, admin: true },
   'admin/opportunities.html': { title: 'Catalogue — Radar admin', description: 'Add, edit, verify and expire listings.', noindex: true, exclude: true, admin: true },
@@ -237,8 +263,8 @@ ${meta.noindex ? '<meta name="robots" content="noindex, follow">\n' : ''}<link r
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
-<link rel="stylesheet" href="/assets/css/radar.css">
-${meta.css ? meta.css.map((href) => `<link rel="stylesheet" href="${href}">`).join('\n') : ''}
+<link rel="stylesheet" href="/assets/css/radar.css?v=${VERSION}">
+${meta.css ? meta.css.map((href) => `<link rel="stylesheet" href="${href}?v=${VERSION}">`).join('\n') : ''}
 <script type="application/ld+json">${jsonLd(file, meta)}</script>
 </head>
 <body class="page">
@@ -246,8 +272,8 @@ ${meta.css ? meta.css.map((href) => `<link rel="stylesheet" href="${href}">`).jo
 ${chrome}
 ${main}
 ${footer()}
-<script type="module" src="/assets/js/ui.js"></script>
-${(meta.scripts || []).map((src) => `<script type="module" src="${src}"></script>`).join('\n')}
+<script type="module" src="/assets/js/ui.js?v=${VERSION}"></script>
+${(meta.scripts || []).map((src) => `<script type="module" src="${src}?v=${VERSION}"></script>`).join('\n')}
 </body>
 </html>
 `.replace(/\n{3,}/g, '\n\n');
@@ -269,6 +295,7 @@ const SCRIPTS = {
   'app/tracker.html': ['/assets/js/tracker.js'],
   'app/calendar.html': ['/assets/js/calendar.js'],
   'app/settings.html': ['/assets/js/settings.js'],
+  'app/diagnostics.html': ['/assets/js/diagnostics.js'],
   'admin/index.html': ['/assets/js/admin.js'],
   'admin/opportunities.html': ['/assets/js/admin.js'],
   'admin/reports.html': ['/assets/js/admin.js'],
@@ -285,6 +312,26 @@ function walk(dir, base = '') {
     else if (entry.endsWith('.html')) found.push(rel);
   }
   return found;
+}
+
+mkdirSync(JS_OUT, { recursive: true });
+
+/* The build id, readable by the app itself — the diagnostics page reports it. */
+writeFileSync(join(JS_SRC, 'build.js'),
+  `/* Written by scripts/build-site.mjs. Do not edit. */\nexport const BUILD = ${JSON.stringify({ id: VERSION, builtAt: new Date().toISOString().slice(0, 16).replace('T', ' ') })};\n`);
+
+let scriptCount = 0;
+for (const file of readdirSync(JS_SRC)) {
+  if (!file.endsWith('.js')) continue;
+  const source = readFileSync(join(JS_SRC, file), 'utf8');
+  /* Rewrites `from './x.js'` and `import('./x.js')`, and nothing else: every
+     specifier in this codebase is a plain relative path. */
+  const versioned = source.replace(
+    /(\bfrom\s*|\bimport\s*\()(['"])(\.\.?\/[^'"]+?\.js)\2/g,
+    (_, keyword, quote, path) => `${keyword}${quote}${path}?v=${VERSION}${quote}`,
+  );
+  writeFileSync(join(JS_OUT, file), versioned);
+  scriptCount += 1;
 }
 
 const files = walk(PAGES).sort();
@@ -338,4 +385,4 @@ writeFileSync(join(OUT, 'sitemap.xml'),
 writeFileSync(join(OUT, 'robots.txt'),
   `User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /app/dashboard.html\nDisallow: /app/saved.html\nDisallow: /app/tracker.html\nDisallow: /app/calendar.html\nDisallow: /app/settings.html\nDisallow: /app/onboarding.html\n\nSitemap: ${ORIGIN}/sitemap.xml\n`);
 
-console.log(`built ${built.length} pages, ${urls.length} sitemap entries`);
+console.log(`built ${built.length} pages, ${scriptCount} scripts, ${urls.length} sitemap entries — build ${VERSION}`);

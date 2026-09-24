@@ -5,9 +5,9 @@
  * step saves as you go, so leaving halfway through does not throw the answers
  * away, and returning later pre-fills what is already known.
  */
-import { get, put, track } from './api.js';
-import { $, $$, handleForm, requireAuth, announce, toast } from './ui.js';
-import { LEVELS, SUBJECTS, GOALS, REGIONS, FUNDING_NEEDS, EXPERIENCE, TYPES } from './config.js';
+import { get, put, track } from './api.js?v=1ed1068b03';
+import { $, $$, handleForm, requireAuth, announce, toast } from './ui.js?v=1ed1068b03';
+import { LEVELS, SUBJECTS, GOALS, REGIONS, FUNDING_NEEDS, EXPERIENCE, TYPES } from './config.js?v=1ed1068b03';
 
 const form = $('#onboarding-form');
 const steps = $$('.onboard-step');

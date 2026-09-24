@@ -5,9 +5,9 @@
  * Everything here is decoration over content that already exists in the HTML,
  * so the page still reads correctly if this module never runs.
  */
-import { get, track } from './api.js';
-import { $, $$, esc, opportunityCard, deadlineText, formatDate, relativeDays } from './ui.js';
-import { SITE } from './config.js';
+import { get, track } from './api.js?v=1ed1068b03';
+import { $, $$, esc, opportunityCard, deadlineText, formatDate, relativeDays } from './ui.js?v=1ed1068b03';
+import { SITE } from './config.js?v=1ed1068b03';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 

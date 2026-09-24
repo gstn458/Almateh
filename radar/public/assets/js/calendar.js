@@ -6,10 +6,10 @@
  * names a closing time in its own zone, that is stated rather than silently
  * converted, because a converted time that is wrong is worse than no time.
  */
-import { get, post, del, track } from './api.js';
-import { $, esc, formatDate, relativeDays, requireAuth, toast, announce, handleForm } from './ui.js';
-import { daysUntil } from './matching.js';
-import { SITE } from './config.js';
+import { get, post, del, track } from './api.js?v=1ed1068b03';
+import { $, esc, formatDate, relativeDays, requireAuth, toast, announce, handleForm } from './ui.js?v=1ed1068b03';
+import { daysUntil } from './matching.js?v=1ed1068b03';
+import { SITE } from './config.js?v=1ed1068b03';
 
 const upcoming = $('#calendar-upcoming');
 const undated = $('#calendar-undated');

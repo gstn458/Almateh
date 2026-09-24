@@ -1,0 +1,32 @@
+<div class="wrap section section--flush" style="max-width:760px">
+  <p class="eyebrow">Diagnostics</p>
+  <h1 class="h2">What this browser is actually running.</h1>
+  <p class="lede" style="font-size:15px">Open this page when something is not working. It reports the deployed build, which
+    backend is serving you, and the exact error Firebase returned — so a problem can be identified from one screenshot
+    instead of a guess.</p>
+
+  <div class="panel" style="margin-top:2.5rem">
+    <h2 class="h4">Build and backend</h2>
+    <dl class="opp__facts" id="diag-build" style="margin-top:1rem"></dl>
+  </div>
+
+  <div class="panel">
+    <h2 class="h4">Firebase</h2>
+    <dl class="opp__facts" id="diag-firebase" style="margin-top:1rem"></dl>
+    <p class="form-note" id="diag-handler-note"></p>
+  </div>
+
+  <div class="panel">
+    <h2 class="h4">Test Google sign-in</h2>
+    <p class="lede" style="font-size:14.5px">Runs the real sign-in and shows whatever comes back, in full.</p>
+    <button class="btn btn--ghost btn--sm" type="button" id="diag-test" style="margin-top:1.2rem">Run the test</button>
+    <pre id="diag-result" style="margin-top:1.2rem;padding:1rem;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--radius);overflow-x:auto;font:12px/1.6 var(--mono);white-space:pre-wrap;word-break:break-word" hidden></pre>
+  </div>
+
+  <div class="panel">
+    <h2 class="h4">Stale files</h2>
+    <p class="lede" style="font-size:14.5px">If the build below is older than the latest deploy, this browser is holding
+      cached copies. This clears them and reloads.</p>
+    <button class="btn btn--ghost btn--sm" type="button" id="diag-clear" style="margin-top:1.2rem">Clear caches and reload</button>
+  </div>
+</div>

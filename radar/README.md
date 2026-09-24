@@ -29,6 +29,7 @@ a dashboard. Each step is exercised by `scripts/journey-test.mjs`.
 ```
 radar/
   pages/                 page bodies — the only place page content is written
+  src/js/                the scripts, in source form — edit these
   public/                the built site; this directory is what gets deployed
     assets/css/          radar.css (system) + hero.css (homepage only)
     assets/js/           one module per page, plus api/ui/config/matching
@@ -46,7 +47,15 @@ radar/
 Every page's header, footer, metadata and structured data come from
 `scripts/build-site.mjs`, but the output is plain HTML. Navigation, headings and
 copy are all in the markup, so the site works with JavaScript disabled and
-search engines see the real content. Edit `pages/`, never `public/*.html`.
+search engines see the real content.
+
+The build also stamps a version onto every asset URL — in the HTML and in each
+module's own import specifiers. Scripts keep their filenames between deploys,
+so without it a browser with the site cached keeps running old code; the
+version makes an updated file a different URL. The id is a hash of the sources,
+so it only changes when they do.
+
+Edit `pages/` and `src/js/`, never `public/`.
 
 ## How it fits together
 
@@ -143,10 +152,17 @@ without it. Assets are served gzipped with a week of cache; HTML revalidates.
 | `node scripts/journey-test.mjs` | The full student journey, auth, authorisation, privacy, calendar, security headers |
 | `node scripts/admin-test.mjs` | Catalogue editing, verification, expiry, reports, audit |
 | `node scripts/firebase-test.mjs` | The Firebase backend's routes against a fake SDK: auth, profile, saves, tracker, reminders, export, deletion, Google sign-in, and that nothing is written outside `users/`, `reports/` and `messages/` |
-| `node scripts/browser-test.mjs` | Console errors, overflow, headings, labels, touch targets, focus, the journey in a real browser, reduced motion, no-JavaScript |
+| `node scripts/browser-test.mjs` | Console errors, overflow, headings, labels, touch targets, focus, colliding hero controls across seven viewports, the journey in a real browser, reduced motion, no-JavaScript |
 
 The browser suite needs Chromium and `playwright-core`; the other two need
 nothing but a running server.
+
+## When something is wrong in someone else's browser
+
+`/app/diagnostics.html` reports the deployed build id, which backend is
+serving, the Firebase configuration in use, whether the SDK loaded, and the
+raw error from a real sign-in attempt. One screenshot of that page carries
+what would otherwise take a dozen questions.
 
 ## What is deliberately not built
 

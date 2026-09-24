@@ -25,7 +25,7 @@ globalThis.localStorage = {
   removeItem(k) { this.store.delete(k); },
 };
 
-const backend = await import('../public/assets/js/firebase-backend.js');
+const backend = await import('../src/js/firebase-backend.js');
 
 /* ------------------------------------------------------------ the fake SDK */
 

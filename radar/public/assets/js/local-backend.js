@@ -10,7 +10,7 @@
  * Data written here stays in one browser. `api.mode` is 'local' in that case
  * and the UI says so, rather than implying an account exists.
  */
-import { rankOpportunities, scoreOpportunity, similarOpportunities, deriveStatus } from './matching.js';
+import { rankOpportunities, scoreOpportunity, similarOpportunities, deriveStatus } from './matching.js?v=1ed1068b03';
 
 const KEY = 'radar.local.v1';
 const CATALOGUE_URL = new URL('../../data/opportunities.json', import.meta.url);
