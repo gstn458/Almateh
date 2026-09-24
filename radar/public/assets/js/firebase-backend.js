@@ -64,6 +64,36 @@ function loadSdk() {
 /* ------------------------------------------------------------- auth state */
 
 let authReady = null;
+let redirectChecked = false;
+
+/**
+ * Finishes a sign-in that used the redirect flow.
+ *
+ * The person left for Google and came back to whatever page they started on,
+ * so every session lookup has to give Firebase a chance to hand over the
+ * result before deciding nobody is signed in.
+ */
+async function completeRedirect(s) {
+  if (redirectChecked) return null;
+  redirectChecked = true;
+  try {
+    const credential = await s.getRedirectResult(s.auth);
+    if (!credential?.user) return null;
+    const existing = await readProfile(s, credential.user.uid);
+    const profile = {
+      ...existing,
+      name: existing.name || credential.user.displayName || '',
+      email: credential.user.email,
+      createdAt: existing.createdAt || now(),
+      updatedAt: now(),
+    };
+    await s.setDoc(userDoc(s, credential.user.uid), profile, { merge: true });
+    return credential.user;
+  } catch {
+    /* No pending redirect, or it failed. Either way, carry on as signed out. */
+    return null;
+  }
+}
 
 /**
  * Resolves once Firebase has restored (or ruled out) a previous session.
@@ -234,7 +264,7 @@ async function route(method, path, { body, query }) {
     const action = rest[0];
 
     if (action === 'me') {
-      const user = await currentUser();
+      const user = (await completeRedirect(s)) || (await currentUser());
       if (!user) return { user: null, profile: null };
       const profile = await readProfile(s, user.uid);
       return { user: publicUser(user, profile), profile: onlyProfile(profile) };
@@ -278,7 +308,21 @@ async function route(method, path, { body, query }) {
         credential = await s.signInWithPopup(s.auth, provider);
       } catch (error) {
         const code = String(error?.code || '');
-        if (code === 'auth/popup-blocked' || code === 'auth/operation-not-supported-in-this-environment') {
+        /**
+         * The popup flow needs the sign-in handler on another origin to reach
+         * its own storage, which browsers increasingly refuse. When that
+         * happens Firebase reports a blocked popup, an unsupported
+         * environment, or simply an internal error — all of which the redirect
+         * flow gets past, because the person's own browser does the navigating.
+         */
+        const popupFailed = [
+          'auth/popup-blocked',
+          'auth/operation-not-supported-in-this-environment',
+          'auth/internal-error',
+          'auth/web-storage-unsupported',
+          'auth/missing-or-invalid-nonce',
+        ].includes(code);
+        if (popupFailed) {
           await s.signInWithRedirect(s.auth, provider);
           return { redirecting: true };
         }

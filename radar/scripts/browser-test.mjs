@@ -129,6 +129,55 @@ for (const viewport of VIEWPORTS) {
   await context.close();
 }
 
+/* ---------------------------------------- the hero's top-right stack */
+console.log('\nHero chrome does not collide');
+{
+  for (const [name, width, height] of [
+    ['desktop', 1440, 900],
+    ['laptop', 1280, 720],
+    ['short laptop', 1366, 640],
+    ['wide', 1920, 1080],
+    ['tablet', 820, 1180],
+    ['phone', 390, 844],
+    ['small phone', 360, 640],
+  ]) {
+    const context = await browser.newContext({ viewport: { width, height } });
+    await blockFonts(context);
+    const page = await context.newPage();
+    await page.goto(BASE, { waitUntil: 'load' });
+    await page.waitForTimeout(2800);
+
+    const collisions = await page.evaluate(() => {
+      const names = ['.hero-account', '.hero-pill', '.story-audio', '.story-progress',
+                     '.hero-brand', '.hero-nav', '.hero-actions', '.back-to-top'];
+      const boxes = names.map((selector) => {
+        const node = document.querySelector(selector);
+        if (!node) return null;
+        const style = getComputedStyle(node);
+        if (style.display === 'none' || style.visibility === 'hidden') return null;
+        const rect = node.getBoundingClientRect();
+        if (!rect.width || !rect.height) return null;
+        return { selector, ...rect.toJSON() };
+      }).filter(Boolean);
+
+      const hits = [];
+      for (let i = 0; i < boxes.length; i += 1) {
+        for (let j = i + 1; j < boxes.length; j += 1) {
+          const a = boxes[i];
+          const b = boxes[j];
+          const overlap = !(a.bottom <= b.top || b.bottom <= a.top || a.right <= b.left || b.right <= a.left);
+          if (overlap) hits.push(`${a.selector} × ${b.selector}`);
+        }
+      }
+      return hits;
+    });
+
+    check(`${name} — no overlapping hero chrome`, collisions.length === 0, collisions.join(', '));
+    await page.close();
+    await context.close();
+  }
+}
+
 /* ------------------------------------------------ mobile menu behaviour */
 console.log('\nMobile menu');
 {

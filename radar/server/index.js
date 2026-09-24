@@ -56,7 +56,7 @@ const CSP = [
   "img-src 'self' data: https://*.googleusercontent.com",
   "connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebaseio.com",
   "frame-src https://*.firebaseapp.com https://accounts.google.com",
-  "form-action 'self'",
+  "form-action 'self' https://accounts.google.com https://*.firebaseapp.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "object-src 'none'",

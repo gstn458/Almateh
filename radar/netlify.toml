@@ -24,7 +24,7 @@
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebaseio.com; frame-src https://*.firebaseapp.com https://accounts.google.com; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.googleusercontent.com; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com wss://*.firebaseio.com; frame-src https://*.firebaseapp.com https://accounts.google.com; form-action 'self' https://accounts.google.com https://*.firebaseapp.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
 
 [[headers]]
   for = "/assets/img/*"
