@@ -12,16 +12,19 @@
  * in person touch their own documents.
  */
 export const FIREBASE = {
-  enabled: false,
+  enabled: true,
 
   /* Firebase console → Project settings → Your apps → Web app → SDK setup. */
   config: {
-    apiKey: '',
-    authDomain: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: '',
-    appId: '',
+    apiKey: 'AIzaSyCTsgGYcuSCraeCH3eatRwZHcXLXXXobvk',
+    authDomain: 'radar-558fa.firebaseapp.com',
+    projectId: 'radar-558fa',
+    storageBucket: 'radar-558fa.firebasestorage.app',
+    messagingSenderId: '966651453945',
+    appId: '1:966651453945:web:4fb1ad719944ecb907dd28',
+    /* measurementId is deliberately left out. It only feeds Google Analytics,
+       which Radar does not load — the privacy policy says there are no
+       third-party trackers, and that has to stay true. */
   },
 
   /* Which sign-in methods the interface offers. Enable the matching providers

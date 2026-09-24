@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://radar.example.com/about.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/app/login.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/app/signup.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/contact.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/how-it-works.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunities.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://radar.example.com/pricing.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/privacy.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/report.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/terms.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://radar.example.com/verification.html</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -102,182 +102,182 @@
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=khalifa-university-undergraduate-scholarships</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=mbzuai-scholarships-in-artificial-intelligence</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=nyu-abu-dhabi-undergraduate-admission-and-scholarship</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=american-university-of-sharjah-merit-scholarships</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=adnoc-scholarship-programme</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=mbrsc-space-programmes-for-students</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=kaust-gifted-student-program</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=injaz-al-arab-company-program-competition</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=rhodes-scholarship</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=gates-cambridge-scholarship</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=chevening-scholarships</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=fulbright-foreign-student-program</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=daad-scholarship-database</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=daad-rise-research-internships</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=erasmus-mundus-joint-masters-scholarships</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=schwarzman-scholars</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=uwc-scholarships</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=breakthrough-junior-challenge</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=conrad-challenge</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=first-robotics-competition</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=genius-olympiad</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=international-mathematical-olympiad</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=john-locke-institute-essay-competition</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=wharton-global-high-school-investment-competition</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=diamond-challenge-for-high-school-entrepreneurs</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=world-scholar-s-cup</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=bafta-young-game-designers</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=sony-world-photography-awards-student-competition</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=mit-primes</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=research-science-institute-rsi</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=cern-summer-student-programme</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=eth-zurich-student-summer-research-fellowship</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=amgen-scholars-program</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=perimeter-institute-issyp</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=simons-summer-research-program</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://radar.example.com/opportunity.html?id=opportunity-desk</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-24</lastmod>
     <priority>0.6</priority>
   </url>
 </urlset>
