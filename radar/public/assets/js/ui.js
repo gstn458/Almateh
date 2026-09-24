@@ -79,6 +79,12 @@ export function announce(message) {
 }
 
 let toastRegion;
+
+/**
+ * Shows a message. Repeating the same one — clicking a broken button four
+ * times — replaces the existing toast and counts it, rather than stacking
+ * seven copies over the form the person is trying to read.
+ */
 export function toast(message, { tone = 'ok', announceIt = true } = {}) {
   toastRegion ||= (() => {
     const node = document.createElement('div');
@@ -86,12 +92,26 @@ export function toast(message, { tone = 'ok', announceIt = true } = {}) {
     document.body.append(node);
     return node;
   })();
+
+  const existing = [...toastRegion.children].find((node) => node.dataset.message === message);
+  if (existing) {
+    const count = Number(existing.dataset.count || 1) + 1;
+    existing.dataset.count = String(count);
+    existing.textContent = `${message} (${count}×)`;
+    clearTimeout(Number(existing.dataset.timer));
+    existing.dataset.timer = String(setTimeout(() => existing.remove(), 5200));
+    return;
+  }
+
   const item = document.createElement('div');
   item.className = `toast${tone === 'error' ? ' toast--error' : ''}`;
   item.textContent = message;
+  item.dataset.message = message;
+  item.dataset.timer = String(setTimeout(() => item.remove(), 5200));
   toastRegion.append(item);
+  /* More than a few at once means something is looping; keep the newest. */
+  while (toastRegion.children.length > 3) toastRegion.firstElementChild.remove();
   if (announceIt) announce(message);
-  setTimeout(() => item.remove(), 5200);
 }
 
 /* ------------------------------------------------------------- navigation */

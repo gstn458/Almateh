@@ -123,7 +123,12 @@ function translate(error) {
     'auth/popup-blocked': [499, 'Your browser blocked the sign-in window.'],
     'auth/account-exists-with-different-credential': [409, 'You already have an account with that email. Sign in the way you did the first time.'],
     'auth/operation-not-allowed': [503, 'That sign-in method is not switched on in Firebase yet.'],
-    'auth/unauthorized-domain': [503, 'This domain is not in the Firebase authorised list yet.'],
+    'auth/unauthorized-domain': [503, 'This site\'s address is not on the Firebase authorised domain list yet.'],
+    /* Firebase reports a rejected sign-in handler as an internal error. In
+       practice it is almost always the domain: the popup reaches Google, comes
+       back to the handler, and the handler refuses an address it does not
+       recognise. Saying so beats repeating Firebase's own wording. */
+    'auth/internal-error': [503, 'Google sign-in could not complete. The usual cause is this site\'s address missing from Firebase → Authentication → Settings → Authorized domains.'],
     'auth/requires-recent-login': [401, 'For safety, sign in again before making this change.'],
     'permission-denied': [403, 'Firestore refused that write. Check your security rules.'],
     unavailable: [503, 'Firebase is unreachable right now.'],
