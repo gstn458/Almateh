@@ -15,7 +15,7 @@
 // and do not add a phone number, home address or date of birth.
 // ─────────────────────────────────────────────────────────────────────────────
 
-export type Status = "Live" | "Published" | "In development" | "In progress" | "Upcoming";
+export type Status = "Live" | "Published" | "In development" | "In progress" | "Upcoming" | "Finalist";
 
 /** Placeholder artwork drawn in code, used until a real screenshot is added. */
 export type VisualKind = "lattice" | "orbit" | "paper" | "radar" | "layout" | "devlog";
@@ -341,8 +341,14 @@ export const activities = {
       dates: undefined, // TODO: years
     },
   ] as Activity[],
-  // No results are listed. Only change a status when there is a real result.
+  // Only list a result you actually have. Everything else stays "Upcoming" or "In progress".
   competitions: [
+    {
+      title: "World Mathematics Championships",
+      detail: "International finalist, Imperial College London.",
+      dates: "2026",
+      status: "Finalist",
+    },
     {
       title: "HMMT November 2026",
       detail: "Organised and registered an independent four person team (team DWIGHT).",

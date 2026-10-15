@@ -6,6 +6,7 @@ const DOTS: Record<Status, string> = {
   "In development": "bg-amber-300",
   "In progress": "bg-amber-300",
   Upcoming: "bg-muted",
+  Finalist: "bg-emerald-400",
 };
 
 export default function StatusChip({ status }: { status: Status }) {
