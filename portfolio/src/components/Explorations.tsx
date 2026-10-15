@@ -1,136 +1,41 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { explorations, links, type Exploration } from "../data/content";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { sideProjects, type SideProject } from "../data/content";
 import { gsap, ScrollTrigger } from "../lib/gsap";
-import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
+import { linkProps } from "../lib/links";
+import { usePrefersReducedMotion } from "../hooks/usePrefersReducedMotion";
+import Dialog from "./Dialog";
 import RingButton from "./RingButton";
+import Todo from "./Todo";
+import Visual from "./Visual";
 
 // A slight tilt per card, alternating direction.
 const ROTATIONS = ["-rotate-3", "rotate-2", "rotate-3", "-rotate-2", "-rotate-1", "rotate-3"];
 
-function Lightbox({
-  index,
-  onClose,
-  onStep,
-}: {
-  index: number | null;
-  onClose: () => void;
-  onStep: (direction: 1 | -1) => void;
-}) {
-  const open = index !== null;
-  useLockBodyScroll(open);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-      if (event.key === "ArrowRight") onStep(1);
-      if (event.key === "ArrowLeft") onStep(-1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose, onStep]);
-
-  const item = index !== null ? explorations[index] : null;
-
-  return createPortal(
-    <AnimatePresence>
-      {item && (
-        <motion.div
-          key="lightbox"
-          role="dialog"
-          aria-modal="true"
-          aria-label={item.title}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          onClick={onClose}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-6 backdrop-blur-md"
-        >
-          <motion.figure
-            key={item.image}
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
-            onClick={(event) => event.stopPropagation()}
-            className="flex max-h-full flex-col items-center"
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              className="max-h-[78vh] w-auto max-w-full rounded-2xl border border-stroke object-contain"
-            />
-            <figcaption className="mt-4 font-display text-xl italic text-text-primary">
-              {item.title}
-            </figcaption>
-          </motion.figure>
-
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-surface text-lg text-text-primary transition-colors hover:bg-stroke md:right-8 md:top-8"
-          >
-            ✕
-          </button>
-          {explorations.length > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  onStep(-1);
-                }}
-                aria-label="Previous image"
-                className="absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-text-primary transition-colors hover:bg-stroke md:left-8"
-              >
-                ←
-              </button>
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  onStep(1);
-                }}
-                aria-label="Next image"
-                className="absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/10 bg-surface text-text-primary transition-colors hover:bg-stroke md:right-8"
-              >
-                →
-              </button>
-            </>
-          )}
-        </motion.div>
-      )}
-    </AnimatePresence>,
-    document.body,
-  );
-}
-
-function Card({
-  item,
-  rotation,
-  onOpen,
-}: {
-  item: Exploration;
-  rotation: string;
-  onOpen: () => void;
-}) {
+function Card({ item, rotation, onOpen }: { item: SideProject; rotation: string; onOpen: () => void }) {
   return (
     <button
       type="button"
       onClick={onOpen}
       aria-label={`Open ${item.title}`}
-      className={`group pointer-events-auto relative aspect-square w-full max-w-[320px] overflow-hidden rounded-3xl border border-stroke bg-surface shadow-2xl shadow-black/40 transition-transform duration-500 hover:rotate-0 hover:scale-[1.03] ${rotation}`}
+      className={`group pointer-events-auto relative aspect-square w-full max-w-[320px] overflow-hidden rounded-3xl border border-stroke bg-surface text-left shadow-2xl shadow-black/40 transition-transform duration-500 hover:rotate-0 hover:scale-[1.03] focus-visible:rotate-0 ${rotation}`}
     >
-      <img
-        src={item.image}
-        alt={item.title}
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-      />
+      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+        {item.image ? (
+          <img
+            src={item.image}
+            alt={item.imageAlt ?? item.title}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <Visual kind={item.visual} />
+        )}
+      </div>
       <div className="halftone pointer-events-none absolute inset-0 opacity-20 mix-blend-multiply" />
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-5">
+        <p className="font-display text-lg italic leading-tight text-white md:text-2xl">{item.title}</p>
+      </div>
     </button>
   );
 }
@@ -141,6 +46,7 @@ export default function Explorations() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const reducedMotion = usePrefersReducedMotion();
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -151,6 +57,8 @@ export default function Explorations() {
         pin: contentRef.current,
         pinSpacing: false,
       });
+
+      if (reducedMotion) return;
 
       // The two columns drift at different speeds as the section scrolls past.
       const scrub = {
@@ -164,58 +72,84 @@ export default function Explorations() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
-  const left = explorations.map((item, i) => ({ item, i })).filter(({ i }) => i % 2 === 0);
-  const right = explorations.map((item, i) => ({ item, i })).filter(({ i }) => i % 2 === 1);
-
+  const items = sideProjects.items.map((item, i) => ({ item, i }));
+  const left = items.filter(({ i }) => i % 2 === 0);
+  const right = items.filter(({ i }) => i % 2 === 1);
+  const open = openIndex !== null ? sideProjects.items[openIndex] : null;
   const close = useCallback(() => setOpenIndex(null), []);
-  const step = useCallback((direction: 1 | -1) => {
-    setOpenIndex((current) =>
-      current === null ? null : (current + direction + explorations.length) % explorations.length,
-    );
-  }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-[300vh] bg-bg">
+    <section ref={sectionRef} id="side-projects" aria-labelledby="side-heading" className="relative min-h-[300vh] bg-bg">
       <div
         ref={contentRef}
         className="relative z-10 flex h-screen flex-col items-center justify-center px-6 text-center"
       >
         <div className="mb-5 flex items-center gap-3">
-          <span className="h-px w-8 bg-stroke" />
-          <span className="text-xs uppercase tracking-[0.3em] text-muted">Explorations</span>
-          <span className="h-px w-8 bg-stroke" />
+          <span aria-hidden="true" className="h-px w-8 bg-stroke" />
+          <span className="text-xs uppercase tracking-[0.3em] text-muted">{sideProjects.eyebrow}</span>
+          <span aria-hidden="true" className="h-px w-8 bg-stroke" />
         </div>
-        <h2 className="text-4xl font-light tracking-tight text-text-primary md:text-6xl lg:text-7xl">
-          Visual <span className="font-display italic">playground</span>
+        <h2 id="side-heading" className="text-4xl font-light tracking-tight text-text-primary md:text-6xl lg:text-7xl">
+          {sideProjects.title} <span className="font-display italic">{sideProjects.titleEmphasis}</span>
         </h2>
-        <p className="mt-4 max-w-md text-sm text-muted md:text-base">
-          Side projects and experiments made outside client work.
-        </p>
+        <p className="mt-4 max-w-md text-sm text-muted md:text-base">{sideProjects.subtext}</p>
         <div className="mt-8">
-          <RingButton href={links.dribbble}>
-            See more on Dribbble <span aria-hidden="true">↗</span>
+          <RingButton href={sideProjects.cta.href}>
+            {sideProjects.cta.label} <span aria-hidden="true">↗</span>
           </RingButton>
         </div>
       </div>
 
       <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
-        <div className="mx-auto grid h-full max-w-[1400px] grid-cols-2 gap-12 px-6 pb-[30vh] pt-[70vh] md:gap-40 md:px-10">
+        <div className="mx-auto grid h-full max-w-[1400px] grid-cols-2 gap-6 px-6 pb-[30vh] pt-[70vh] sm:gap-12 md:gap-40 md:px-10">
           <div ref={leftRef} className="flex flex-col items-start justify-around">
             {left.map(({ item, i }) => (
-              <Card key={i} item={item} rotation={ROTATIONS[i % ROTATIONS.length]} onOpen={() => setOpenIndex(i)} />
+              <Card key={item.title} item={item} rotation={ROTATIONS[i % ROTATIONS.length]} onOpen={() => setOpenIndex(i)} />
             ))}
           </div>
           <div ref={rightRef} className="flex flex-col items-end justify-around">
             {right.map(({ item, i }) => (
-              <Card key={i} item={item} rotation={ROTATIONS[i % ROTATIONS.length]} onOpen={() => setOpenIndex(i)} />
+              <Card key={item.title} item={item} rotation={ROTATIONS[i % ROTATIONS.length]} onOpen={() => setOpenIndex(i)} />
             ))}
           </div>
         </div>
       </div>
 
-      <Lightbox index={openIndex} onClose={close} onStep={step} />
+      <Dialog open={!!open} onClose={close} label={open?.title ?? "Side project"}>
+        {open && (
+          <article>
+            <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-2xl border border-stroke bg-bg">
+              {open.image ? (
+                <img src={open.image} alt={open.imageAlt ?? open.title} className="absolute inset-0 h-full w-full object-cover" />
+              ) : (
+                <>
+                  <Visual kind={open.visual} />
+                  <div className="absolute bottom-3 right-3">
+                    <Todo>screenshot</Todo>
+                  </div>
+                </>
+              )}
+            </div>
+            <h2 className="font-display text-3xl italic text-text-primary">{open.title}</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted md:text-base">{open.summary}</p>
+            <div className="mt-6">
+              {open.link ? (
+                <a
+                  href={open.link.href}
+                  {...linkProps(open.link.href)}
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-stroke px-5 text-sm text-text-primary transition-colors hover:border-text-primary/40"
+                >
+                  {open.link.label} <span aria-hidden="true">↗</span>
+                </a>
+              ) : (
+                <Todo>link</Todo>
+              )}
+            </div>
+          </article>
+        )}
+      </Dialog>
     </section>
   );
 }

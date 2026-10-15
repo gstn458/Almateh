@@ -3,8 +3,14 @@
 A single-page dark portfolio (React, Vite, Tailwind, GSAP, Framer Motion, hls.js)
 with a separate `/resume` page.
 
-All personal content is in `src/data/content.ts`. Lines marked `PLACEHOLDER`
-still need your own details.
+All content (copy, links, image paths, metadata) is in `src/data/content.ts`.
+Search it for `TODO`. Missing details show as dashed amber "TODO" chips on the
+dev server only and are left out of the production build.
+
+- Screenshots go in `public/images/`; point `image` at them in content.ts.
+- Your resume PDF goes at `public/resume.pdf`; the Download button appears once it exists.
+- `public/og.png` is the social preview image (1200 × 630).
+- Set `site.url` once deployed; the sitemap, robots.txt and social tags use it.
 
 ```bash
 npm install

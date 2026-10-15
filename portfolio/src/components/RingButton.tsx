@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { linkProps } from "../lib/links";
 
 type RingButtonProps = {
   children: ReactNode;
@@ -46,13 +47,8 @@ export default function RingButton({
   );
 
   if (href) {
-    const external = /^https?:\/\//.test(href);
     return (
-      <a
-        href={href}
-        className={outer}
-        {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      >
+      <a href={href} className={outer} {...linkProps(href)}>
         {content}
       </a>
     );

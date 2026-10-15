@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { profile } from "./data/content";
+import { site } from "./data/content";
 import "./index.css";
 
-document.title = `${profile.name} — Portfolio`;
+document.title = site.title;
 
 // Start at the top on reload; the page handles its own scrolling.
 if ("scrollRestoration" in window.history) {

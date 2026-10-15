@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +6,8 @@
   --bg: 0 0% 4%;
   --surface: 0 0% 8%;
   --text: 0 0% 96%;
-  --muted: 0 0% 53%;
+  /* 60% grey keeps body text above 7:1 contrast on the dark background. */
+  --muted: 0 0% 60%;
   --stroke: 0 0% 12%;
   --accent: 0 0% 96%;
 
@@ -21,6 +20,12 @@
 @layer base {
   body {
     @apply bg-bg font-body text-text-primary antialiased;
+  }
+
+  /* A visible focus ring for keyboard users on every link and button. */
+  :focus-visible {
+    outline: 2px solid #89aacc;
+    outline-offset: 3px;
   }
 
   ::selection {
@@ -47,6 +52,20 @@
 
   .animate-role-fade-in {
     animation: role-fade-in 0.4s ease-out;
+  }
+
+  /* Grows the tappable area of small controls to at least 44 × 44px without changing how they look. */
+  .hit-area {
+    position: relative;
+  }
+  .hit-area::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
   }
 
   .halftone {

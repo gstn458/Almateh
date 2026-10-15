@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import PageTransition from "./components/PageTransition";
@@ -12,7 +12,8 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(() => location.pathname === "/");
 
   return (
-    <>
+    // reducedMotion="user" turns off movement for visitors who ask their system to reduce motion.
+    <MotionConfig reducedMotion="user">
       <Navbar />
       <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
         <Routes location={location} key={location.pathname}>
@@ -35,6 +36,6 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>
-    </>
+    </MotionConfig>
   );
 }

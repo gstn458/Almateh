@@ -1,189 +1,491 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// ALL OF YOUR PERSONAL CONTENT LIVES IN THIS ONE FILE.
+// ALL SITE CONTENT LIVES IN THIS ONE FILE.
 //
-// Every line marked "PLACEHOLDER" is something you still need to replace with
-// your own details. Keep the quotes and commas; only change the text inside the
-// quotes. Save the file and the site updates on its own while `npm run dev`
-// is running.
+// Edit text inside the quotes and save; the dev server updates by itself.
 //
-// Images: any public image link works (for example one copied from your
-// Dribbble, Behance or Google Drive "anyone with the link" share). You can also
-// put image files in a folder called `public/images/` and write the path as
-// "/images/your-file.jpg".
+// TODOs: search this file for "TODO". A field left as `undefined` shows up on
+// the dev server (`npm run dev`) as a dashed amber "TODO" chip, and is simply
+// left out of the production build, so an unfinished detail never ships.
+//
+// Screenshots: put image files in `public/images/` and set `image` to
+// "/images/your-file.png" (plus a short `imageAlt` describing it). Until then
+// each card shows a generated placeholder visual.
+//
+// Privacy: this is a public site. Keep location to city level ("Dubai, UAE")
+// and do not add a phone number, home address or date of birth.
 // ─────────────────────────────────────────────────────────────────────────────
 
+export type Status = "Live" | "Published" | "In development" | "In progress" | "Upcoming";
+
+/** Placeholder artwork drawn in code, used until a real screenshot is added. */
+export type VisualKind = "lattice" | "orbit" | "paper" | "radar" | "layout" | "devlog";
+
+export type Link = { label: string; href: string };
+
 export type Project = {
+  id: string;
+  /** Full title, used in the detail view. */
   title: string;
-  category: string;
-  image: string;
-  /** Optional. Where the card goes when clicked. Leave out to make it non-clickable. */
-  href?: string;
+  /** Optional shorter title for the card. */
+  cardTitle?: string;
+  /** One line shown on the card. */
+  summary: string;
+  status: Status;
+  tags?: string[];
+  links: Link[];
+  visual: VisualKind;
+  image?: string;
+  imageAlt?: string;
+  details: {
+    problem?: string;
+    built?: string;
+    how?: string;
+    learned?: string;
+    /** Extra facts shown as a short list, e.g. publication details. */
+    facts?: string[];
+    /** Small plain note at the bottom of the detail view. */
+    note?: string;
+  };
 };
 
-export type JournalEntry = {
+export type ResearchItem = {
+  kind: string;
   title: string;
-  image: string;
-  readTime: string;
-  date: string;
-  /** Optional. Link to the full article. */
-  href?: string;
+  summary: string;
+  status?: Status;
+  link?: Link;
+  note?: string;
 };
 
-export type Exploration = {
+export type Activity = {
   title: string;
-  image: string;
+  detail?: string;
+  dates?: string;
+  status?: Status;
 };
 
-export type Stat = {
-  value: string;
-  label: string;
-};
-
-export type SocialLink = {
-  label: string;
-  href: string;
-};
-
-export type Experience = {
-  role: string;
+export type Internship = {
   company: string;
-  period: string;
-  location?: string;
-  description: string;
+  role?: string;
+  dates?: string;
+  summary?: string;
 };
 
-export type Education = {
-  school: string;
-  degree: string;
-  period: string;
+export type WritingEntry = {
+  title: string;
+  /** Set to true once the piece is out. The Writing section stays hidden until at least one is. */
+  published: boolean;
+  href?: string;
+  readTime?: string;
+  date?: string;
 };
 
-export const profile = {
-  name: "Your Name", // PLACEHOLDER
-  initials: "YN", // PLACEHOLDER: shown inside the round logo
-  city: "Your City", // PLACEHOLDER: "A Designer lives in ___."
-  // PLACEHOLDER: the words that cycle in "A ___ lives in Your City."
-  roles: ["Your Role", "Second Role", "Third Role"],
-  // PLACEHOLDER: one plain sentence about what you do and who you do it for.
+export type SideProject = {
+  title: string;
+  summary: string;
+  visual: VisualKind;
+  image?: string;
+  imageAlt?: string;
+  link?: Link;
+};
+
+// ── Site and metadata ────────────────────────────────────────────────────────
+
+export const site = {
+  title: "Tehzeeb Basha | Mathematics and Cryptography",
   description:
-    "Replace this with one sentence about the work you do and who you do it for.",
-  email: "you@example.com", // PLACEHOLDER
-  availability: {
-    available: true, // set to false to show a grey dot instead of a green one
-    label: "Available for projects",
-  },
+    "Tehzeeb Ali Gows Basha is an IB Diploma student in Dubai working on post quantum cryptography, mathematics and software.",
+  // TODO: the public address of this site once it is deployed, e.g. "https://yourdomain.com"
+  // (no trailing slash). Used for the sitemap, social previews and search metadata.
+  url: "",
+  ogImage: "/og.png", // TODO (optional): replace public/og.png with your own 1200 × 630 image
+  ogImageAlt: "Tehzeeb Basha. Mathematics and cryptography.",
 };
 
-export const links = {
-  // PLACEHOLDER: where the "View all work" button goes.
-  allWork: "https://dribbble.com/your-handle",
-  // PLACEHOLDER: where the journal's "View all" button goes.
-  journal: "https://medium.com/@your-handle",
-  // PLACEHOLDER: the Dribbble button in the Explorations section.
-  dribbble: "https://dribbble.com/your-handle",
+export const person = {
+  name: "Tehzeeb Basha",
+  fullName: "Tehzeeb Ali Gows Basha",
+  chineseName: "白泽博",
+  initials: "TB",
+  location: "Dubai, UAE",
+  school: "Dwight School Dubai",
+  email: undefined as string | undefined, // TODO: the email address you want public
+  availability: { open: true, label: "Open to opportunities" },
 };
 
-export const socials: SocialLink[] = [
-  { label: "Twitter", href: "https://x.com/your-handle" }, // PLACEHOLDER
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/your-handle" }, // PLACEHOLDER
-  { label: "Dribbble", href: "https://dribbble.com/your-handle" }, // PLACEHOLDER
-  { label: "GitHub", href: "https://github.com/your-handle" }, // PLACEHOLDER
+export const socials: Link[] = [
+  { label: "GitHub", href: "https://github.com/gstn458" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/tehzeeb-ali" },
+  { label: "cryptomath.org", href: "https://cryptomath.org" },
 ];
 
-// Exactly four projects fill the grid (wide, narrow, narrow, wide).
+// ── Navigation and loader ────────────────────────────────────────────────────
+
+export const nav = {
+  home: "Home",
+  work: "Work",
+  resume: "Resume",
+  contact: "Say hi",
+};
+
+export const loader = {
+  label: "Portfolio",
+  words: ["Research", "Build", "Teach"],
+};
+
+// ── Hero ─────────────────────────────────────────────────────────────────────
+
+export const hero = {
+  eyebrow: "Portfolio 2026",
+  roleLine: {
+    before: "A mathematics and ",
+    emphasis: "cryptography",
+    after: " student building in Dubai.",
+  },
+  description:
+    "I research post quantum cryptography, build tools that make it usable, and teach the maths behind it.",
+  primaryCta: "See my work",
+  secondaryCta: "Get in touch",
+  scrollLabel: "Scroll",
+};
+
+// ── Selected work ────────────────────────────────────────────────────────────
+
+const paperTitle =
+  "Quantum Resistant Cryptography and Its Implications for Blockchain and Cryptocurrency: A Comprehensive Mathematical Analysis";
+const paperDoi = "https://doi.org/10.65161/reciVMFDoYuEGfYeh";
+const paperCitation =
+  "Oxford Journal of Student Scholarship, Vol. 10, Issue 4, August 2026, pp. 329–345.";
+const journalNote =
+  "The Oxford Journal of Student Scholarship is an independent publication. It is not affiliated with the University of Oxford.";
+
+export const work = {
+  eyebrow: "Selected work",
+  title: "Featured",
+  titleEmphasis: "projects",
+  subtext: "What I'm building and what I've published.",
+  allLink: { label: "More on GitHub", href: "https://github.com/gstn458" },
+  detailsLabel: "Details",
+};
+
+// Shown in this order. The grid alternates wide and narrow cards.
 export const projects: Project[] = [
   {
-    title: "Your Project Title", // PLACEHOLDER
-    category: "Project type", // PLACEHOLDER
-    image: "https://picsum.photos/seed/atlas/1200/900", // PLACEHOLDER
+    id: "ratchet",
+    title: "Ratchet",
+    summary:
+      "Scans a codebase for cryptography that quantum computers will break and produces a CycloneDX cryptographic bill of materials (CBOM).",
+    status: "In development",
+    tags: ["Post quantum cryptography", "Security tooling", "Open source"],
+    links: [{ label: "GitHub", href: "https://github.com/gstn458/ratchet" }],
+    visual: "lattice",
+    image: undefined, // TODO: screenshot, e.g. "/images/ratchet.png"
+    imageAlt: undefined, // TODO: describe the screenshot
+    details: {
+      problem: undefined, // TODO: the problem Ratchet solves, in your words
+      built:
+        "The scanner and its CycloneDX CBOM output. Automated migration pull requests are on the roadmap.",
+      how: undefined, // TODO: how the scanner works
+      learned: undefined, // TODO: what you learned
+    },
   },
   {
-    title: "Second Project Title", // PLACEHOLDER
-    category: "Project type", // PLACEHOLDER
-    image: "https://picsum.photos/seed/harbor/1200/900", // PLACEHOLDER
+    id: "cryptomath",
+    title: "cryptomath.org",
+    summary:
+      "A bilingual English and Arabic interactive platform that teaches the mathematics of cryptography.",
+    status: "Live",
+    tags: ["Education", "Three.js", "Bilingual", "Cryptography"],
+    links: [{ label: "Visit site", href: "https://cryptomath.org" }],
+    visual: "orbit",
+    image: undefined, // TODO: screenshot, e.g. "/images/cryptomath.png"
+    imageAlt: undefined, // TODO: describe the screenshot
+    details: {
+      problem: undefined, // TODO: why you built it
+      built:
+        "I built it as my IB Personal Project, which was graded in the top band. Every page works in English and Arabic.",
+      how: "One Three.js animated background runs across the whole site.",
+      learned: undefined, // TODO: what you learned
+    },
   },
   {
-    title: "Third Project Title", // PLACEHOLDER
-    category: "Project type", // PLACEHOLDER
-    image: "https://picsum.photos/seed/meadow/1200/900", // PLACEHOLDER
+    id: "paper",
+    title: paperTitle,
+    cardTitle: "Quantum Resistant Cryptography and Blockchain",
+    summary: "Published paper. A mathematical analysis of quantum resistant cryptography for blockchain and cryptocurrency.",
+    status: "Published",
+    tags: ["Research", "Post quantum cryptography", "Blockchain"],
+    links: [{ label: "Read via DOI", href: paperDoi }],
+    visual: "paper",
+    image: undefined, // TODO (optional): image of the first page, e.g. "/images/paper.png"
+    imageAlt: undefined,
+    details: {
+      problem: undefined, // TODO: the question the paper answers
+      built: undefined, // TODO: a two line summary of the paper's argument
+      how: undefined, // TODO: the method
+      learned: undefined, // TODO: what you learned
+      facts: [paperCitation, "DOI: 10.65161/reciVMFDoYuEGfYeh"],
+      note: journalNote,
+    },
   },
   {
-    title: "Fourth Project Title", // PLACEHOLDER
-    category: "Project type", // PLACEHOLDER
-    image: "https://picsum.photos/seed/summit/1200/900", // PLACEHOLDER
+    id: "radar",
+    title: "Radar",
+    summary:
+      "Matches students to competitions, internships, research programs and summer schools, with a match score, a plain explanation of why, and a personal deadline tracker.",
+    status: "In development",
+    tags: undefined, // TODO: tags, e.g. tech used or field
+    links: [], // TODO: link to Radar once it is public
+    visual: "radar",
+    image: undefined, // TODO: screenshot, e.g. "/images/radar.png"
+    imageAlt: undefined,
+    details: {
+      problem: undefined, // TODO: the problem Radar solves
+      built:
+        "Every match comes with a score and a plain explanation of why it fits. A personal deadline tracker keeps the dates in one place.",
+      how: undefined, // TODO: how the matching works
+      learned: undefined, // TODO: what you learned
+    },
   },
 ];
 
-export const journal: JournalEntry[] = [
+// ── Research ─────────────────────────────────────────────────────────────────
+
+export const research = {
+  eyebrow: "Research",
+  title: "Questions I'm",
+  titleEmphasis: "working on",
+  subtext: "A published paper, a research proposal and two pieces of IB coursework.",
+  items: [
+    {
+      kind: "Published paper",
+      title: paperTitle,
+      summary: paperCitation,
+      status: "Published",
+      link: { label: "DOI: 10.65161/reciVMFDoYuEGfYeh", href: paperDoi },
+      note: journalNote,
+    },
+    {
+      kind: "Research proposal",
+      title: "LaVA: Lattice VRF with Aggregation",
+      summary: "A post quantum, aggregatable verifiable random function for proof of stake consensus.",
+      status: "In progress",
+    },
+    {
+      kind: "IB Extended Essay, Mathematics HL",
+      title: "Asset weighting and impermanent loss",
+      summary:
+        "How asset weighting in a constant product market maker affects a liquidity provider's impermanent loss, and which weighting minimises it.",
+      status: "In progress",
+    },
+    {
+      kind: "IB Mathematics AA HL Internal Assessment",
+      title: "Modelling shuttlecock flight with drag",
+      summary:
+        "Uses real drop test data and numerical simulation to test whether aerodynamic drag explains the 13.4 m badminton court length. Written in LaTeX.",
+      status: undefined, // TODO: status, e.g. "In progress"
+    },
+  ] as ResearchItem[],
+};
+
+// ── Experience ───────────────────────────────────────────────────────────────
+
+export const experience: Internship[] = [
   {
-    title: "Your Journal Entry Title", // PLACEHOLDER
-    image: "https://picsum.photos/seed/notebook/600/600", // PLACEHOLDER
-    readTime: "5 min read", // PLACEHOLDER
-    date: "Add date", // PLACEHOLDER
+    company: "DP World",
+    role: undefined, // TODO: internship role
+    dates: undefined, // TODO: dates
+    summary: undefined, // TODO: one line on what you did
   },
   {
-    title: "Second Journal Entry Title", // PLACEHOLDER
-    image: "https://picsum.photos/seed/lantern/600/600", // PLACEHOLDER
-    readTime: "4 min read", // PLACEHOLDER
-    date: "Add date", // PLACEHOLDER
+    company: "Beldex",
+    role: undefined, // TODO: internship role
+    dates: undefined, // TODO: dates
+    summary: undefined, // TODO: one line on what you did
   },
   {
-    title: "Third Journal Entry Title", // PLACEHOLDER
-    image: "https://picsum.photos/seed/compass/600/600", // PLACEHOLDER
-    readTime: "6 min read", // PLACEHOLDER
-    date: "Add date", // PLACEHOLDER
-  },
-  {
-    title: "Fourth Journal Entry Title", // PLACEHOLDER
-    image: "https://picsum.photos/seed/horizon/600/600", // PLACEHOLDER
-    readTime: "3 min read", // PLACEHOLDER
-    date: "Add date", // PLACEHOLDER
+    company: "Zeru",
+    role: undefined, // TODO: internship role
+    dates: undefined, // TODO: dates
+    summary: undefined, // TODO: one line on what you did
   },
 ];
 
-// Six images, split across two parallax columns.
-export const explorations: Exploration[] = [
-  { title: "Exploration 01", image: "https://picsum.photos/seed/ember/800/800" }, // PLACEHOLDER
-  { title: "Exploration 02", image: "https://picsum.photos/seed/tide/800/800" }, // PLACEHOLDER
-  { title: "Exploration 03", image: "https://picsum.photos/seed/prism/800/800" }, // PLACEHOLDER
-  { title: "Exploration 04", image: "https://picsum.photos/seed/dune/800/800" }, // PLACEHOLDER
-  { title: "Exploration 05", image: "https://picsum.photos/seed/orbit/800/800" }, // PLACEHOLDER
-  { title: "Exploration 06", image: "https://picsum.photos/seed/grove/800/800" }, // PLACEHOLDER
+// ── Leadership and competitions ──────────────────────────────────────────────
+
+export const activities = {
+  eyebrow: "Leadership and competitions",
+  title: "School and",
+  titleEmphasis: "competitions",
+  subtext: "Leadership roles at Dwight School Dubai, then competitions and service.",
+  leadershipHeading: "Leadership at Dwight School Dubai",
+  competitionsHeading: "Competitions and service",
+  // I am a prefect. Do not use Head Boy or Deputy Head anywhere.
+  leadership: [
+    { title: "Prefect Team member", dates: "2026 to 2027" },
+    {
+      title: "Student Council member",
+      detail: undefined, // TODO: Student Council role
+      dates: undefined, // TODO: years
+    },
+    {
+      title: "House Captain",
+      detail: undefined, // TODO: house name
+      dates: undefined, // TODO: years
+    },
+    {
+      title: "Dwight Ambassador",
+      dates: undefined, // TODO: years
+    },
+  ] as Activity[],
+  // No results are listed. Only change a status when there is a real result.
+  competitions: [
+    {
+      title: "HMMT November 2026",
+      detail: "Organised and registered an independent four person team (team DWIGHT).",
+      status: "Upcoming",
+    },
+    {
+      title: "Wharton Global High School Investment Competition",
+      detail: "Team TAAD.",
+      dates: "2026 to 2027",
+      status: "In progress",
+    },
+    { title: "AMC 12A and 12B", dates: "November 2026", status: "Upcoming" },
+    {
+      title: "Junior Coach volunteer, Heroes of Hope UAE",
+      detail: "Inclusive sport sessions.",
+      dates: "Term 1, 2026 to 2027",
+      status: "In progress",
+    },
+    {
+      title: "Immerse Education Essay Competition",
+      detail: "Mathematics essay on symmetry.",
+      status: "In progress",
+    },
+  ] as Activity[],
+};
+
+// ── Writing ──────────────────────────────────────────────────────────────────
+
+export const writing = {
+  eyebrow: "Writing",
+  title: "Notes on",
+  titleEmphasis: "the maths",
+  subtext: "Short explainers on the ideas behind my projects.",
+  comingSoon: "Coming soon",
+  // The whole section is hidden on the live site until one entry has published: true.
+  entries: [
+    { title: "Why Shor's algorithm breaks the signatures on your crypto wallet", published: false },
+    { title: "What a cryptographic bill of materials is, and why every codebase needs one", published: false },
+    { title: "The calculus of impermanent loss", published: false },
+    { title: "What a falling shuttlecock taught me about drag", published: false },
+  ] as WritingEntry[],
+};
+
+// ── Side projects ────────────────────────────────────────────────────────────
+
+export const sideProjects = {
+  eyebrow: "Experiments",
+  title: "Side",
+  titleEmphasis: "projects",
+  subtext: "Smaller things I build and write outside the main projects.",
+  cta: { label: "See more on GitHub", href: "https://github.com/gstn458" },
+  items: [
+    {
+      title: "Three.js background experiments",
+      summary: "Animated background studies from building cryptomath.org.",
+      visual: "orbit",
+      image: undefined, // TODO: screenshot or still
+      imageAlt: undefined,
+      link: undefined, // TODO (optional): link
+    },
+    {
+      title: "Web design studies",
+      summary: "Agency style layout and motion studies, inspired by studios like Monopo and Noomo.",
+      visual: "layout",
+      image: undefined, // TODO: screenshot
+      imageAlt: undefined,
+      link: undefined, // TODO (optional): link
+    },
+    {
+      title: "Z Battlegrounds devlog",
+      summary: "A YouTube devlog series I script for Z Battlegrounds, a Roblox game made by a friend.",
+      visual: "devlog",
+      image: undefined, // TODO: thumbnail
+      imageAlt: undefined,
+      link: undefined, // TODO: link to the YouTube series
+    },
+  ] as SideProject[],
+};
+
+// ── Stats (computed from the lists above, so they stay correct) ──────────────
+
+const publishedPapers = research.items.filter((item) => item.status === "Published").length;
+
+export const stats = [
+  { value: publishedPapers, label: publishedPapers === 1 ? "Published paper" : "Published papers" },
+  { value: experience.length, label: experience.length === 1 ? "Internship" : "Internships" },
+  { value: projects.length, label: projects.length === 1 ? "Project built" : "Projects built" },
 ];
 
-export const stats: Stat[] = [
-  { value: "00", label: "Years of experience" }, // PLACEHOLDER number
-  { value: "00", label: "Projects completed" }, // PLACEHOLDER number
-  { value: "00", label: "Clients worked with" }, // PLACEHOLDER number
-];
+// ── Contact ──────────────────────────────────────────────────────────────────
+
+export const contact = {
+  marquee: ["Post quantum cryptography", "Mathematics", "Blockchain", "Research", "Web development"],
+  eyebrow: "Get in touch",
+  title: "Want to work on something",
+  titleEmphasis: "together?",
+  subtext: "Open to research collaborations, internships and interesting problems.",
+  // Shown instead of the email button until person.email is set.
+  fallbackCta: { label: "Message me on LinkedIn", href: "https://www.linkedin.com/in/tehzeeb-ali" },
+  footer: "© 2026 Tehzeeb Basha",
+};
+
+// ── Resume page ──────────────────────────────────────────────────────────────
 
 export const resume = {
-  // PLACEHOLDER: a link to a PDF of your resume. Leave as "" to hide the button.
-  pdfUrl: "",
+  pageTitle: "Resume | Tehzeeb Ali Gows Basha",
+  eyebrow: "Resume",
+  headline: "IB Diploma student, Class of 2028",
   summary:
-    "Replace this with two or three sentences about your background and the kind of work you want to do next.", // PLACEHOLDER
-  experience: [
+    "I am an IB Diploma student (DP1, Class of 2028) at Dwight School Dubai. My work sits where mathematics, cryptography and building software meet. I want to study Applied Mathematics at university.",
+  // TODO: put your resume PDF at public/resume.pdf. The live site only shows
+  // the button once that file exists.
+  pdf: { label: "Download PDF", href: "/resume.pdf" },
+  education: {
+    school: "Dwight School Dubai",
+    programme: "IB Diploma Programme",
+    period: "Class of 2028",
+    subjects: [
+      "Mathematics Analysis and Approaches HL",
+      "Physics HL",
+      "Economics HL",
+      "History HL",
+      "English SL",
+      "Mandarin ab initio",
+      "Islamic B",
+    ],
+    core: ["Theory of Knowledge", "Extended Essay", "CAS"],
+  },
+  skills: [
     {
-      role: "Your Job Title", // PLACEHOLDER
-      company: "Company Name", // PLACEHOLDER
-      period: "Start – End", // PLACEHOLDER, e.g. "2022 – Present"
-      location: "City", // PLACEHOLDER (optional, delete the line to hide it)
-      description: "One or two sentences about what you did and what came of it.", // PLACEHOLDER
+      group: "Mathematics and cryptography",
+      items: [
+        "Modular arithmetic",
+        "Elliptic curves",
+        "Lattice based cryptography",
+        "Hash functions",
+        "Zero knowledge proofs",
+      ],
     },
     {
-      role: "Previous Job Title", // PLACEHOLDER
-      company: "Company Name", // PLACEHOLDER
-      period: "Start – End", // PLACEHOLDER
-      description: "One or two sentences about what you did and what came of it.", // PLACEHOLDER
+      group: "Web",
+      items: ["Three.js"],
+      todo: "confirm your stack, e.g. React, TypeScript, Vite", // TODO
     },
-  ] as Experience[],
-  education: [
-    {
-      school: "School or University", // PLACEHOLDER
-      degree: "Degree or Programme", // PLACEHOLDER
-      period: "Start – End", // PLACEHOLDER
-    },
-  ] as Education[],
-  // PLACEHOLDER: one short entry per skill.
-  skills: ["Skill One", "Skill Two", "Skill Three", "Skill Four", "Skill Five", "Skill Six"],
+    { group: "Writing", items: ["LaTeX"] },
+  ] as { group: string; items: string[]; todo?: string }[],
+  closingTitle: "Want to work on something",
+  closingEmphasis: "together?",
 };

@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import LoadingScreen from "../components/LoadingScreen";
 import Hero from "../components/Hero";
 import SelectedWorks from "../components/SelectedWorks";
+import Research from "../components/Research";
+import Activities from "../components/Activities";
 import Journal from "../components/Journal";
 import Explorations from "../components/Explorations";
 import Stats from "../components/Stats";
@@ -45,6 +47,8 @@ export default function Index({ isLoading, onLoaded }: IndexProps) {
       <AnimatePresence>{isLoading && <LoadingScreen onComplete={onLoaded} />}</AnimatePresence>
       <Hero ready={!isLoading} />
       <SelectedWorks />
+      <Research />
+      <Activities />
       <Journal />
       <Explorations />
       <Stats />

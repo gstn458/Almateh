@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { profile } from "../data/content";
+import { nav, person } from "../data/content";
 import { useGoToSection } from "../lib/navigation";
 
-type NavLink = "Home" | "Work" | "Resume";
-const LINKS: NavLink[] = ["Home", "Work", "Resume"];
+type NavLink = "home" | "work" | "resume";
+const LINKS: NavLink[] = ["home", "work", "resume"];
 
 export default function Navbar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const goToSection = useGoToSection();
   const [scrolled, setScrolled] = useState(false);
-  const [section, setSection] = useState<"Home" | "Work">("Home");
+  const [section, setSection] = useState<"home" | "work">("home");
 
   // Shadow after 100px, and the active link follows the scroll position.
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 100);
       const work = document.getElementById("work");
       const pastWork = work ? work.getBoundingClientRect().top <= window.innerHeight * 0.4 : false;
-      setSection(pastWork ? "Work" : "Home");
+      setSection(pastWork ? "work" : "home");
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -30,11 +30,11 @@ export default function Navbar() {
     };
   }, [pathname]);
 
-  const active: NavLink = pathname === "/resume" ? "Resume" : section;
+  const active: NavLink = pathname === "/resume" ? "resume" : section;
 
   const handleClick = (link: NavLink) => {
-    if (link === "Home") goToSection("home");
-    else if (link === "Work") goToSection("work");
+    if (link === "home") goToSection("home");
+    else if (link === "work") goToSection("work");
     else if (pathname !== "/resume") navigate("/resume");
   };
 
@@ -49,11 +49,11 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => goToSection("home")}
-          aria-label={`${profile.name}, back to top`}
-          className="group relative h-9 w-9 shrink-0 rounded-full bg-[linear-gradient(90deg,#89AACC_0%,#4E85BF_100%)] p-[1.5px] transition-transform duration-300 hover:scale-110 hover:bg-[linear-gradient(270deg,#89AACC_0%,#4E85BF_100%)]"
+          aria-label={`${person.name}, back to top`}
+          className="hit-area group relative h-9 w-9 shrink-0 rounded-full bg-[linear-gradient(90deg,#89AACC_0%,#4E85BF_100%)] p-[1.5px] transition-transform duration-300 hover:scale-110 hover:bg-[linear-gradient(270deg,#89AACC_0%,#4E85BF_100%)]"
         >
           <span className="flex h-full w-full items-center justify-center rounded-full bg-bg font-display text-[13px] italic text-text-primary">
-            {profile.initials}
+            {person.initials}
           </span>
         </button>
 
@@ -65,13 +65,13 @@ export default function Navbar() {
             type="button"
             onClick={() => handleClick(link)}
             aria-current={active === link ? "page" : undefined}
-            className={`rounded-full px-3 py-1.5 text-xs transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm ${
+            className={`hit-area rounded-full px-3 py-1.5 text-xs transition-colors duration-300 sm:px-4 sm:py-2 sm:text-sm ${
               active === link
                 ? "bg-stroke/50 text-text-primary"
                 : "text-muted hover:bg-stroke/50 hover:text-text-primary"
             }`}
           >
-            {link}
+            {nav[link]}
           </button>
         ))}
 
@@ -80,7 +80,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => goToSection("contact")}
-          className="group relative rounded-full text-xs focus-visible:outline-none sm:text-sm"
+          className="hit-area group relative rounded-full text-xs focus-visible:outline-none sm:text-sm"
         >
           <span
             aria-hidden="true"
@@ -88,7 +88,7 @@ export default function Navbar() {
             style={{ inset: -2 }}
           />
           <span className="relative inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-surface px-3 py-1.5 text-text-primary backdrop-blur-md sm:px-4 sm:py-2">
-            Say hi <span aria-hidden="true">↗</span>
+            {nav.contact} <span aria-hidden="true">↗</span>
           </span>
         </button>
       </nav>

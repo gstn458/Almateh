@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import { loader } from "../data/content";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
-const WORDS = ["Design", "Create", "Inspire"];
+const WORDS = loader.words;
 const DURATION = 2700;
 
 type LoadingScreenProps = {
@@ -57,7 +58,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className="absolute left-6 top-6 text-xs uppercase tracking-[0.3em] text-muted md:left-10 md:top-10"
       >
-        Portfolio
+        {loader.label}
       </motion.span>
 
       <div className="absolute inset-0 flex items-center justify-center">
