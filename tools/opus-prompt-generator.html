@@ -2,9 +2,9 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a two-pane workbench. Brief on the left, the prompt sheet on the right; stacks on phones. */
+/* Layout: one centered column. Ask box on top, the finished prompt below it. */
 :root {
   --bg: #eceeea;
   --surface: #ffffff;
@@ -20,8 +20,6 @@
   --var-ink: #5a4500;
   --warn: #a5560a;
   --warn-soft: #fbeedd;
-  --ok: #1d7a43;
-  --ok-soft: #e1f2e7;
   --bad: #b3261e;
   --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -31,371 +29,125 @@
   :root:not([data-theme="light"]) {
     --bg: #101412; --surface: #181d1b; --sunk: #141917; --ink: #e5ebe7; --muted: #95a29b; --line: #2b3431;
     --accent: #9aa4ff; --accent-ink: #10132e; --accent-soft: #23284a; --tag: #52d0b3;
-    --var-bg: #4a3d0c; --var-ink: #f6dc7a; --warn: #f0a85a; --warn-soft: #3a2a17; --ok: #6fd39a; --ok-soft: #173024; --bad: #ff8a80;
+    --var-bg: #4a3d0c; --var-ink: #f6dc7a; --warn: #f0a85a; --warn-soft: #3a2a17; --bad: #ff8a80;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #101412; --surface: #181d1b; --sunk: #141917; --ink: #e5ebe7; --muted: #95a29b; --line: #2b3431;
   --accent: #9aa4ff; --accent-ink: #10132e; --accent-soft: #23284a; --tag: #52d0b3;
-  --var-bg: #4a3d0c; --var-ink: #f6dc7a; --warn: #f0a85a; --warn-soft: #3a2a17; --ok: #6fd39a; --ok-soft: #173024; --bad: #ff8a80;
+  --var-bg: #4a3d0c; --var-ink: #f6dc7a; --warn: #f0a85a; --warn-soft: #3a2a17; --bad: #ff8a80;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 body {
-  background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body);
+  background: var(--bg); color: var(--ink); font: 16px/1.55 var(--body);
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 20px 48px;
+  padding-block: 28px 56px;
 }
-.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 20px; }
+.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 20px; }
 
-header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
-h1 { font: 700 clamp(26px, 4vw, 38px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+h1 { font: 700 clamp(28px, 5vw, 40px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
 h1 em { font-style: normal; color: var(--accent); }
-.lede { margin: 6px 0 0; color: var(--muted); max-width: 60ch; }
-.status { display: inline-flex; align-items: center; gap: 8px; font: 500 12px/1 var(--mono); color: var(--muted); border: 1px solid var(--line); background: var(--surface); padding: 8px 10px; border-radius: 4px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
-.status[data-state="ready"] .dot { background: var(--ok); }
-.status[data-state="off"] .dot { background: var(--warn); }
+.lede { margin: 8px 0 0; color: var(--muted); max-width: 56ch; }
 
-.grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 20px; align-items: start; }
-@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
 
-.pane { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; min-width: 0; }
-.pane-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
-.pane-title { font: 600 13px/1 var(--body); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0; }
-.pane-body { padding: 18px; display: grid; gap: 16px; }
-
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--sunk); }
-.seg button { font: 500 13px/1 var(--body); border: 0; background: transparent; color: var(--muted); padding: 9px 12px; cursor: pointer; }
-.seg button + button { border-left: 1px solid var(--line); }
-.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
-.seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-
-.field { display: grid; gap: 6px; min-width: 0; }
-.field label, .field .lbl { font: 600 13px/1.3 var(--body); }
-.hint { font-size: 12.5px; color: var(--muted); font-weight: 400; }
-.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-@media (max-width: 480px) { .row { grid-template-columns: minmax(0, 1fr); } }
-
-input[type="text"], textarea, select {
-  width: 100%; font: 14px/1.5 var(--body); color: var(--ink); background: var(--sunk);
-  border: 1px solid var(--line); border-radius: 4px; padding: 9px 11px;
+label.big { font: 600 15px/1.3 var(--body); }
+textarea {
+  width: 100%; font: 16px/1.5 var(--body); color: var(--ink); background: var(--sunk);
+  border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; resize: vertical; min-height: 120px;
 }
-textarea { resize: vertical; min-height: 76px; }
-textarea.code { font: 13px/1.55 var(--mono); min-height: 200px; }
-input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
-.checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
-.checks label { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; cursor: pointer; }
-.checks input { accent-color: var(--accent); width: 16px; height: 16px; }
+textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
 
-details.more { border-top: 1px dashed var(--line); padding-top: 12px; }
-details.more summary { cursor: pointer; font: 600 13px/1.3 var(--body); color: var(--muted); }
-details.more[open] summary { margin-bottom: 14px; }
-details.more .inner { display: grid; gap: 16px; }
+.ideas { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ideas span { font-size: 13px; color: var(--muted); }
+.idea { font: 14px/1.2 var(--body); border: 1px solid var(--line); background: var(--sunk); color: var(--ink); border-radius: 4px; padding: 7px 10px; cursor: pointer; }
+.idea:hover { border-color: var(--muted); }
 
 .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.btn { font: 600 14px/1 var(--body); border-radius: 4px; padding: 11px 16px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.btn { font: 600 15px/1 var(--body); border-radius: 6px; padding: 13px 20px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
 .btn:hover { border-color: var(--muted); }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .btn.primary:hover { filter: brightness(1.08); }
-.btn.small { font-size: 12.5px; padding: 7px 10px; }
+.btn.small { font-size: 14px; padding: 9px 14px; }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.kbd { font: 500 11px/1 var(--mono); color: var(--muted); }
+.btn:focus-visible, .idea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.msg { font-size: 14px; color: var(--muted); margin: 0; }
+.msg.err { color: var(--bad); }
 
-/* Output sheet */
-.sheet-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; }
-.meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font: 500 12px/1 var(--mono); color: var(--muted); }
-.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 3px; padding: 5px 7px; background: var(--sunk); font: 500 12px/1 var(--mono); color: var(--ink); }
-.chip b { font-weight: 500; color: var(--muted); }
-.chip.accent { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+.result-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.result-head h2 { font: 700 20px/1.2 var(--display); margin: 0; display: flex; gap: 10px; align-items: center; }
 .example-flag { font: 600 11px/1 var(--body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); background: var(--warn-soft); padding: 5px 7px; border-radius: 3px; }
 
-.sheet { background: var(--sunk); border: 1px solid var(--line); border-radius: 4px; overflow-x: auto; max-height: 560px; overflow-y: auto; }
-.sheet pre { margin: 0; padding: 12px 0; font: 13px/1.6 var(--mono); counter-reset: ln; min-width: 0; }
-.sheet .ln { display: block; padding: 0 14px 0 52px; position: relative; white-space: pre-wrap; word-break: break-word; min-height: 1.6em; }
-.sheet .ln::before { counter-increment: ln; content: counter(ln); position: absolute; left: 0; width: 38px; text-align: right; color: var(--muted); opacity: 0.6; font-size: 11.5px; }
+.sheet { background: var(--sunk); border: 1px solid var(--line); border-radius: 6px; max-height: 520px; overflow: auto; }
+.sheet pre { margin: 0; padding: 14px 16px; font: 13.5px/1.65 var(--mono); white-space: pre-wrap; word-break: break-word; }
 .tg { color: var(--tag); }
 .vr { background: var(--var-bg); color: var(--var-ink); border-radius: 2px; padding: 0 2px; }
 .caret { display: inline-block; width: 7px; height: 1.1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s steps(2) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.placeholder { padding: 28px 18px; color: var(--muted); font: 14px/1.5 var(--body); }
+.placeholder { padding: 24px 16px; color: var(--muted); font: 15px/1.5 var(--body); }
 
-.why { font-size: 13.5px; color: var(--muted); margin: 0; }
-.notes { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
+.tip { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; font-size: 14.5px; }
+.tip b { background: var(--accent-soft); color: var(--accent); font: 500 13px/1 var(--mono); padding: 5px 8px; border-radius: 3px; }
+.tip span { color: var(--muted); }
 
-.section-label { font: 600 12px/1 var(--body); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 8px; }
-.block { border-top: 1px solid var(--line); padding-top: 16px; }
+details.why summary { cursor: pointer; font-size: 14px; color: var(--muted); }
+details.why ul { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14.5px; }
 
-.lint { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.lint li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; font-size: 13.5px; padding: 8px 10px; border-radius: 4px; background: var(--sunk); }
-.lint li .mk { font: 600 11px/1 var(--mono); padding: 4px 6px; border-radius: 3px; margin-top: 1px; }
-.lint li.ok .mk { background: var(--ok-soft); color: var(--ok); }
-.lint li.warn .mk { background: var(--warn-soft); color: var(--warn); }
-.lint li strong { font-weight: 600; }
-.lint li span.d { color: var(--muted); }
+.tweak { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.tweak input { width: 100%; font: 15px/1.4 var(--body); color: var(--ink); background: var(--sunk); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; min-width: 0; }
+.tweak input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+@media (max-width: 480px) { .tweak { grid-template-columns: minmax(0, 1fr); } }
 
-.vars { display: grid; gap: 10px; }
-.vars textarea { min-height: 54px; font: 13px/1.5 var(--mono); }
-.vars label code { font: 500 12.5px/1 var(--mono); background: var(--var-bg); color: var(--var-ink); padding: 2px 4px; border-radius: 2px; }
-
-.answer { white-space: pre-wrap; word-break: break-word; font-size: 14px; background: var(--sunk); border: 1px solid var(--line); border-radius: 4px; padding: 12px 14px; max-height: 420px; overflow: auto; }
-.msg { font-size: 13px; color: var(--muted); }
-.msg.err { color: var(--bad); }
-
-.history { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.history button { width: 100%; text-align: left; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: baseline; background: var(--sunk); border: 1px solid transparent; border-radius: 4px; padding: 9px 11px; color: var(--ink); font: 14px/1.4 var(--body); cursor: pointer; }
-.history button:hover, .history button:focus-visible { border-color: var(--line); outline: none; }
-.history .t { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.history .w { font: 500 11.5px/1 var(--mono); color: var(--muted); }
-
-.guide { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.guide div { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
-.guide h3 { margin: 0 0 4px; font: 700 15px/1.25 var(--display); }
-.guide p { margin: 0; font-size: 13.5px; color: var(--muted); }
-
+.foot { font-size: 13px; color: var(--muted); margin: 0; }
 @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
 </style>
 
 <div class="wrap">
-  <header class="top">
-    <div>
-      <h1>Opus <em>Prompt</em> Generator</h1>
-      <p class="lede">Describe what you want done. You get a prompt written the way Claude Opus 5.5 reads best, with the effort setting to run it at.</p>
-    </div>
-    <span class="status" id="status" data-state="wait"><span class="dot"></span><span id="statusText">Connecting to Claude…</span></span>
+  <header>
+    <h1>Opus <em>Prompt</em> Generator</h1>
+    <p class="lede">Say what you want Claude to do, or paste a prompt you already have. You get back a prompt written for Claude Opus 5.5.</p>
   </header>
 
-  <div class="grid">
-    <!-- Brief -->
-    <section class="pane" aria-labelledby="briefTitle">
-      <div class="pane-head">
-        <h2 class="pane-title" id="briefTitle">Brief</h2>
-        <div class="seg" role="group" aria-label="Mode">
-          <button type="button" id="modeIdea" aria-pressed="true">From an idea</button>
-          <button type="button" id="modeUpgrade" aria-pressed="false">Upgrade a prompt</button>
-        </div>
-      </div>
-      <form class="pane-body" id="brief" novalidate>
-        <!-- Idea mode -->
-        <div id="ideaFields" class="pane-body" style="padding:0">
-          <div class="field">
-            <label for="task">What should Claude do?</label>
-            <textarea id="task" rows="4" placeholder="e.g. Review a pull request diff and point out real bugs, not style nits"></textarea>
-          </div>
-          <div class="field">
-            <span class="lbl">Prompt type</span>
-            <div class="seg" role="group" aria-label="Prompt type">
-              <button type="button" id="typeUser" aria-pressed="true">User message</button>
-              <button type="button" id="typeSystem" aria-pressed="false">System prompt</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="field">
-              <label for="kind">Kind of task</label>
-              <select id="kind">
-                <option>Writing</option>
-                <option>Coding</option>
-                <option selected>Analysis &amp; research</option>
-                <option>Data extraction (JSON)</option>
-                <option>Agent with tools</option>
-                <option>Chat assistant</option>
-                <option>Teaching &amp; explaining</option>
-                <option>Brainstorming</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="format">Output format</label>
-              <select id="format">
-                <option>Let Claude decide</option>
-                <option>Plain prose</option>
-                <option selected>Markdown with headings</option>
-                <option>Bulleted list</option>
-                <option>Table</option>
-                <option>JSON</option>
-                <option>Code only</option>
-                <option>Email</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="field">
-              <label for="tone">Tone</label>
-              <select id="tone">
-                <option selected>Plain and direct</option>
-                <option>Warm and friendly</option>
-                <option>Formal</option>
-                <option>Persuasive</option>
-                <option>Technical</option>
-                <option>Playful</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="length">Length</label>
-              <select id="length">
-                <option>Auto</option>
-                <option selected>Short</option>
-                <option>Medium</option>
-                <option>Long</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="audience">Who reads the result? <span class="hint">optional</span></label>
-            <input type="text" id="audience" placeholder="e.g. Senior engineers on my team">
-          </div>
-          <details class="more" id="moreDetails">
-            <summary>Context, things to avoid, extras</summary>
-            <div class="inner">
-              <div class="field">
-                <label for="context">Background Claude can't guess <span class="hint">optional</span></label>
-                <textarea id="context" rows="3" placeholder="Product, domain, constraints, what good looks like…"></textarea>
-              </div>
-              <div class="field">
-                <label for="avoid">Name specific things to avoid <span class="hint">Opus 5.5 responds better to named patterns than to "make it good"</span></label>
-                <input type="text" id="avoid" placeholder="e.g. No em dashes, no 'In conclusion', no emoji">
-              </div>
-              <div class="checks">
-                <label><input type="checkbox" id="examples"> Include examples</label>
-                <label><input type="checkbox" id="placeholders" checked> {{VARIABLES}} for inputs</label>
-              </div>
-            </div>
-          </details>
-        </div>
-
-        <!-- Upgrade mode -->
-        <div id="upgradeFields" class="pane-body" style="padding:0" hidden>
-          <div class="field">
-            <label for="original">Paste the prompt you have</label>
-            <textarea id="original" class="code" placeholder="Paste a system prompt or user prompt written for another model…"></textarea>
-          </div>
-          <div class="row">
-            <div class="field">
-              <label for="origin">Written for</label>
-              <select id="origin">
-                <option>Not sure</option>
-                <option>An older Claude model (3.x / 4.x)</option>
-                <option>Claude Opus 5 or Fable</option>
-                <option>GPT-4 / GPT-4o</option>
-                <option>GPT-5 / o-series</option>
-                <option>Gemini</option>
-                <option>Llama / open model</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="upType">It is a</label>
-              <select id="upType">
-                <option>Detect it</option>
-                <option>User message</option>
-                <option>System prompt</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label for="goal">Anything to change while upgrading? <span class="hint">optional</span></label>
-            <input type="text" id="goal" placeholder="e.g. Shorter answers; it keeps over-explaining">
-          </div>
-          <div id="upLintWrap" hidden>
-            <p class="section-label">Opus 5.5 check on your prompt</p>
-            <ul class="lint" id="upLint"></ul>
-          </div>
-        </div>
-
-        <div class="field">
-          <span class="lbl">Generator effort <span class="hint">how hard Opus 5.5 thinks about your prompt</span></span>
-          <div class="seg" role="group" aria-label="Generator effort">
-            <button type="button" data-effort="low" aria-pressed="false">Low</button>
-            <button type="button" data-effort="medium" aria-pressed="true">Medium</button>
-            <button type="button" data-effort="high" aria-pressed="false">High</button>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button type="submit" class="btn primary" id="go">Generate prompt</button>
-          <button type="button" class="btn" id="stop" hidden>Stop</button>
-          <span class="kbd">Ctrl / ⌘ + Enter</span>
-        </div>
-        <p class="msg" id="formMsg" role="status"></p>
-      </form>
-    </section>
-
-    <!-- Output -->
-    <section class="pane" aria-labelledby="outTitle">
-      <div class="pane-head">
-        <h2 class="pane-title" id="outTitle">Prompt</h2>
-        <div class="meta" id="outMeta"></div>
-      </div>
-      <div class="pane-body">
-        <div class="sheet-head">
-          <div class="meta" id="settingsChips"></div>
-          <div class="actions">
-            <button type="button" class="btn small" id="copyBtn">Copy prompt</button>
-          </div>
-        </div>
-        <div class="sheet" id="sheet" aria-live="polite"><div class="placeholder">Your prompt appears here.</div></div>
-        <p class="why" id="why"></p>
-        <ul class="notes" id="notes"></ul>
-
-        <div class="block" id="lintBlock" hidden>
-          <p class="section-label">Opus 5.5 check</p>
-          <ul class="lint" id="lint"></ul>
-        </div>
-
-        <div class="block" id="varsBlock" hidden>
-          <p class="section-label">Fill the variables</p>
-          <div class="vars" id="vars"></div>
-          <div class="actions" style="margin-top:10px">
-            <button type="button" class="btn small" id="copyFilled">Copy filled prompt</button>
-          </div>
-        </div>
-
-        <div class="block" id="refineBlock" hidden>
-          <p class="section-label">Revise</p>
-          <div class="field">
-            <label for="feedback" class="hint">Say what to change and Opus 5.5 rewrites only that.</label>
-            <textarea id="feedback" rows="2" placeholder="e.g. Make it handle tickets in other languages, and cap the report at 250 words"></textarea>
-          </div>
-          <div class="actions" style="margin-top:10px">
-            <button type="button" class="btn" id="reviseBtn">Revise prompt</button>
-          </div>
-        </div>
-
-        <div class="block" id="testBlock" hidden>
-          <p class="section-label">Test it on Opus 5.5</p>
-          <div class="field" id="testMsgField" hidden>
-            <label for="testMsg">A message from your user</label>
-            <textarea id="testMsg" rows="2" placeholder="Type what a user would send to this assistant"></textarea>
-          </div>
-          <div class="actions" style="margin-top:10px">
-            <button type="button" class="btn" id="testBtn">Run prompt</button>
-            <button type="button" class="btn" id="testStop" hidden>Stop</button>
-            <span class="msg" id="testMsgOut"></span>
-          </div>
-          <div class="answer" id="answer" hidden></div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="pane" aria-labelledby="histTitle" id="histPane" hidden>
-    <div class="pane-head">
-      <h2 class="pane-title" id="histTitle">Recent prompts</h2>
-      <button type="button" class="btn small" id="clearHist">Clear</button>
+  <form class="card" id="form" novalidate>
+    <label class="big" for="ask">What do you want Claude to do?</label>
+    <textarea id="ask" placeholder="e.g. Write a friendly email asking my landlord to fix the heating"></textarea>
+    <div class="ideas" id="ideas">
+      <span>Try:</span>
+      <button type="button" class="idea">Explain a topic to a beginner</button>
+      <button type="button" class="idea">Review my code for bugs</button>
+      <button type="button" class="idea">Summarize a long article</button>
+      <button type="button" class="idea">Write a cover letter</button>
     </div>
-    <div class="pane-body"><ul class="history" id="history"></ul></div>
+    <div class="actions">
+      <button type="submit" class="btn primary" id="go">Generate prompt</button>
+      <button type="button" class="btn" id="stop" hidden>Stop</button>
+    </div>
+    <p class="msg" id="formMsg" role="status"></p>
+  </form>
+
+  <section class="card" aria-labelledby="outTitle">
+    <div class="result-head">
+      <h2 id="outTitle">Your prompt <span class="example-flag" id="exampleFlag">Example</span></h2>
+      <button type="button" class="btn small" id="copyBtn">Copy</button>
+    </div>
+    <div class="sheet" id="sheet" aria-live="polite"><div class="placeholder">Your prompt appears here.</div></div>
+    <p class="tip" id="tip" hidden></p>
+    <details class="why" id="whyBox" hidden>
+      <summary>Why it's written this way</summary>
+      <ul id="notes"></ul>
+    </details>
+    <form class="tweak" id="tweakForm" hidden novalidate>
+      <input type="text" id="tweak" aria-label="What to change" placeholder="Want a change? e.g. make it shorter">
+      <button type="submit" class="btn small" id="tweakBtn">Update</button>
+    </form>
   </section>
 
-  <section aria-label="What the generator applies" class="guide">
-    <div><h3>Effort, not "think step by step"</h3><p>Opus 5.5 always reasons before it answers. The prompt skips reasoning instructions and recommends an effort level (low to max) instead.</p></div>
-    <div><h3>Reasons over capital letters</h3><p>It follows instructions literally, so walls of MUST and NEVER get over-applied. Constraints come with a one-line why.</p></div>
-    <div><h3>Named things to avoid</h3><p>"Make it less generic" swaps one default for another. Listing the exact patterns to skip works.</p></div>
-    <div><h3>Material first, ask last</h3><p>Inputs go in XML tags at the top and the task sits at the end. No assistant prefill, since Opus 5.5 rejects it.</p></div>
-  </section>
+  <p class="foot" id="foot">Paste the prompt into Claude. Text in <span class="vr">{{LIKE_THIS}}</span> is a blank for you to fill in.</p>
 </div>
 
 <script>
@@ -407,595 +159,274 @@ details.more .inner { display: grid; gap: 16px; }
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
   };
 
-  // ---------- The guidance the generator writes against ----------
-  const GUIDE = `You are an expert prompt engineer. You write prompts for Claude Opus 5.5 (API model id claude-opus-5-5). Your job is to produce one production-ready prompt that gets the best result from Opus 5.5 on the first run.
+  // How the generator writes: Opus 5.5 prompting guidance.
+  const GUIDE = `You are an expert prompt engineer. You write prompts for Claude Opus 5.5 (API model id claude-opus-5-5). Your job is to produce one ready-to-use prompt that gets the best result from Opus 5.5 on the first run. The person asking may not know anything about prompting, so make every decision for them.
 
 <opus_5_5_facts>
-- It always thinks before answering. Adaptive thinking cannot be turned off; the "effort" setting (low, medium, high, xhigh, max; default medium) controls how deeply. So the prompt should not ask it to "think step by step" or show its reasoning, unless visible reasoning is part of the deliverable. Recommend an effort level instead.
-- It follows instructions precisely and literally. Prompts written for older models are usually over-prescriptive: capitalized MUST/NEVER/CRITICAL, repeated warnings, step-by-step micromanagement of how to think. These make it over-apply rules. Write calm, direct instructions and give the reason behind each important constraint so it can apply the rule with judgment.
+- It always thinks before answering; the "effort" setting (low, medium, high, xhigh, max; default medium) controls how deeply. So the prompt should not ask it to "think step by step" or show its reasoning unless visible reasoning is part of the deliverable.
+- It follows instructions precisely and literally. Capitalized MUST/NEVER, repeated warnings and step-by-step micromanagement make it over-apply rules. Write calm, direct instructions and give the reason behind each important constraint.
 - It works best when the prompt states the goal, who the result is for and what they will do with it, the context it cannot infer, what a good result looks like, and the hard constraints, then leaves the method to it.
-- Vague quality words ("make it engaging", "avoid sounding generic") just swap one default for another. Name the concrete patterns to avoid or include.
-- It uses less markdown by default than older models. Say when headings, lists, or tables are wanted instead of banning formatting.
-- Assistant prefill is not supported. Define the output format in words, with an exact template when the shape matters, or a JSON schema when the output will be parsed (and mention structured outputs in the notes).
-- Separate material from instructions with XML tags (<document>, <data>, <examples>, <code> and so on). Put long material first and the task or question at the end.
-- Examples help when format or style is subtle: 1 to 3 varied examples inside <example> tags, with a sentence on what makes them right, labelled as illustrations so it does not copy their content.
-- For long deliverables, ask it to settle structure and hard decisions first rather than drafting twice.
-- For agents and system prompts: state the scope, when to proceed without asking versus when to stop and ask, what counts as done, and to report anything blocked or left out.
-- When writing quality matters, ask for plain, direct sentences and no mannered prose (metaphor and flourish in place of direct statement).
+- Vague quality words ("make it engaging") just swap one default for another. Name concrete things to include or avoid.
+- It uses little markdown by default. Say when headings, lists or tables are wanted rather than banning formatting.
+- Assistant prefill is not supported. Describe the output format in words, with a template when the shape matters.
+- Separate material from instructions with XML tags. Put long material first and the task at the end.
+- When writing quality matters, ask for plain, direct sentences without flourish.
 </opus_5_5_facts>
 
 <writing_rules>
-- Write to Claude in the second person. Skip filler openers like "You are a helpful AI assistant"; a role line is fine only when a specific expertise changes the answer.
-- Unless told otherwise, use {{SNAKE_CASE}} placeholders for anything supplied at run time (documents, data, the end user's question), each wrapped in its own XML tag.
-- Match length to the task. A simple task gets a short prompt. Do not pad, and do not restate the same rule twice.
-- Do not invent facts about the user's product, company, or data; use a placeholder or keep it general.
+- Write to Claude in the second person. No filler openers like "You are a helpful AI assistant".
+- Use {{SNAKE_CASE}} placeholders, each in its own XML tag, for things only the person can supply (their document, their details, their code). Keep them few and obvious.
+- Infer a sensible audience, format, tone and length from the request instead of leaving gaps.
+- Match length to the task. A simple task gets a short prompt.
+- Do not invent facts about the person or their situation; use a placeholder instead.
 </writing_rules>
-
-<effort_guide>
-low: lookups, classification, short rewrites, casual chat. medium: everyday writing, summaries, routine analysis. high: hard reasoning, substantial code, long or high-stakes documents. xhigh: hard agentic coding and long multi-step tool work. max: only when correctness matters far more than cost.
-max_tokens counts thinking plus the reply: about 16000 for most tasks, 32000 to 64000 for long deliverables or high effort and above.
-</effort_guide>
 
 Reply in exactly this structure, with nothing before or after it:
 <prompt>
 (the complete prompt, ready to paste)
 </prompt>
 <settings>
-effort: (one of low, medium, high, xhigh, max)
-max_tokens: (a number)
-why: (one sentence on why this effort fits)
+effort: (low, medium, high, xhigh or max: low for quick simple tasks, medium for everyday writing and analysis, high for hard reasoning, code or long documents)
 </settings>
 <notes>
-- (2 to 4 short lines: the key choices you made and what the user should fill in or tweak)
+- (2 or 3 short, plain-language lines a non-expert can follow: what you assumed and what to fill in)
 </notes>`;
 
-  // ---------- State ----------
-  const state = {
-    mode: "idea",
-    type: "user",
-    effort: "medium",
-    raw: "",
-    parsed: null,
-    lastRequest: null,
-    vars: {},
-    example: true,
-    sample: null,
-    ctl: null,
-    testCtl: null,
+  const IDEAS = {
+    "Explain a topic to a beginner": "Explain a topic I don't know anything about, in simple language, with an everyday example, so I actually understand it.",
+    "Review my code for bugs": "Look through my code and point out real bugs and risky spots, explaining each one and how to fix it. Skip style nitpicks.",
+    "Summarize a long article": "Summarize a long article into the key points I need to know, in a few short paragraphs.",
+    "Write a cover letter": "Write a cover letter for a job I'm applying to, based on my CV and the job description, that sounds like a real person and not a template.",
   };
 
-  // ---------- Example shown on first open ----------
-  const EXAMPLE_FIELDS = {
-    task: "Turn a week of raw customer support tickets into a short report the product team reads on Monday: the top issues, how often each came up, and what customers actually said.",
-    kind: "Analysis & research", format: "Markdown with headings", tone: "Plain and direct", length: "Short",
-    audience: "Product managers and engineers",
-    context: "", avoid: "Don't guess at root causes. No intro paragraph and no 'In conclusion' wrap-up.",
-    examples: false, placeholders: true, type: "user",
-  };
+  const EXAMPLE_ASK = "Write a friendly email asking my landlord to fix the heating";
   const EXAMPLE_RAW = `<prompt>
-<tickets>
-{{TICKETS}}
-</tickets>
+<details>
+Landlord's name: {{LANDLORD_NAME}}
+My name: {{MY_NAME}}
+What's wrong with the heating and since when: {{PROBLEM}}
+</details>
 
-The tickets above are one week of customer support conversations for {{PRODUCT_NAME}}. Turn them into the weekly support report the product team reads on Monday morning. They use it to decide what to fix next, so they need to see which problems hit the most customers and hear how customers describe them.
+Write an email from me to my landlord asking them to fix the heating. I want to stay on good terms with them, so keep it friendly and polite, but make clear this needs fixing soon, because the flat is cold and it's affecting daily life.
 
-Structure the report like this:
-
-## Top issues
-The 3 to 6 most common problems, most frequent first. For each: a one-line name for the issue, how many tickets mention it, and one or two short direct quotes that show the problem in the customer's words.
-
-## New this week
-Anything that appears for the first time or jumps sharply, if the tickets make that visible. Leave this section out if nothing stands out.
-
-## Worth a look
-At most three smaller issues that a single fix could clear up.
-
-Group tickets by the underlying problem, not by the words customers used: "can't log in" and "the reset email never came" may be the same issue. Count each ticket once, under its main problem. If a count is an estimate because tickets are ambiguous, say so.
-
-Report only what the tickets show. Don't guess at root causes or suggest fixes unless a customer or agent in the tickets states one, because the team relies on this report to separate evidence from opinion. Keep it under 400 words, in plain, direct sentences, with no introduction and no closing summary.
+Say what the problem is and how long it has been going on, using the details above. Ask when someone can come to look at it, and offer to be flexible about times. Keep it to around 120 words, in plain everyday language, with a short subject line on the first line. Don't sound angry or threatening, and don't over-apologize for asking.
 </prompt>
 <settings>
-effort: medium
-max_tokens: 16000
-why: Grouping and counting a week of tickets is moderate reasoning; move to high if the batch is large or messy.
+effort: low
 </settings>
 <notes>
-- The tickets come first inside XML tags and the instructions follow, which holds up better on long inputs.
-- "Don't guess at root causes" comes with its reason, so Claude applies it with judgment instead of refusing to describe anything.
-- Fill {{TICKETS}} with the raw ticket text and {{PRODUCT_NAME}} before running.
+- Fill in the three blanks at the top with your own details before you paste it.
+- It asks for a short, polite email that still makes clear the repair is urgent.
 </notes>`;
 
+  const state = { sample: null, ctl: null, raw: "", parsed: null, ask: "", example: true };
+
   // ---------- Parsing & rendering ----------
-  function section(text, tag, from = 0) {
-    const open = `<${tag}>`;
-    const i = text.indexOf(open, from);
+  function section(text, tag) {
+    const i = text.indexOf(`<${tag}>`);
     if (i === -1) return null;
-    const start = i + open.length;
+    const start = i + tag.length + 2;
     const j = text.indexOf(`</${tag}>`, start);
-    return text.slice(start, j === -1 ? undefined : j).replace(/^\n+|\s+$/g, "");
+    return text.slice(start, j === -1 ? undefined : j).trim();
   }
   function parse(text, done) {
-    const pOpen = text.indexOf("<prompt>");
     let prompt = null, rest = "";
+    const pOpen = text.indexOf("<prompt>");
     if (pOpen !== -1) {
       const start = pOpen + 8;
       const pClose = text.lastIndexOf("</prompt>");
       if (pClose > start) { prompt = text.slice(start, pClose); rest = text.slice(pClose); }
       else prompt = text.slice(start);
       prompt = prompt.replace(/^\n+|\s+$/g, "");
-    } else if (done) {
-      prompt = text.trim();
-    }
-    const settingsRaw = section(rest, "settings");
-    const settings = {};
-    if (settingsRaw) settingsRaw.split("\n").forEach((l) => {
-      const m = l.match(/^\s*([a-z_]+)\s*:\s*(.+)$/i);
-      if (m) settings[m[1].toLowerCase()] = m[2].trim();
-    });
+    } else if (done) prompt = text.trim();
+    const s = section(rest, "settings") || "";
+    const m = s.match(/effort\s*:\s*([a-z]+)/i);
     const notesRaw = section(rest, "notes");
     const notes = notesRaw ? notesRaw.split("\n").map((l) => l.replace(/^\s*[-*•]\s?/, "").trim()).filter(Boolean) : [];
-    return { prompt, settings, notes, complete: rest.includes("</prompt>") };
+    return { prompt, effort: m ? m[1].toLowerCase() : "", notes };
   }
-
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  function highlight(line) {
-    return esc(line)
-      .replace(/&lt;\/?[a-zA-Z][\w-]*(?:\s[^&]*?)?&gt;/g, (m) => `<span class="tg">${m}</span>`)
-      .replace(/\{\{\s*[A-Za-z0-9_]+\s*\}\}/g, (m) => `<span class="vr">${m}</span>`);
-  }
+  const highlight = (s) => esc(s)
+    .replace(/&lt;\/?[a-zA-Z][\w-]*&gt;/g, (m) => `<span class="tg">${m}</span>`)
+    .replace(/\{\{\s*[A-Za-z0-9_]+\s*\}\}/g, (m) => `<span class="vr">${m}</span>`);
 
-  function renderSheet(prompt, streaming) {
+  const EFFORT_WORDS = {
+    low: "it's a quick, simple task",
+    medium: "the default; fine for everyday tasks",
+    high: "it needs careful reasoning",
+    xhigh: "it's a long, hard task",
+    max: "only worth it when accuracy matters most",
+  };
+
+  function render(streaming) {
+    const p = state.parsed || { prompt: null, effort: "", notes: [] };
     const sheet = $("sheet");
-    if (prompt == null || prompt === "") {
+    if (!p.prompt) {
       sheet.innerHTML = streaming
-        ? `<div class="placeholder">Opus 5.5 is thinking about your prompt… <span class="caret"></span></div>`
+        ? `<div class="placeholder">Writing your prompt… <span class="caret"></span></div>`
         : `<div class="placeholder">Your prompt appears here.</div>`;
-      return;
-    }
-    const lines = prompt.split("\n");
-    const html = lines.map((l, i) => `<span class="ln">${highlight(l)}${streaming && i === lines.length - 1 ? '<span class="caret"></span>' : ""}</span>`).join("");
-    sheet.innerHTML = `<pre>${html}</pre>`;
-  }
-
-  function tokenEstimate(s) { return Math.max(1, Math.round(s.length / 3.8)); }
-
-  function renderAll(streaming = false) {
-    const p = state.parsed || { prompt: null, settings: {}, notes: [] };
-    renderSheet(p.prompt, streaming);
-
-    const meta = $("outMeta");
-    meta.innerHTML = "";
-    if (state.example) meta.insertAdjacentHTML("beforeend", `<span class="example-flag">Example</span>`);
-    if (p.prompt) meta.insertAdjacentHTML("beforeend", `<span>${p.prompt.split("\n").length} lines · ~${tokenEstimate(p.prompt).toLocaleString()} tokens</span>`);
-
-    const chips = $("settingsChips");
-    chips.innerHTML = `<span class="chip accent"><b>model</b> ${MODEL}</span>`;
-    if (p.settings.effort) chips.insertAdjacentHTML("beforeend", `<span class="chip"><b>effort</b> ${esc(p.settings.effort)}</span>`);
-    if (p.settings.max_tokens) chips.insertAdjacentHTML("beforeend", `<span class="chip"><b>max_tokens</b> ${esc(p.settings.max_tokens)}</span>`);
-    $("why").textContent = p.settings.why || "";
-
-    const notes = $("notes");
-    notes.innerHTML = "";
-    p.notes.forEach((n) => { const li = document.createElement("li"); li.innerHTML = highlight(n); notes.append(li); });
-
-    const has = !!(p.prompt && !streaming);
-    $("copyBtn").disabled = !p.prompt;
-    $("lintBlock").hidden = !has;
-    $("refineBlock").hidden = !has || !state.sample;
-    $("testBlock").hidden = !has || !state.sample;
-    if (has) {
-      renderLint($("lint"), lint(p.prompt));
-      renderVars(p.prompt);
-      $("testMsgField").hidden = currentType() !== "system";
     } else {
-      $("varsBlock").hidden = true;
+      sheet.innerHTML = `<pre>${highlight(p.prompt)}${streaming ? '<span class="caret"></span>' : ""}</pre>`;
     }
+    $("exampleFlag").hidden = !state.example;
+    $("copyBtn").disabled = !p.prompt;
+
+    const done = !!p.prompt && !streaming;
+    const tip = $("tip");
+    tip.hidden = !(done && p.effort);
+    if (!tip.hidden) tip.innerHTML = `Best run on Opus 5.5 at <b>${esc(p.effort)} effort</b><span>${esc(EFFORT_WORDS[p.effort] || "")}</span>`;
+
+    $("whyBox").hidden = !(done && p.notes.length);
+    $("notes").innerHTML = p.notes.map((n) => `<li>${highlight(n)}</li>`).join("");
+    $("tweakForm").hidden = !(done && state.sample);
+    $("foot").hidden = !(p.prompt && /\{\{/.test(p.prompt));
   }
 
-  // ---------- Opus 5.5 lint ----------
-  function lint(text) {
-    const out = [];
-    const t = text || "";
-    if (/think (it through )?step[- ]by[- ]step|let'?s think|show your (reasoning|work)|chain[- ]of[- ]thought/i.test(t))
-      out.push(["warn", "Asks for step-by-step reasoning", "Opus 5.5 already thinks before answering. Drop this and raise effort if it needs more depth."]);
-    const shouts = (t.match(/\b(MUST|NEVER|ALWAYS|IMPORTANT|CRITICAL|DO NOT|ONLY)\b/g) || []).length;
-    if (shouts >= 3)
-      out.push(["warn", `${shouts} all-caps commands`, "Opus 5.5 takes instructions literally and over-applies shouted rules. State each once, calmly, with the reason."]);
-    if (/budget_tokens|temperature\s*[:=]|top_p|top_k/i.test(t))
-      out.push(["warn", "Mentions sampling or thinking-budget settings", "Opus 5.5 rejects temperature, top_p, top_k and budget_tokens. Use effort instead."]);
-    if (/^\s*(Assistant|AI)\s*:/im.test(t) || /prefill/i.test(t))
-      out.push(["warn", "Relies on an assistant prefill", "Prefill returns an error on Opus 5.5. Describe the output format instead."]);
-    if (/(do not|don'?t|never|no)\s+(use\s+)?(any\s+)?(markdown|bullet|bullets|bullet points|lists|headers|headings|bold)/i.test(t))
-      out.push(["warn", "Bans formatting outright", "Opus 5.5 already formats lightly. Say when lists or headings are wanted rather than forbidding them."]);
-    if (/\b(make it|be|sound)\s+(more\s+)?(engaging|professional|modern|creative|less generic|not generic)\b|avoid (sounding |looking )?(generic|robotic|ai)/i.test(t))
-      out.push(["warn", "Vague quality words", "Name the exact patterns to avoid or include; vague words swap one default for another."]);
-    if (/^\s*you are (an? )?(helpful|friendly|smart)?\s*(ai|assistant|language model)/i.test(t))
-      out.push(["warn", "Generic assistant opener", "Replace it with the goal, the audience, and the context Claude can't infer."]);
-    if (t.length > 0 && t.length < 120)
-      out.push(["warn", "Very short", "Opus 5.5 can't infer context you leave out. Add who it's for and what a good result looks like."]);
+  // ---------- Requests ----------
+  function newRequest(ask) {
+    return `${GUIDE}
 
-    if (/<[a-z_]+>[\s\S]*<\/[a-z_]+>/i.test(t)) out.push(["ok", "Material is wrapped in XML tags", "Keeps instructions and inputs apart."]);
-    if (/\b(format|structure|template|json|heading|section|table|list|words|sentences)\b/i.test(t)) out.push(["ok", "Says what the output looks like", "Specified format, length or structure."]);
-    if (/\b(because|so that|so they|since|they use|in order to)\b/i.test(t)) out.push(["ok", "Gives reasons for its rules", "Lets Opus 5.5 apply them with judgment."]);
-    return out;
-  }
-  function renderLint(ul, items) {
-    ul.innerHTML = "";
-    if (!items.length) items = [["ok", "Nothing to flag", "No outdated patterns found."]];
-    items.sort((a, b) => (a[0] === b[0] ? 0 : a[0] === "warn" ? -1 : 1));
-    items.forEach(([lvl, title, d]) => {
-      const li = document.createElement("li");
-      li.className = lvl;
-      li.innerHTML = `<span class="mk">${lvl === "ok" ? "OK" : "FIX"}</span><div><strong>${esc(title)}.</strong> <span class="d">${esc(d)}</span></div>`;
-      ul.append(li);
-    });
-  }
-
-  // ---------- Variables ----------
-  function varNames(p) {
-    const seen = new Set();
-    (p.match(/\{\{\s*([A-Za-z0-9_]+)\s*\}\}/g) || []).forEach((m) => seen.add(m.replace(/[{}\s]/g, "")));
-    return [...seen];
-  }
-  function renderVars(p) {
-    const names = varNames(p);
-    const box = $("vars");
-    $("varsBlock").hidden = names.length === 0;
-    box.innerHTML = "";
-    names.forEach((n) => {
-      const id = "var_" + n;
-      const f = document.createElement("div");
-      f.className = "field";
-      f.innerHTML = `<label for="${id}"><code>{{${esc(n)}}}</code></label><textarea id="${id}" rows="2"></textarea>`;
-      const ta = f.querySelector("textarea");
-      ta.value = state.vars[n] || "";
-      ta.addEventListener("input", () => { state.vars[n] = ta.value; });
-      box.append(f);
-    });
-  }
-  function filledPrompt() {
-    const p = state.parsed?.prompt || "";
-    return p.replace(/\{\{\s*([A-Za-z0-9_]+)\s*\}\}/g, (m, n) => (state.vars[n] && state.vars[n].trim() ? state.vars[n] : m));
-  }
-
-  // ---------- Form ----------
-  function setPressed(groupBtns, active) { groupBtns.forEach((b) => b.setAttribute("aria-pressed", String(b === active))); }
-  function setMode(m) {
-    state.mode = m;
-    setPressed([$("modeIdea"), $("modeUpgrade")], m === "idea" ? $("modeIdea") : $("modeUpgrade"));
-    $("ideaFields").hidden = m !== "idea";
-    $("upgradeFields").hidden = m !== "upgrade";
-    $("go").textContent = state.sample ? (m === "idea" ? "Generate prompt" : "Upgrade prompt") : (m === "idea" ? "Build from template" : "Check prompt");
-    saveDraft();
-  }
-  function setType(t) { state.type = t; setPressed([$("typeUser"), $("typeSystem")], t === "user" ? $("typeUser") : $("typeSystem")); saveDraft(); }
-  function currentType() {
-    if (state.mode === "idea") return state.type;
-    const u = $("upType").value;
-    if (u === "System prompt") return "system";
-    if (u === "User message") return "user";
-    return /\byou are\b|\bassistant\b|\busers?\b/i.test($("original").value) && !/\{\{|<document>/i.test($("original").value) ? "system" : "user";
-  }
-
-  const FIELD_IDS = ["task", "kind", "format", "tone", "length", "audience", "context", "avoid", "original", "origin", "upType", "goal"];
-  function readFields() {
-    const f = {};
-    FIELD_IDS.forEach((id) => (f[id] = $(id).value));
-    f.examples = $("examples").checked;
-    f.placeholders = $("placeholders").checked;
-    f.type = state.type;
-    return f;
-  }
-  function writeFields(f) {
-    FIELD_IDS.forEach((id) => { if (f[id] != null) $(id).value = f[id]; });
-    if (f.examples != null) $("examples").checked = f.examples;
-    if (f.placeholders != null) $("placeholders").checked = f.placeholders;
-    if (f.type) setType(f.type);
-  }
-  function saveDraft() { store.set("opg.draft", { fields: readFields(), mode: state.mode, effort: state.effort }); }
-
-  function ideaRequest(f) {
-    const v = (x, d) => (x && x.trim() ? x.trim() : d);
-    return `<request>
-<task>${v(f.task, "")}</task>
-<prompt_type>${f.type === "system" ? "A system prompt for a deployed app or agent; the end user's messages arrive separately" : "A single user message, sent as-is"}</prompt_type>
-<task_kind>${f.kind}</task_kind>
-<audience>${v(f.audience, "not specified; infer from the task")}</audience>
-<tone>${f.tone}</tone>
-<output_format>${f.format === "Let Claude decide" ? "choose what fits the task" : f.format}</output_format>
-<length>${f.length === "Auto" ? "choose what fits the task" : f.length}</length>
-<background>${v(f.context, "none given")}</background>
-<avoid>${v(f.avoid, "none given")}</avoid>
-<include_examples>${f.examples ? "yes, 1 to 3 short illustrative examples" : "no, unless the format is impossible to describe without one"}</include_examples>
-<placeholders>${f.placeholders ? "yes, use {{SNAKE_CASE}} placeholders for run-time inputs" : "no placeholders; write the prompt as a finished, self-contained message"}</placeholders>
+<request>
+${ask}
 </request>
 
-Write the prompt for this request.`;
+The request is either a description of something the person wants Claude to do, or an existing prompt they want improved. If it's a description, write a prompt for it. If it's an existing prompt, rewrite it for Opus 5.5: keep its purpose, its inputs (in their original variable syntax) and its output format, and remove what Opus 5.5 doesn't need, such as "think step by step", shouted rules, or temperature settings.`;
   }
-  function upgradeRequest(f) {
-    return `<original_prompt>
-${f.original.trim()}
-</original_prompt>
+  function tweakRequest(change) {
+    return `${GUIDE}
 
-The prompt above was written for: ${f.origin}. It is ${f.upType === "Detect it" ? "either a system prompt or a user message; work out which" : "a " + f.upType.toLowerCase()}.
-${f.goal.trim() ? "The user also wants this change: " + f.goal.trim() + "\n" : ""}
-Rewrite it so it works best on Claude Opus 5.5. Keep its purpose, every input or variable it expects (in its original variable syntax), and its output contract (format, fields, length) unless the requested change says otherwise. Remove what Opus 5.5 does not need or handles badly: step-by-step reasoning instructions, shouted or repeated rules, sampling settings, prefill tricks, blanket formatting bans. Add only what is missing and would clearly help: the goal, the audience, the reasons behind key constraints, a clear output format. Keep it no longer than it needs to be. In the notes, list the most important changes and why.`;
-  }
-  function reviseRequest(feedback) {
-    const prev = state.parsed?.prompt || "";
-    const base = state.lastRequest || "";
-    return `${base}
+<request>
+${state.ask}
+</request>
 
 <current_prompt>
-${prev}
+${state.parsed?.prompt || ""}
 </current_prompt>
 
-You already wrote the prompt in <current_prompt> for the request above. Revise it according to this feedback:
-<feedback>
-${feedback}
-</feedback>
-Change only what the feedback calls for and keep everything else as it is. Reply in the same structure; in the notes, say what you changed.`;
+You already wrote the prompt above for this request. Change it as follows: ${change}
+Change only what that calls for and keep the rest. Reply in the same structure.`;
   }
 
-  // ---------- Template fallback (no Claude access) ----------
-  function buildLocal(f) {
-    const parts = [];
-    if (f.placeholders) parts.push("<input>\n{{INPUT}}\n</input>\n");
-    const aud = f.audience.trim() ? ` for ${f.audience.trim()}` : "";
-    parts.push(`${f.task.trim()}${/[.!?]$/.test(f.task.trim()) ? "" : "."}${aud ? ` The result is${aud}, so write it with them in mind.` : ""}`);
-    if (f.context.trim()) parts.push(`<background>\n${f.context.trim()}\n</background>`);
-    const fmt = f.format === "Let Claude decide" ? "" : `Format the answer as ${f.format.toLowerCase()}.`;
-    const len = f.length === "Auto" ? "" : ` Keep it ${f.length.toLowerCase()}.`;
-    if (fmt || len) parts.push((fmt + len).trim());
-    parts.push(`Write in a ${f.tone.toLowerCase()} tone, in plain sentences that say what they mean.`);
-    if (f.avoid.trim()) parts.push(`Avoid these specifically: ${f.avoid.trim()}`);
-    if (f.examples) parts.push("<examples>\n<example>\n{{EXAMPLE_1}}\n</example>\n</examples>\nThe example shows the shape and level of detail wanted; don't copy its content.");
-    return `<prompt>\n${parts.join("\n\n")}\n</prompt>\n<settings>\neffort: ${/Coding|Agent/.test(f.kind) ? "high" : "medium"}\nmax_tokens: 16000\nwhy: Built from the template without Claude; review and adjust before use.\n</settings>\n<notes>\n- Built locally because Claude isn't reachable from this view. Open the artifact in Claude to have Opus 5.5 write it.\n</notes>`;
+  // Used only when this page can't reach Claude.
+  function buildLocal(ask) {
+    const t = ask.trim().replace(/\s+$/, "");
+    return `<prompt>
+${t}${/[.!?]$/.test(t) ? "" : "."}
+
+Before you start, think about who this is for and what they need from it, and write for them. Use plain, direct sentences. If you need something only I can give you, ask me for it in one short question.
+</prompt>
+<settings>
+effort: medium
+</settings>
+<notes>
+- This is a basic version made without Claude. Open this page in Claude to get a full prompt written by Opus 5.5.
+</notes>`;
   }
 
-  // ---------- Errors ----------
-  function copyFor(code) {
+  function errorText(code) {
     switch (code) {
-      case "not_granted": return "Claude access wasn't allowed for this page, so it can't generate. Allow it from the artifact's permissions to try again.";
-      case "sampling_disabled": return "Claude isn't available on this account.";
-      case "rate_limited": return "You've hit a usage limit. Wait a bit and try again.";
-      case "session_expired": return "Your session expired. Sign in again, then retry.";
-      case "refused": return "Claude declined this request. Rephrase the task and try again.";
-      case "prompt_too_large": return "That's too much text. Shorten the prompt or the background.";
-      case "empty_completion": return "Claude returned nothing. Try simplifying the request.";
-      default: return "Something went wrong reaching Claude. Try again.";
+      case "not_granted": return "The page wasn't allowed to use Claude. Allow it when asked, then try again.";
+      case "rate_limited": return "You've hit a usage limit. Wait a little and try again.";
+      case "session_expired": return "You've been signed out. Sign in again and retry.";
+      case "refused": return "Claude couldn't help with that request. Try wording it differently.";
+      case "prompt_too_large": return "That's too much text. Try something shorter.";
+      default: return "Something went wrong. Please try again.";
     }
   }
 
-  // ---------- Run generation ----------
+  // ---------- Generate ----------
   function busy(on) {
     $("go").disabled = on; $("stop").hidden = !on;
-    $("reviseBtn").disabled = on;
+    $("tweakBtn").disabled = on;
+    document.querySelectorAll(".idea").forEach((b) => (b.disabled = on));
   }
-  async function generate(input) {
-    state.ctl?.abort();
-    const ctl = new AbortController();
-    state.ctl = ctl;
+  async function run(input) {
+    const msg = $("formMsg");
+    msg.className = "msg"; msg.textContent = "";
     state.example = false;
     state.raw = "";
-    state.parsed = parse("", false);
+    state.parsed = null;
+    render(true);
+    $("sheet").closest(".card").scrollIntoView({ behavior: "smooth", block: "start" });
+
+    if (!state.sample) {
+      state.raw = buildLocal(state.ask);
+      state.parsed = parse(state.raw, true);
+      render(false);
+      save();
+      return;
+    }
+    const ctl = new AbortController();
+    state.ctl = ctl;
     busy(true);
-    $("formMsg").className = "msg";
-    $("formMsg").textContent = "";
-    renderAll(true);
-    const sheet = $("sheet");
     try {
       const res = await state.sample(input, {
-        model: MODEL, modelTier: "complex", effort: state.effort, cache: false, signal: ctl.signal,
-        onText: ({ text }) => {
-          state.raw = text;
-          state.parsed = parse(text, false);
-          const atBottom = sheet.scrollTop + sheet.clientHeight >= sheet.scrollHeight - 30;
-          renderAll(true);
-          if (atBottom) sheet.scrollTop = sheet.scrollHeight;
-        },
+        model: MODEL, modelTier: "complex", effort: "medium", cache: false, signal: ctl.signal,
+        onText: ({ text }) => { state.raw = text; state.parsed = parse(text, false); render(true); },
       });
       state.raw = res.text;
       state.parsed = parse(res.text, true);
-      if (res.modelApplied !== MODEL && res.modelTierApplied !== "complex") {
-        $("formMsg").textContent = `Opus 5.5 wasn't available to this account, so the ${res.modelTierApplied} model wrote this one.`;
-      } else if (res.truncated) {
-        $("formMsg").textContent = "The answer was cut short. Try a shorter brief or a lower effort.";
-      }
-      addHistory();
+      save();
     } catch (e) {
-      if (e && e.code === "cancelled") {
-        state.parsed = parse(e.text || state.raw, true);
-        $("formMsg").textContent = "Stopped.";
-      } else {
-        state.parsed = e && e.text && e.code !== "refused" ? parse(e.text, true) : null;
-        $("formMsg").className = "msg err";
-        $("formMsg").textContent = copyFor(e && e.code);
-      }
+      const code = e && e.code;
+      if (code === "cancelled") { state.parsed = parse(e.text || state.raw, true); msg.textContent = "Stopped."; }
+      else { state.parsed = e && e.text && code !== "refused" ? parse(e.text, true) : null; msg.className = "msg err"; msg.textContent = errorText(code); }
     } finally {
-      if (state.ctl === ctl) state.ctl = null;
+      state.ctl = null;
       busy(false);
-      renderAll(false);
+      render(false);
     }
   }
 
-  function submit() {
-    const f = readFields();
-    saveDraft();
-    $("formMsg").className = "msg";
-    if (state.mode === "idea" && !f.task.trim()) { $("formMsg").className = "msg err"; $("formMsg").textContent = "Describe the task first."; $("task").focus(); return; }
-    if (state.mode === "upgrade" && !f.original.trim()) { $("formMsg").className = "msg err"; $("formMsg").textContent = "Paste a prompt to upgrade."; $("original").focus(); return; }
+  function save() { store.set("opg.last", { ask: state.ask, raw: state.raw }); }
 
-    if (!state.sample) {
-      if (state.mode === "idea") {
-        state.example = false;
-        state.raw = buildLocal(f);
-        state.parsed = parse(state.raw, true);
-        state.lastRequest = null;
-        addHistory();
-        renderAll(false);
-      } else {
-        renderUpLint();
-        $("formMsg").textContent = "Claude isn't reachable here, so only the check ran.";
-      }
-      return;
-    }
-    const req = state.mode === "idea" ? ideaRequest(f) : upgradeRequest(f);
-    state.lastRequest = req;
-    state.vars = {};
-    generate(`${GUIDE}\n\n${req}`);
-  }
-
-  // ---------- Test run ----------
-  async function testRun() {
-    const p = filledPrompt();
-    const missing = varNames(p);
-    const out = $("testMsgOut");
-    out.className = "msg";
-    if (missing.length) { out.className = "msg err"; out.textContent = `Fill ${missing.map((n) => "{{" + n + "}}").join(", ")} first.`; return; }
-    const sys = currentType() === "system";
-    const userMsg = $("testMsg").value.trim();
-    if (sys && !userMsg) { out.className = "msg err"; out.textContent = "Type a user message to test the system prompt."; $("testMsg").focus(); return; }
-    const input = sys
-      ? [{ role: "user", content: `Use the following as your system prompt for this conversation.\n<system_prompt>\n${p}\n</system_prompt>` }, { role: "user", content: userMsg }]
-      : p;
-    const effort = (state.parsed?.settings?.effort || "medium").toLowerCase();
-    const sampleEffort = effort === "low" ? "low" : effort === "medium" ? "medium" : "high";
-    state.testCtl?.abort();
-    const ctl = new AbortController();
-    state.testCtl = ctl;
-    const ans = $("answer");
-    ans.hidden = false;
-    ans.textContent = "Thinking…";
-    out.textContent = `Running at ${sampleEffort} effort`;
-    $("testBtn").disabled = true; $("testStop").hidden = false;
-    try {
-      const res = await state.sample(input, { model: MODEL, modelTier: "complex", effort: sampleEffort, cache: false, signal: ctl.signal, onText: ({ text }) => { ans.textContent = text; } });
-      ans.textContent = res.text;
-      out.textContent = res.modelApplied === MODEL || res.modelTierApplied === "complex" ? `Answered at ${sampleEffort} effort` : `Answered by the ${res.modelTierApplied} model (Opus 5.5 unavailable)`;
-    } catch (e) {
-      if (e && e.code === "cancelled") { ans.textContent = e.text || ""; out.textContent = "Stopped."; }
-      else { ans.textContent = e && e.text && e.code !== "refused" ? e.text : ""; ans.hidden = !ans.textContent; out.className = "msg err"; out.textContent = copyFor(e && e.code); }
-    } finally {
-      if (state.testCtl === ctl) state.testCtl = null;
-      $("testBtn").disabled = false; $("testStop").hidden = true;
-    }
-  }
-
-  // ---------- History ----------
-  function addHistory() {
-    if (!state.parsed?.prompt) return;
-    const f = readFields();
-    const title = state.mode === "idea" ? f.task.trim() : "Upgrade: " + f.original.trim().split("\n")[0];
-    const list = store.get("opg.history", []);
-    list.unshift({ id: Date.now(), ts: Date.now(), mode: state.mode, title: title.slice(0, 140), raw: state.raw, fields: f, req: state.lastRequest });
-    store.set("opg.history", list.slice(0, 15));
-    renderHistory();
-  }
-  function renderHistory() {
-    const list = store.get("opg.history", []);
-    $("histPane").hidden = list.length === 0;
-    const ul = $("history");
-    ul.innerHTML = "";
-    list.forEach((h) => {
-      const li = document.createElement("li");
-      const b = document.createElement("button");
-      b.type = "button";
-      const d = new Date(h.ts);
-      b.innerHTML = `<span class="t"></span><span class="w">${d.toLocaleDateString(undefined, { month: "short", day: "numeric" })} ${d.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" })}</span>`;
-      b.querySelector(".t").textContent = h.title || "Untitled";
-      b.addEventListener("click", () => {
-        writeFields(h.fields || {});
-        setMode(h.mode || "idea");
-        state.example = false;
-        state.raw = h.raw;
-        state.parsed = parse(h.raw, true);
-        state.lastRequest = h.req || null;
-        state.vars = {};
-        renderAll(false);
-        $("sheet").scrollIntoView({ behavior: "smooth", block: "nearest" });
-      });
-      li.append(b);
-      ul.append(li);
-    });
-  }
-
-  // ---------- Copy ----------
-  async function copyText(text, btn) {
-    const label = btn.textContent;
-    try {
-      await navigator.clipboard.writeText(text);
-      btn.textContent = "Copied";
-    } catch {
-      const r = document.createRange();
-      const pre = $("sheet").querySelector("pre");
-      if (pre) { r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-      btn.textContent = "Selected; press Ctrl+C";
-    }
-    setTimeout(() => (btn.textContent = label), 1600);
-  }
-
-  function renderUpLint() {
-    const v = $("original").value;
-    $("upLintWrap").hidden = !v.trim();
-    if (v.trim()) renderLint($("upLint"), lint(v));
-  }
-
-  // ---------- Wire up ----------
-  $("modeIdea").addEventListener("click", () => setMode("idea"));
-  $("modeUpgrade").addEventListener("click", () => setMode("upgrade"));
-  $("typeUser").addEventListener("click", () => setType("user"));
-  $("typeSystem").addEventListener("click", () => setType("system"));
-  document.querySelectorAll("[data-effort]").forEach((b) => b.addEventListener("click", () => {
-    state.effort = b.dataset.effort;
-    setPressed([...document.querySelectorAll("[data-effort]")], b);
-    saveDraft();
-  }));
-  $("brief").addEventListener("submit", (e) => { e.preventDefault(); submit(); });
-  $("brief").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); submit(); } });
-  $("brief").addEventListener("input", () => { saveDraft(); });
-  $("original").addEventListener("input", renderUpLint);
-  $("stop").addEventListener("click", () => state.ctl?.abort());
-  $("copyBtn").addEventListener("click", (e) => state.parsed?.prompt && copyText(state.parsed.prompt, e.currentTarget));
-  $("copyFilled").addEventListener("click", (e) => copyText(filledPrompt(), e.currentTarget));
-  $("reviseBtn").addEventListener("click", () => {
-    const fb = $("feedback").value.trim();
-    if (!fb) { $("feedback").focus(); return; }
-    if (!state.lastRequest) state.lastRequest = state.mode === "idea" ? ideaRequest(readFields()) : upgradeRequest(readFields());
-    const req = reviseRequest(fb);
-    $("feedback").value = "";
-    generate(`${GUIDE}\n\n${req}`);
+  $("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ask = $("ask").value.trim();
+    if (!ask) { const m = $("formMsg"); m.className = "msg err"; m.textContent = "Type what you want Claude to do first."; $("ask").focus(); return; }
+    state.ask = ask;
+    run(newRequest(ask));
   });
-  $("testBtn").addEventListener("click", testRun);
-  $("testStop").addEventListener("click", () => state.testCtl?.abort());
-  $("clearHist").addEventListener("click", () => { store.set("opg.history", []); renderHistory(); });
+  $("ask").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); $("form").requestSubmit(); } });
+  $("stop").addEventListener("click", () => state.ctl?.abort());
+  document.querySelectorAll(".idea").forEach((b) => b.addEventListener("click", () => {
+    $("ask").value = IDEAS[b.textContent] || b.textContent;
+    $("ask").focus();
+  }));
+  $("tweakForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const change = $("tweak").value.trim();
+    if (!change) { $("tweak").focus(); return; }
+    $("tweak").value = "";
+    run(tweakRequest(change));
+  });
+  $("copyBtn").addEventListener("click", async (e) => {
+    const btn = e.currentTarget, text = state.parsed?.prompt;
+    if (!text) return;
+    try { await navigator.clipboard.writeText(text); btn.textContent = "Copied"; }
+    catch {
+      const pre = $("sheet").querySelector("pre");
+      if (pre) { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+      btn.textContent = "Selected, press Ctrl+C";
+    }
+    setTimeout(() => (btn.textContent = "Copy"), 1600);
+  });
 
   // ---------- Boot ----------
-  const draft = store.get("opg.draft", null);
-  if (draft && draft.fields) {
-    writeFields(draft.fields);
-    if (draft.effort) {
-      state.effort = draft.effort;
-      setPressed([...document.querySelectorAll("[data-effort]")], document.querySelector(`[data-effort="${draft.effort}"]`) || document.querySelector('[data-effort="medium"]'));
-    }
+  const last = store.get("opg.last", null);
+  if (last && last.raw) {
+    state.ask = last.ask || "";
+    state.raw = last.raw;
+    state.example = false;
+    $("ask").value = state.ask;
   } else {
-    writeFields(EXAMPLE_FIELDS);
+    state.ask = EXAMPLE_ASK;
+    state.raw = EXAMPLE_RAW;
   }
-  setMode(draft?.mode || "idea");
-  renderUpLint();
-  state.raw = EXAMPLE_RAW;
-  state.parsed = parse(EXAMPLE_RAW, true);
-  renderAll(false);
-  renderHistory();
+  state.parsed = parse(state.raw, true);
+  render(false);
 
-  const setStatus = (s, text) => { $("status").dataset.state = s; $("statusText").textContent = text; };
   const use = window.claude && typeof window.claude.use === "function" ? window.claude.use("sample") : Promise.resolve(null);
-  Promise.resolve(use).then((sample) => {
-    state.sample = sample || null;
-    if (sample) setStatus("ready", "Opus 5.5 ready");
-    else setStatus("off", "Template mode · Claude not reachable");
-    setMode(state.mode);
-    renderAll(false);
-  }).catch(() => { setStatus("off", "Template mode · Claude not reachable"); setMode(state.mode); });
+  Promise.resolve(use).then((s) => { state.sample = s || null; render(false); }).catch(() => {});
 })();
 </script>
