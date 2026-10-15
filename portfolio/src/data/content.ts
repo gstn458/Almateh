@@ -291,23 +291,26 @@ export const research = {
 // ── Experience ───────────────────────────────────────────────────────────────
 
 export const experience: Internship[] = [
+  // Most recent first.
+  {
+    company: "Zeru",
+    role: "Intern & Research Assistant",
+    dates: "July 2026",
+    summary:
+      "Researched AI driven on-chain reputation scoring and analysed crypto wallet behaviour data for the team's trust layer for Web3 and AI agents.",
+  },
   {
     company: "DP World",
-    role: undefined, // TODO: internship role
-    dates: undefined, // TODO: dates
-    summary: undefined, // TODO: one line on what you did
+    role: "Corporate Intern",
+    dates: "June 2026 (1 week)",
+    summary: "Completed a corporate induction and departmental rotations, and analysed global supply chain operations.",
   },
   {
     company: "Beldex",
-    role: undefined, // TODO: internship role
-    dates: undefined, // TODO: dates
-    summary: undefined, // TODO: one line on what you did
-  },
-  {
-    company: "Zeru",
-    role: undefined, // TODO: internship role
-    dates: undefined, // TODO: dates
-    summary: undefined, // TODO: one line on what you did
+    role: "Blockchain Intern",
+    dates: "July 2025 (2 weeks)",
+    summary:
+      "Shadowed blockchain developers and the product team on a live cryptocurrency network, and studied privacy preserving transaction protocols.",
   },
 ];
 
