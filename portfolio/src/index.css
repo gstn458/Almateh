@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 0 0% 4%;
+  --surface: 0 0% 8%;
+  --text: 0 0% 96%;
+  --muted: 0 0% 53%;
+  --stroke: 0 0% 12%;
+  --accent: 0 0% 96%;
+
+  --font-body: "Inter", sans-serif;
+  --font-display: "Instrument Serif", serif;
+
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    @apply bg-bg font-body text-text-primary antialiased;
+  }
+
+  ::selection {
+    background: #4e85bf;
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .accent-gradient {
+    background: linear-gradient(90deg, #89aacc 0%, #4e85bf 100%);
+  }
+
+  /* Moving gradient, used for animated borders. */
+  .accent-gradient-animated {
+    background: linear-gradient(90deg, #89aacc, #4e85bf, #89aacc, #4e85bf);
+    background-size: 300% 100%;
+    animation: gradient-shift 6s ease infinite;
+  }
+
+  .animate-scroll-down {
+    animation: scroll-down 1.5s ease-in-out infinite;
+  }
+
+  .animate-role-fade-in {
+    animation: role-fade-in 0.4s ease-out;
+  }
+
+  .halftone {
+    background-image: radial-gradient(circle, #000 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@keyframes role-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-down,
+  .animate-role-fade-in,
+  .accent-gradient-animated {
+    animation: none;
+  }
+}
