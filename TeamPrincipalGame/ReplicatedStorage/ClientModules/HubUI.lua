@@ -639,6 +639,7 @@ function HubUI.refresh()
 	local s = ctx.state
 	if not s then
 		UIKit.label(content, "Loading your career...", { TextSize = 20 })
+		UIKit.paragraph(content, "This usually takes a few seconds. If it never finishes, a red box will explain what went wrong.")
 		return
 	end
 	local ok, err = pcall(renderers[currentTab], content, s)
@@ -651,9 +652,8 @@ end
 
 function HubUI.showTab(name)
 	if renderers[name] then
-		if name ~= currentTab then
-			content.CanvasPosition = Vector2.new(0, 0)
-		end
+		-- Always jump back to the top, so clicking the tab you are on still does something.
+		content.CanvasPosition = Vector2.new(0, 0)
 		currentTab = name
 		HubUI.refresh()
 	end

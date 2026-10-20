@@ -14,6 +14,19 @@ This page has the setup guide, then every script in full, in order.
 
 ## Setup guide
 
+### Easiest way: one command (also used to update the game)
+
+1. In Studio, open the Command Bar (View or Window menu > Command Bar).
+2. Copy everything in `INSTALL_COMMAND.lua`, paste it into the Command Bar and press Run.
+3. The Output window should end with "22 of 22 scripts installed". If you see
+   "FAILED", turn on Home > Game Settings > Security > Allow HTTP Requests and run it again.
+
+Running the same command again later replaces every script with the newest
+version. If you just got told about an update, wait about 5 minutes before
+running it, so GitHub serves the new files.
+
+The steps below do the same thing by hand.
+
 ### One-time Studio settings
 
 1. Open Roblox Studio and create a new place from the **Baseplate** template.
@@ -1433,7 +1446,8 @@ return TrackPath
 	DataManager (ModuleScript)
 	Location: ServerScriptService > ServerModules > DataManager
 
-	Loads and saves each player's career with DataStoreService.
+	Loads and saves each player's career with DataStoreService, using
+	UpdateAsync and a session lock so a quick rejoin can't lose progress.
 	If DataStores are not available (for example an unpublished place in Studio,
 	or "Studio Access to API Services" is turned off) the game still runs,
 	it just cannot save. If loading fails for a player who may already have a
@@ -1442,6 +1456,7 @@ return TrackPath
 ]]
 
 local DataStoreService = game:GetService("DataStoreService")
+local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Config = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Config"))
@@ -1467,6 +1482,18 @@ local function keyFor(player)
 	return Config.SaveKeyPrefix .. tostring(player.UserId)
 end
 
+-- Each running server gets its own id. A save remembers which server is using
+-- it (a "session lock"), so two servers can never overwrite each other's save
+-- when a player rejoins quickly. A lock that hasn't been refreshed for
+-- LOCK_TIMEOUT seconds belongs to a server that crashed and can be taken over.
+local SESSION_ID = HttpService:GenerateGUID(false)
+local LOCK_TIMEOUT = 600
+
+local function lockedByOther(data)
+	local lock = type(data) == "table" and data._lock
+	return type(lock) == "table" and lock.id ~= SESSION_ID and os.time() - (tonumber(lock.time) or 0) < LOCK_TIMEOUT
+end
+
 -- Returns: data (table or nil), status ("loaded" | "new" | "offline"), message
 function DataManager.load(player)
 	if not store then
@@ -1474,47 +1501,72 @@ function DataManager.load(player)
 	end
 	local key = keyFor(player)
 	local lastErr = nil
-	for attempt = 1, 3 do
-		local ok, result = pcall(function()
-			return store:GetAsync(key)
+	for attempt = 1, 5 do
+		local force = attempt == 5 -- after waiting a while, take over a stuck lock
+		local blocked = false
+		local loaded = nil
+		local ok, err = pcall(function()
+			store:UpdateAsync(key, function(old)
+				if lockedByOther(old) and not force then
+					blocked = true
+					return nil -- leave the save untouched
+				end
+				loaded = old
+				if type(old) == "table" then
+					old._lock = { id = SESSION_ID, time = os.time() }
+					return old, { player.UserId }
+				end
+				return nil
+			end)
 		end)
-		if ok then
-			if type(result) == "table" then
-				return result, "loaded", "Career loaded."
+		if ok and not blocked then
+			if type(loaded) == "table" then
+				return loaded, "loaded", "Career loaded."
 			end
 			return nil, "new", "New career started."
 		end
-		lastErr = tostring(result)
-		warn(string.format("[DataManager] Load attempt %d failed for %s: %s", attempt, player.Name, lastErr))
+		lastErr = ok and "your save is still open on another server" or tostring(err)
+		warn(string.format("[DataManager] Load attempt %d for %s: %s", attempt, player.Name, lastErr))
 		if not player.Parent then
 			break
 		end
-		task.wait(1.5 * attempt)
+		task.wait(blocked and 4 or 1.5 * attempt)
 	end
-	-- UserId 0 or negative ids are Studio test players; their keys work like normal ones.
 	return nil, "offline", "Could not load your save, so saving is off for this visit: " .. tostring(lastErr)
 end
 
--- Saves a profile. Returns ok (boolean) and a message.
-function DataManager.save(player, profile)
+-- Saves a profile. release = true frees the session lock (player leaving).
+-- Returns ok (boolean), a message, and lostLock (true if another server took over).
+function DataManager.save(player, profile, release)
 	if not store then
-		return false, "Saving is not available."
+		return false, "Saving is not available.", false
 	end
 	local key = keyFor(player)
 	profile.lastSaved = os.time()
+	profile._lock = (not release) and { id = SESSION_ID, time = os.time() } or nil
 	local lastErr = nil
 	for attempt = 1, 3 do
+		local lostLock = false
 		local ok, err = pcall(function()
-			store:SetAsync(key, profile, { player.UserId })
+			store:UpdateAsync(key, function(old)
+				if lockedByOther(old) then
+					lostLock = true
+					return nil
+				end
+				return profile, { player.UserId }
+			end)
 		end)
+		if ok and lostLock then
+			return false, "Your career is open on another server, so this server stopped saving it.", true
+		end
 		if ok then
-			return true, "Saved."
+			return true, "Saved.", false
 		end
 		lastErr = tostring(err)
 		warn(string.format("[DataManager] Save attempt %d failed for %s: %s", attempt, player.Name, lastErr))
 		task.wait(1 + attempt)
 	end
-	return false, "Save failed: " .. tostring(lastErr)
+	return false, "Save failed: " .. tostring(lastErr), false
 end
 
 -- Copies any missing fields from template into data (used when the save format grows).
@@ -5593,32 +5645,82 @@ local StateChanged = makeRemote("RemoteEvent", "StateChanged")
 ---------------------------------------------------------------------
 -- Modules
 ---------------------------------------------------------------------
-local Modules = script.Parent:WaitForChild("ServerModules")
-local DataManager = require(Modules:WaitForChild("DataManager"))
-local TeamManager = require(Modules:WaitForChild("TeamManager"))
-local WeekendManager = require(Modules:WaitForChild("WeekendManager"))
-local Objectives = require(Modules:WaitForChild("Objectives"))
-local Records = require(Modules:WaitForChild("Records"))
-local Radio = require(Modules:WaitForChild("Radio"))
+local ScriptContext = game:GetService("ScriptContext")
+
+-- If a server module is missing or broken, tell the player's screen instead of
+-- freezing silently (every request answers with the problem).
+local function failStartup(message)
+	warn("[GameServer] " .. message)
+	Request.OnServerInvoke = function()
+		return { ok = false, msg = message }
+	end
+	local function tell(player)
+		Notify:FireClient(player, "ServerError", { text = message })
+	end
+	Players.PlayerAdded:Connect(tell)
+	for _, player in ipairs(Players:GetPlayers()) do
+		tell(player)
+	end
+	error(message, 0)
+end
+
+local Modules = script.Parent:WaitForChild("ServerModules", 10)
+if not Modules then
+	failStartup("The ServerModules folder is missing from ServerScriptService. Run the install command again.")
+end
+local loaded = {}
+for _, name in ipairs({ "DataManager", "TeamManager", "WeekendManager", "Objectives", "Records", "Radio" }) do
+	local moduleScript = Modules:WaitForChild(name, 10)
+	if not moduleScript then
+		failStartup("The " .. name .. " script is missing from ServerScriptService > ServerModules. Run the install command again.")
+	end
+	local ok, result = pcall(require, moduleScript)
+	if not ok then
+		failStartup("The " .. name .. " script has an error: " .. tostring(result))
+	end
+	loaded[name] = result
+end
+local DataManager = loaded.DataManager
+local TeamManager = loaded.TeamManager
+local WeekendManager = loaded.WeekendManager
+local Objectives = loaded.Objectives
+local Records = loaded.Records
+local Radio = loaded.Radio
 
 DataManager.init()
 Radio.init()
 WeekendManager.init()
+
+-- Show server errors on the players' screens too (handy when testing in Studio).
+local lastErrorAt = 0
+ScriptContext.Error:Connect(function(message, trace)
+	if os.clock() - lastErrorAt < 2 then
+		return
+	end
+	lastErrorAt = os.clock()
+	Notify:FireAllClients("ServerError", { text = tostring(message) .. "\n" .. tostring(trace) })
+end)
 
 local sessions = {}
 
 ---------------------------------------------------------------------
 -- Saving
 ---------------------------------------------------------------------
-local function saveSession(session)
+-- release = true when the player is leaving: the save also frees the session lock.
+local function saveSession(session, release)
 	if not session.savingEnabled then
 		return false
 	end
-	if session.saving then
-		return false
+	local waited = 0
+	while session.saving and waited < 10 do
+		if not release then
+			return false
+		end
+		task.wait(0.2)
+		waited += 0.2
 	end
 	session.saving = true
-	local ok, msg = DataManager.save(session.player, session.profile)
+	local ok, msg, lostLock = DataManager.save(session.player, session.profile, release)
 	session.saving = false
 	session.lastSave = os.clock()
 	if ok then
@@ -5628,6 +5730,10 @@ local function saveSession(session)
 		session.saveMessage = string.format("Saved at %02d:%02d UTC", t.hour, t.min)
 	else
 		session.saveMessage = msg
+		if lostLock then
+			-- Another server now owns this career; stop saving here so we never overwrite it.
+			session.savingEnabled = false
+		end
 	end
 	if session.player.Parent then
 		Notify:FireClient(session.player, "SaveStatus", { ok = ok, text = session.saveMessage })
@@ -5720,7 +5826,7 @@ Players.PlayerRemoving:Connect(function(player)
 	if session then
 		sessions[player] = nil
 		session.race = nil
-		saveSession(session)
+		saveSession(session, true) -- true = release the session lock
 	end
 end)
 
@@ -5729,7 +5835,7 @@ game:BindToClose(function()
 	for _, session in pairs(sessions) do
 		pending += 1
 		task.spawn(function()
-			saveSession(session)
+			saveSession(session, true)
 			pending -= 1
 		end)
 	end
@@ -5853,9 +5959,11 @@ task.spawn(function()
 	while true do
 		task.wait(5)
 		for _, session in pairs(sessions) do
-			if session.dirty and not session.race and session.savingEnabled then
+			if not session.race and session.savingEnabled then
 				local since = os.clock() - session.lastSave
-				if since >= Config.AutoSaveSeconds or (session.saveSoon and since >= 7) then
+				local due = session.dirty and (since >= Config.AutoSaveSeconds or (session.saveSoon and since >= 7))
+				-- Save every 5 minutes anyway, to keep this server's session lock fresh.
+				if due or since >= 300 then
 					task.spawn(saveSession, session)
 				end
 			end
@@ -8841,6 +8949,7 @@ function HubUI.refresh()
 	local s = ctx.state
 	if not s then
 		UIKit.label(content, "Loading your career...", { TextSize = 20 })
+		UIKit.paragraph(content, "This usually takes a few seconds. If it never finishes, a red box will explain what went wrong.")
 		return
 	end
 	local ok, err = pcall(renderers[currentTab], content, s)
@@ -8853,9 +8962,8 @@ end
 
 function HubUI.showTab(name)
 	if renderers[name] then
-		if name ~= currentTab then
-			content.CanvasPosition = Vector2.new(0, 0)
-		end
+		-- Always jump back to the top, so clicking the tab you are on still does something.
+		content.CanvasPosition = Vector2.new(0, 0)
 		currentTab = name
 		HubUI.refresh()
 	end
@@ -10220,6 +10328,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 local StarterGui = game:GetService("StarterGui")
+local ScriptContext = game:GetService("ScriptContext")
 
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
@@ -10254,7 +10363,10 @@ local StateChanged = remotes:WaitForChild("StateChanged")
 ---------------------------------------------------------------------
 -- Modules
 ---------------------------------------------------------------------
-local ClientModules = ReplicatedStorage:WaitForChild("ClientModules")
+local ClientModules = ReplicatedStorage:WaitForChild("ClientModules", 15)
+if not ClientModules then
+	error("The ClientModules folder is missing from ReplicatedStorage. Run the install command again.")
+end
 local UIKit = require(ClientModules:WaitForChild("UIKit"))
 local TrackBuilder = require(ClientModules:WaitForChild("TrackBuilder"))
 local RaceViewer = require(ClientModules:WaitForChild("RaceViewer"))
@@ -10269,14 +10381,102 @@ pcall(function()
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Health, false)
 end)
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "TeamPrincipalGui"
-gui.ResetOnSpawn = false
-gui.IgnoreGuiInset = false -- keep everything below Roblox's own top bar
-gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-gui.Parent = playerGui
+local screen = Instance.new("ScreenGui")
+screen.Name = "TeamPrincipalGui"
+screen.ResetOnSpawn = false
+screen.IgnoreGuiInset = false -- keep everything below Roblox's own top bar
+screen.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screen.Parent = playerGui
+
+-- The interface is designed for a 1200 x 720 screen. On smaller or bigger
+-- screens (for example a laptop running Studio) everything is scaled to fit,
+-- so no window or button ends up off-screen.
+local DESIGN_SIZE = Vector2.new(1200, 720)
+local gui = Instance.new("Frame")
+gui.Name = "Root"
+gui.BackgroundTransparency = 1
+gui.BorderSizePixel = 0
+gui.Parent = screen
+local uiScale = Instance.new("UIScale")
+uiScale.Parent = gui
+local function fitToScreen()
+	local size = screen.AbsoluteSize
+	if size.X < 10 or size.Y < 10 then
+		return
+	end
+	local scale = math.clamp(math.min(size.X / DESIGN_SIZE.X, size.Y / DESIGN_SIZE.Y), 0.45, 1.6)
+	uiScale.Scale = scale
+	gui.Size = UDim2.new(1 / scale, 0, 1 / scale, 0)
+end
+fitToScreen()
+screen:GetPropertyChangedSignal("AbsoluteSize"):Connect(fitToScreen)
 
 UIKit.initToasts(gui)
+
+-- A red box that shows any script error on screen, so it can be screenshotted.
+local problemBox = nil
+local function showProblem(text)
+	if problemBox then
+		local label = problemBox:FindFirstChild("Message", true)
+		if label then
+			label.Text = text
+		end
+		return
+	end
+	problemBox = UIKit.frame(gui, {
+		Name = "Problem",
+		AnchorPoint = Vector2.new(0, 1),
+		Position = UDim2.new(0, 10, 1, -10),
+		Size = UDim2.new(0, 560, 0, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+		BackgroundColor3 = Color3.fromRGB(110, 25, 30),
+		ZIndex = 80,
+	})
+	UIKit.corner(problemBox, 8)
+	local inner = UIKit.frame(problemBox, {
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, -36, 0, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+		ZIndex = 81,
+	})
+	UIKit.padding(inner, 10, 12)
+	UIKit.list(inner, nil, 6)
+	UIKit.label(inner, "<b>Something went wrong.</b> Take a screenshot of this box and send it to Claude.", {
+		Size = UDim2.new(1, 0, 0, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+		TextSize = 15,
+		ZIndex = 81,
+	})
+	UIKit.label(inner, text, {
+		Name = "Message",
+		Size = UDim2.new(1, 0, 0, 0),
+		AutomaticSize = Enum.AutomaticSize.Y,
+		TextSize = 13,
+		RichText = false,
+		TextColor3 = Color3.fromRGB(255, 210, 210),
+		ZIndex = 81,
+		LayoutOrder = 2,
+	})
+	UIKit.button(problemBox, "X", function()
+		problemBox:Destroy()
+		problemBox = nil
+	end, {
+		AnchorPoint = Vector2.new(1, 0),
+		Position = UDim2.new(1, -6, 0, 6),
+		Size = UDim2.new(0, 26, 0, 26),
+		BackgroundColor3 = Color3.fromRGB(70, 20, 20),
+		ZIndex = 82,
+	})
+end
+
+local lastProblem = 0
+ScriptContext.Error:Connect(function(message, trace)
+	if os.clock() - lastProblem < 1 then
+		return
+	end
+	lastProblem = os.clock()
+	showProblem("[Your screen] " .. tostring(message) .. "\n" .. tostring(trace))
+end)
 
 ---------------------------------------------------------------------
 -- Shared context passed to every UI module
@@ -10330,16 +10530,29 @@ function ctx.setState(state)
 end
 
 -- Sends a request to the server and shows its answer.
+-- Gives up after 20 seconds so the buttons never stay frozen.
 function ctx.request(action, args)
 	if ctx.busy then
 		UIKit.toast("One moment...", nil, 1)
 		return nil
 	end
 	ctx.busy = true
-	local ok, resp = pcall(function()
-		return Request:InvokeServer(action, args or {})
+	local finished, ok, resp = false, false, nil
+	task.spawn(function()
+		ok, resp = pcall(function()
+			return Request:InvokeServer(action, args or {})
+		end)
+		finished = true
 	end)
+	local started = os.clock()
+	while not finished and os.clock() - started < 20 do
+		task.wait(0.05)
+	end
 	ctx.busy = false
+	if not finished then
+		showProblem("The server did not answer the '" .. tostring(action) .. "' request. Open the Output window and look for red text from GameServer or ServerModules.")
+		return nil
+	end
 	if not ok or type(resp) ~= "table" then
 		UIKit.toast("Connection problem: " .. tostring(resp), "bad")
 		return nil
@@ -10416,6 +10629,8 @@ Notify.OnClientEvent:Connect(function(kind, payload)
 		UIKit.toast("🎯 Objective complete: " .. tostring(payload.text) .. " (claim it in Objectives)", "gold", 5)
 	elseif kind == "Record" then
 		HubPanels.celebrateRecord(payload)
+	elseif kind == "ServerError" then
+		showProblem("[Server] " .. tostring(payload.text))
 	elseif payload.text then
 		UIKit.toast(payload.text)
 	end
@@ -10442,6 +10657,11 @@ end)
 ---------------------------------------------------------------------
 -- First load (the career can take a few seconds to load)
 ---------------------------------------------------------------------
+task.delay(25, function()
+	if not ctx.state then
+		showProblem("Your career has not loaded after 25 seconds. The server script (GameServer) probably stopped with an error: open the Output window and look for red text.")
+	end
+end)
 task.spawn(function()
 	for _ = 1, 30 do
 		if ctx.state then
@@ -10537,6 +10757,14 @@ seconds, and a message says "Building the circuit...".
 **The game is slow on my computer**
 Lower the graphics quality in Studio (File > Studio Settings > Rendering) or in
 the Roblox menu while playing. Use the Overhead camera during races.
+
+**A red box says "Something went wrong"**
+Take a screenshot of the box and send it to whoever is helping you. It shows the
+exact error from the game, so it can be fixed quickly.
+
+**The menus look too small or too big**
+The interface scales itself to fit the game window. Make the Studio game view
+bigger (close side panels such as the Assistant) for larger text.
 
 **I want to start my career again**
 Change `Config.DataStoreName` (top of Config) to a new name, for example

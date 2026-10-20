@@ -17,6 +17,19 @@ below, if you prefer copying from one page.
 
 ## Setup guide
 
+### Easiest way: one command (also used to update the game)
+
+1. In Studio, open the Command Bar (View or Window menu > Command Bar).
+2. Copy everything in `INSTALL_COMMAND.lua`, paste it into the Command Bar and press Run.
+3. The Output window should end with "22 of 22 scripts installed". If you see
+   "FAILED", turn on Home > Game Settings > Security > Allow HTTP Requests and run it again.
+
+Running the same command again later replaces every script with the newest
+version. If you just got told about an update, wait about 5 minutes before
+running it, so GitHub serves the new files.
+
+The steps below do the same thing by hand.
+
 ### One-time Studio settings
 
 1. Open Roblox Studio and create a new place from the **Baseplate** template.
@@ -179,6 +192,14 @@ seconds, and a message says "Building the circuit...".
 **The game is slow on my computer**
 Lower the graphics quality in Studio (File > Studio Settings > Rendering) or in
 the Roblox menu while playing. Use the Overhead camera during races.
+
+**A red box says "Something went wrong"**
+Take a screenshot of the box and send it to whoever is helping you. It shows the
+exact error from the game, so it can be fixed quickly.
+
+**The menus look too small or too big**
+The interface scales itself to fit the game window. Make the Studio game view
+bigger (close side panels such as the Assistant) for larger text.
 
 **I want to start my career again**
 Change `Config.DataStoreName` (top of Config) to a new name, for example

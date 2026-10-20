@@ -48,32 +48,82 @@ local StateChanged = makeRemote("RemoteEvent", "StateChanged")
 ---------------------------------------------------------------------
 -- Modules
 ---------------------------------------------------------------------
-local Modules = script.Parent:WaitForChild("ServerModules")
-local DataManager = require(Modules:WaitForChild("DataManager"))
-local TeamManager = require(Modules:WaitForChild("TeamManager"))
-local WeekendManager = require(Modules:WaitForChild("WeekendManager"))
-local Objectives = require(Modules:WaitForChild("Objectives"))
-local Records = require(Modules:WaitForChild("Records"))
-local Radio = require(Modules:WaitForChild("Radio"))
+local ScriptContext = game:GetService("ScriptContext")
+
+-- If a server module is missing or broken, tell the player's screen instead of
+-- freezing silently (every request answers with the problem).
+local function failStartup(message)
+	warn("[GameServer] " .. message)
+	Request.OnServerInvoke = function()
+		return { ok = false, msg = message }
+	end
+	local function tell(player)
+		Notify:FireClient(player, "ServerError", { text = message })
+	end
+	Players.PlayerAdded:Connect(tell)
+	for _, player in ipairs(Players:GetPlayers()) do
+		tell(player)
+	end
+	error(message, 0)
+end
+
+local Modules = script.Parent:WaitForChild("ServerModules", 10)
+if not Modules then
+	failStartup("The ServerModules folder is missing from ServerScriptService. Run the install command again.")
+end
+local loaded = {}
+for _, name in ipairs({ "DataManager", "TeamManager", "WeekendManager", "Objectives", "Records", "Radio" }) do
+	local moduleScript = Modules:WaitForChild(name, 10)
+	if not moduleScript then
+		failStartup("The " .. name .. " script is missing from ServerScriptService > ServerModules. Run the install command again.")
+	end
+	local ok, result = pcall(require, moduleScript)
+	if not ok then
+		failStartup("The " .. name .. " script has an error: " .. tostring(result))
+	end
+	loaded[name] = result
+end
+local DataManager = loaded.DataManager
+local TeamManager = loaded.TeamManager
+local WeekendManager = loaded.WeekendManager
+local Objectives = loaded.Objectives
+local Records = loaded.Records
+local Radio = loaded.Radio
 
 DataManager.init()
 Radio.init()
 WeekendManager.init()
+
+-- Show server errors on the players' screens too (handy when testing in Studio).
+local lastErrorAt = 0
+ScriptContext.Error:Connect(function(message, trace)
+	if os.clock() - lastErrorAt < 2 then
+		return
+	end
+	lastErrorAt = os.clock()
+	Notify:FireAllClients("ServerError", { text = tostring(message) .. "\n" .. tostring(trace) })
+end)
 
 local sessions = {}
 
 ---------------------------------------------------------------------
 -- Saving
 ---------------------------------------------------------------------
-local function saveSession(session)
+-- release = true when the player is leaving: the save also frees the session lock.
+local function saveSession(session, release)
 	if not session.savingEnabled then
 		return false
 	end
-	if session.saving then
-		return false
+	local waited = 0
+	while session.saving and waited < 10 do
+		if not release then
+			return false
+		end
+		task.wait(0.2)
+		waited += 0.2
 	end
 	session.saving = true
-	local ok, msg = DataManager.save(session.player, session.profile)
+	local ok, msg, lostLock = DataManager.save(session.player, session.profile, release)
 	session.saving = false
 	session.lastSave = os.clock()
 	if ok then
@@ -83,6 +133,10 @@ local function saveSession(session)
 		session.saveMessage = string.format("Saved at %02d:%02d UTC", t.hour, t.min)
 	else
 		session.saveMessage = msg
+		if lostLock then
+			-- Another server now owns this career; stop saving here so we never overwrite it.
+			session.savingEnabled = false
+		end
 	end
 	if session.player.Parent then
 		Notify:FireClient(session.player, "SaveStatus", { ok = ok, text = session.saveMessage })
@@ -175,7 +229,7 @@ Players.PlayerRemoving:Connect(function(player)
 	if session then
 		sessions[player] = nil
 		session.race = nil
-		saveSession(session)
+		saveSession(session, true) -- true = release the session lock
 	end
 end)
 
@@ -184,7 +238,7 @@ game:BindToClose(function()
 	for _, session in pairs(sessions) do
 		pending += 1
 		task.spawn(function()
-			saveSession(session)
+			saveSession(session, true)
 			pending -= 1
 		end)
 	end
@@ -308,9 +362,11 @@ task.spawn(function()
 	while true do
 		task.wait(5)
 		for _, session in pairs(sessions) do
-			if session.dirty and not session.race and session.savingEnabled then
+			if not session.race and session.savingEnabled then
 				local since = os.clock() - session.lastSave
-				if since >= Config.AutoSaveSeconds or (session.saveSoon and since >= 7) then
+				local due = session.dirty and (since >= Config.AutoSaveSeconds or (session.saveSoon and since >= 7))
+				-- Save every 5 minutes anyway, to keep this server's session lock fresh.
+				if due or since >= 300 then
 					task.spawn(saveSession, session)
 				end
 			end
