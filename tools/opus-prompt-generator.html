@@ -1,154 +1,224 @@
 <title>Opus Prompt Generator</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="page-type" content="software">
+<meta name="site-kind" content="software">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=DM+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one centered column. Ask box on top, the finished prompt below it. */
+/* Deal (tasteskill 2.5): kind software · palette cobalt-on-sand · type instrument · radius soft · buttons solid · mark initial.
+   Layout: header, then the hero line, then the tool itself in one app frame (request pane | prompt pane), stacked on phones. */
 :root {
-  --bg: #eceeea;
-  --surface: #ffffff;
-  --sunk: #f5f6f3;
-  --ink: #17201c;
-  --muted: #5a6560;
-  --line: #d3d8d3;
-  --accent: #2f3db0;
-  --accent-ink: #ffffff;
-  --accent-soft: #e4e6f7;
-  --tag: #0d7563;
-  --var-bg: #fbe9a6;
-  --var-ink: #5a4500;
-  --warn: #a5560a;
-  --warn-soft: #fbeedd;
-  --bad: #b3261e;
-  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* dealt palette, light grade */
+  --p-bg: #e6dbc7; --p-surface: #ddd0b9; --p-ink: #062b8a; --p-muted: #3253a4;
+  --p-action: #062b8a; --p-action-ink: #e6dbc7;
+  --bg: var(--p-bg); --surface: var(--p-surface); --ink: var(--p-ink); --muted: var(--p-muted);
+  --accent: var(--p-ink); --accent-ink: var(--p-bg); --action: var(--p-action); --action-ink: var(--p-action-ink);
+  --err: #9b1c1c;
+  --line: color-mix(in oklab, var(--ink) 11%, transparent);
+  --line-strong: color-mix(in oklab, var(--ink) 20%, transparent);
+
+  /* type */
+  --font-display: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-text: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500; --display-tracking: -0.028em; --display-tracking-xl: -0.036em; --display-stretch: 96%;
+  --t-label: 13px; --t-small: 14px; --t-body: 16px; --t-lead: 18px; --t-card: 18px;
+  --t-h1: clamp(38px, 2.4vw + 26px, 60px);
+
+  /* spacing, radius, controls */
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-btn: 8px;
+  --btn-h: 44px; --btn-h-sm: 36px; --nav: 72px; --gut: 80px;
+
+  /* motion */
+  --m-in: 140ms; --m-out: 200ms; --m-press: 90ms; --m-ease: cubic-bezier(.2,.8,.2,1);
 }
+@media (max-width: 639px) { :root { --nav: 56px; --gut: 24px; } }
+/* evening grade: the palette's own inverse */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #101412; --surface: #181d1b; --sunk: #141917; --ink: #e5ebe7; --muted: #95a29b; --line: #2b3431;
-    --accent: #9aa4ff; --accent-ink: #10132e; --accent-soft: #23284a; --tag: #52d0b3;
-    --var-bg: #4a3d0c; --var-ink: #f6dc7a; --warn: #f0a85a; --warn-soft: #3a2a17; --bad: #ff8a80;
+    --bg: #062b8a; --surface: #153a90; --ink: #e6dbc7; --muted: #aab0bc;
+    --accent: #e6dbc7; --accent-ink: #062b8a; --action: #e6dbc7; --action-ink: #062b8a; --err: #ffb4a8;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #101412; --surface: #181d1b; --sunk: #141917; --ink: #e5ebe7; --muted: #95a29b; --line: #2b3431;
-  --accent: #9aa4ff; --accent-ink: #10132e; --accent-soft: #23284a; --tag: #52d0b3;
-  --var-bg: #4a3d0c; --var-ink: #f6dc7a; --warn: #f0a85a; --warn-soft: #3a2a17; --bad: #ff8a80;
+  --bg: #062b8a; --surface: #153a90; --ink: #e6dbc7; --muted: #aab0bc;
+  --accent: #e6dbc7; --accent-ink: #062b8a; --action: #e6dbc7; --action-ink: #062b8a; --err: #ffb4a8;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-body {
-  background: var(--bg); color: var(--ink); font: 16px/1.55 var(--body);
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 28px 56px;
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t-body)/1.6 var(--font-text); -webkit-font-smoothing: antialiased; }
+.wrap {
+  max-width: calc(1280px + 2 * var(--gut)); margin: 0 auto;
+  padding-left: max(var(--gut), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gut), env(safe-area-inset-right, 0px));
 }
-.wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 20px; }
 
-h1 { font: 700 clamp(28px, 5vw, 40px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
-h1 em { font-style: normal; color: var(--accent); }
-.lede { margin: 8px 0 0; color: var(--muted); max-width: 56ch; }
+/* header */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; height: var(--nav); background: var(--bg); border-bottom: 1px solid var(--line); }
+.nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); }
+.nav__logo { display: inline-flex; align-items: center; gap: var(--s-2); font: 500 22px/1 var(--font-display); letter-spacing: -0.02em; white-space: nowrap; }
+@media (max-width: 639px) { .nav__logo { font-size: 20px; } }
+.mark--initial { display: inline-grid; place-items: center; flex: none; width: 22px; height: 22px; border-radius: calc(var(--r-sm) * .75); background: var(--accent); color: var(--accent-ink); font: 500 13px/1 var(--font-display); }
+.nav__fact { font: 500 var(--t-label)/1.2 var(--font-text); color: var(--muted); white-space: nowrap; }
+@media (max-width: 479px) { .nav__fact { display: none; } }
 
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+/* hero line */
+.hero { padding-block: var(--s-7) var(--s-6); }
+.hero h1 { margin: 0; font: var(--display-weight) var(--t-h1)/1.04 var(--font-display); font-stretch: var(--display-stretch); letter-spacing: var(--display-tracking-xl); text-wrap: balance; max-width: 18ch; }
+.hero p { margin: var(--s-4) 0 0; font-size: var(--t-lead); line-height: 1.55; max-width: 56ch; }
+@media (max-width: 639px) { .hero { padding-block: var(--s-6) var(--s-5); } }
 
-label.big { font: 600 15px/1.3 var(--body); }
-textarea {
-  width: 100%; font: 16px/1.5 var(--body); color: var(--ink); background: var(--sunk);
-  border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; resize: vertical; min-height: 120px;
+/* the app frame: one window, one radius, one hairline */
+.app { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); border: 1px solid var(--line-strong); border-radius: var(--r-lg); background: var(--bg); overflow: hidden; }
+.pane { display: grid; align-content: start; gap: var(--s-4); padding: var(--s-5); min-width: 0; }
+.pane + .pane { border-left: 1px solid var(--line); background: var(--surface); }
+.pane__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); min-height: var(--btn-h-sm); }
+.pane__title { margin: 0; font: 500 var(--t-card)/1.3 var(--font-display); letter-spacing: -0.01em; }
+@media (max-width: 899px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .pane + .pane { border-left: 0; border-top: 1px solid var(--line); }
 }
-textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
+@media (max-width: 639px) { .pane { padding: var(--s-4); } }
 
-.ideas { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.ideas span { font-size: 13px; color: var(--muted); }
-.idea { font: 14px/1.2 var(--body); border: 1px solid var(--line); background: var(--sunk); color: var(--ink); border-radius: 4px; padding: 7px 10px; cursor: pointer; }
-.idea:hover { border-color: var(--muted); }
+.label { font: 500 var(--t-label)/1.3 var(--font-text); color: var(--muted); }
+textarea, input[type="text"] {
+  width: 100%; font: 400 var(--t-body)/1.5 var(--font-text); color: var(--ink); background: var(--bg);
+  border: 1px solid var(--line-strong); border-radius: var(--r-sm); padding: var(--s-3) var(--s-4);
+  transition: border-color var(--m-out) var(--m-ease), box-shadow var(--m-out) var(--m-ease);
+}
+textarea { min-height: 168px; resize: vertical; }
+input[type="text"] { height: 48px; }
+textarea:hover, input[type="text"]:hover { border-color: color-mix(in oklab, var(--ink) 48%, transparent); }
+textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--action); box-shadow: 0 0 0 3px color-mix(in oklab, var(--action) 20%, transparent); transition-duration: var(--m-in); }
+::placeholder { color: var(--muted); opacity: 1; }
 
-.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.btn { font: 600 15px/1 var(--body); border-radius: 6px; padding: 13px 20px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
-.btn:hover { border-color: var(--muted); }
-.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.btn.primary:hover { filter: brightness(1.08); }
-.btn.small { font-size: 14px; padding: 9px 14px; }
-.btn:disabled { opacity: 0.55; cursor: not-allowed; }
-.btn:focus-visible, .idea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.msg { font-size: 14px; color: var(--muted); margin: 0; }
-.msg.err { color: var(--bad); }
+.ideas { display: flex; flex-wrap: wrap; gap: var(--s-2); }
 
-.result-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
-.result-head h2 { font: 700 20px/1.2 var(--display); margin: 0; display: flex; gap: 10px; align-items: center; }
-.example-flag { font: 600 11px/1 var(--body); letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); background: var(--warn-soft); padding: 5px 7px; border-radius: 3px; }
+/* buttons: one pair, solid look */
+.btn {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  height: var(--btn-h); padding: 0 var(--s-5); border-radius: var(--r-btn); border: 1px solid transparent;
+  font: 500 var(--t-body)/1 var(--font-text); white-space: nowrap; cursor: pointer;
+  transition: background-color var(--m-out) var(--m-ease), color var(--m-out) var(--m-ease), border-color var(--m-out) var(--m-ease), transform var(--m-press) var(--m-ease);
+}
+.btn--primary { background: var(--action); color: var(--action-ink); }
+.btn--primary:hover { background: color-mix(in oklab, var(--action) 84%, var(--bg)); transition-duration: var(--m-in); }
+.btn--secondary { background: var(--bg); color: var(--ink); border-color: var(--line-strong); }
+.btn--secondary:hover { background: color-mix(in oklab, var(--bg) 94%, var(--ink)); border-color: color-mix(in oklab, var(--ink) 35%, transparent); transition-duration: var(--m-in); }
+.btn--sm { height: var(--btn-h-sm); padding: 0 var(--s-4); font-size: var(--t-small); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { transform: translateY(-1px); } }
+.btn:active { transform: translateY(1px) scale(.985); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn-row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+@media (max-width: 639px) { .btn-row > .btn:not(.btn--sm) { flex: 1 1 100%; } }
 
-.sheet { background: var(--sunk); border: 1px solid var(--line); border-radius: 6px; max-height: 520px; overflow: auto; }
-.sheet pre { margin: 0; padding: 14px 16px; font: 13.5px/1.65 var(--mono); white-space: pre-wrap; word-break: break-word; }
-.tg { color: var(--tag); }
-.vr { background: var(--var-bg); color: var(--var-ink); border-radius: 2px; padding: 0 2px; }
-.caret { display: inline-block; width: 7px; height: 1.1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s steps(2) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-.placeholder { padding: 24px 16px; color: var(--muted); font: 15px/1.5 var(--body); }
+:is(a, button, input, textarea, summary):focus-visible { outline: 2px solid var(--action); outline-offset: 2px; animation: m-focus var(--m-out) var(--m-ease); }
+@keyframes m-focus { from { outline-offset: 6px; outline-color: transparent; } }
 
-.tip { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; font-size: 14.5px; }
-.tip b { background: var(--accent-soft); color: var(--accent); font: 500 13px/1 var(--mono); padding: 5px 8px; border-radius: 3px; }
-.tip span { color: var(--muted); }
+.msg { margin: 0; font-size: var(--t-small); color: var(--muted); }
+.msg.err { color: var(--err); }
 
-details.why summary { cursor: pointer; font-size: 14px; color: var(--muted); }
-details.why ul { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14.5px; }
+/* the prompt sheet */
+.sheet { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); min-height: 260px; max-height: 520px; overflow: auto; }
+.sheet pre { margin: 0; padding: var(--s-4) var(--s-5); font: 400 14px/1.7 var(--font-mono); white-space: pre-wrap; word-break: break-word; }
+.tg { color: var(--muted); }
+.vr { border: 1px solid var(--line-strong); border-radius: 4px; padding: 0 3px; font-weight: 500; }
+.caret { display: inline-block; width: 2px; height: 1.1em; background: var(--ink); vertical-align: text-bottom; margin-left: 1px; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.empty { padding: var(--s-6) var(--s-5); color: var(--muted); }
 
-.tweak { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
-.tweak input { width: 100%; font: 15px/1.4 var(--body); color: var(--ink); background: var(--sunk); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; min-width: 0; }
-.tweak input:focus { outline: 2px solid var(--accent); outline-offset: -1px; border-color: transparent; }
-@media (max-width: 480px) { .tweak { grid-template-columns: minmax(0, 1fr); } }
+.effort { margin: 0; font-size: var(--t-body); }
+.effort b { font-weight: 500; }
+.effort span { color: var(--ink); }
+details.why summary { cursor: pointer; font: 500 var(--t-small)/1.4 var(--font-text); width: fit-content; }
+details.why ul { margin: var(--s-3) 0 0; padding-left: var(--s-5); display: grid; gap: var(--s-1); }
+.fill { margin: 0; font-size: var(--t-small); color: var(--ink); }
 
-.foot { font-size: 13px; color: var(--muted); margin: 0; }
-@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+.tweak { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-3); padding-top: var(--s-4); border-top: 1px solid var(--line); }
+.tweak .btn { height: 48px; }
+@media (max-width: 479px) { .tweak { grid-template-columns: minmax(0, 1fr); } }
+
+.foot { padding-block: var(--s-6) var(--s-7); }
+.foot p { margin: 0; font-size: var(--t-small); color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, textarea, input { transition-property: opacity, color, background-color, border-color; }
+  .btn:hover, .btn:active { transform: none; }
+  .caret, :focus-visible { animation: none; }
+}
 </style>
 
-<div class="wrap">
-  <header>
-    <h1>Opus <em>Prompt</em> Generator</h1>
-    <p class="lede">Say what you want Claude to do, or paste a prompt you already have. You get back a prompt written for Claude Opus 5.5.</p>
-  </header>
+<!-- kind: software · deal: cobalt-on-sand, instrument, soft, solid, initial · no hero visual: the tool itself is the product, in one app frame -->
+<header class="nav">
+  <div class="wrap">
+    <span class="nav__logo"><span class="mark--initial" aria-hidden="true">O</span>Opus Prompt Generator</span>
+    <span class="nav__fact">Runs on Claude Opus 5.5</span>
+  </div>
+</header>
 
-  <form class="card" id="form" novalidate>
-    <label class="big" for="ask">What do you want Claude to do?</label>
-    <textarea id="ask" placeholder="e.g. Write a friendly email asking my landlord to fix the heating"></textarea>
-    <div class="ideas" id="ideas">
-      <span>Try:</span>
-      <button type="button" class="idea">Explain a topic to a beginner</button>
-      <button type="button" class="idea">Review my code for bugs</button>
-      <button type="button" class="idea">Summarize a long article</button>
-      <button type="button" class="idea">Write a cover letter</button>
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Prompt writer for Claude Opus 5.5</h1>
+      <p>Describe a task, or paste a prompt you already have. You get back a prompt written the way Opus 5.5 reads best, ready to copy.</p>
     </div>
-    <div class="actions">
-      <button type="submit" class="btn primary" id="go">Generate prompt</button>
-      <button type="button" class="btn" id="stop" hidden>Stop</button>
-    </div>
-    <p class="msg" id="formMsg" role="status"></p>
-  </form>
-
-  <section class="card" aria-labelledby="outTitle">
-    <div class="result-head">
-      <h2 id="outTitle">Your prompt <span class="example-flag" id="exampleFlag">Example</span></h2>
-      <button type="button" class="btn small" id="copyBtn">Copy</button>
-    </div>
-    <div class="sheet" id="sheet" aria-live="polite"><div class="placeholder">Your prompt appears here.</div></div>
-    <p class="tip" id="tip" hidden></p>
-    <details class="why" id="whyBox" hidden>
-      <summary>Why it's written this way</summary>
-      <ul id="notes"></ul>
-    </details>
-    <form class="tweak" id="tweakForm" hidden novalidate>
-      <input type="text" id="tweak" aria-label="What to change" placeholder="Want a change? e.g. make it shorter">
-      <button type="submit" class="btn small" id="tweakBtn">Update</button>
-    </form>
   </section>
 
-  <p class="foot" id="foot">Paste the prompt into Claude. Text in <span class="vr">{{LIKE_THIS}}</span> is a blank for you to fill in.</p>
-</div>
+  <section aria-label="Prompt generator">
+    <div class="wrap">
+      <div class="app">
+        <form class="pane" id="form" novalidate>
+          <div class="pane__head"><h2 class="pane__title">Task description</h2></div>
+          <label class="label" for="ask">What should Claude do?</label>
+          <textarea id="ask" placeholder="Write a friendly email asking my landlord to fix the heating"></textarea>
+          <div class="ideas" id="ideas" aria-label="Starting points">
+            <button type="button" class="btn btn--secondary btn--sm idea">Explain a topic simply</button>
+            <button type="button" class="btn btn--secondary btn--sm idea">Review code for bugs</button>
+            <button type="button" class="btn btn--secondary btn--sm idea">Summarize an article</button>
+            <button type="button" class="btn btn--secondary btn--sm idea">Write a cover letter</button>
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn--primary" id="go">Write the prompt</button>
+            <button type="button" class="btn btn--secondary" id="stop" hidden>Stop</button>
+          </div>
+          <p class="msg" id="formMsg" role="status"></p>
+        </form>
+
+        <div class="pane" aria-labelledby="outTitle">
+          <div class="pane__head">
+            <h2 class="pane__title" id="outTitle">Opus 5.5 prompt</h2>
+            <button type="button" class="btn btn--secondary btn--sm" id="copyBtn">
+              <svg id="copyIcon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="5" width="8.5" height="8.5" rx="1.5"/><path d="M10.5 5V3.5A1.5 1.5 0 0 0 9 2H3.5A1.5 1.5 0 0 0 2 3.5V9a1.5 1.5 0 0 0 1.5 1.5H5"/></svg>
+              <svg id="checkIcon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" hidden><path d="M3 8.5l3.2 3L13 4.5"/></svg>
+              <span id="copyLabel">Copy prompt</span>
+            </button>
+          </div>
+          <div class="sheet" id="sheet" aria-live="polite"><div class="empty">Your prompt appears here.</div></div>
+          <p class="fill" id="fill" hidden>Replace the outlined blanks with your own details before you paste it into Claude.</p>
+          <p class="effort" id="effort" hidden></p>
+          <details class="why" id="whyBox" hidden>
+            <summary>Why it's written this way</summary>
+            <ul id="notes"></ul>
+          </details>
+          <form class="tweak" id="tweakForm" hidden novalidate>
+            <input type="text" id="tweak" aria-label="What to change" placeholder="Change something, e.g. make it shorter">
+            <button type="submit" class="btn btn--secondary" id="tweakBtn">Update prompt</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><p>Each prompt is written on your own Claude account and uses your normal Claude usage.</p></div>
+</footer>
 
 <script>
 (() => {
@@ -193,14 +263,14 @@ effort: (low, medium, high, xhigh or max: low for quick simple tasks, medium for
 </notes>`;
 
   const IDEAS = {
-    "Explain a topic to a beginner": "Explain a topic I don't know anything about, in simple language, with an everyday example, so I actually understand it.",
-    "Review my code for bugs": "Look through my code and point out real bugs and risky spots, explaining each one and how to fix it. Skip style nitpicks.",
-    "Summarize a long article": "Summarize a long article into the key points I need to know, in a few short paragraphs.",
+    "Explain a topic simply": "Explain a topic I don't know anything about, in simple language, with an everyday example, so I actually understand it.",
+    "Review code for bugs": "Look through my code and point out real bugs and risky spots, explaining each one and how to fix it. Skip style nitpicks.",
+    "Summarize an article": "Summarize a long article into the key points I need to know, in a few short paragraphs.",
     "Write a cover letter": "Write a cover letter for a job I'm applying to, based on my CV and the job description, that sounds like a real person and not a template.",
   };
 
-  const EXAMPLE_ASK = "Write a friendly email asking my landlord to fix the heating";
-  const EXAMPLE_RAW = `<prompt>
+  const FIRST_ASK = "Write a friendly email asking my landlord to fix the heating";
+  const FIRST_RAW = `<prompt>
 <details>
 Landlord's name: {{LANDLORD_NAME}}
 My name: {{MY_NAME}}
@@ -219,7 +289,7 @@ effort: low
 - It asks for a short, polite email that still makes clear the repair is urgent.
 </notes>`;
 
-  const state = { sample: null, ctl: null, raw: "", parsed: null, ask: "", example: true };
+  const state = { sample: null, ctl: null, raw: "", parsed: null, ask: "" };
 
   // ---------- Parsing & rendering ----------
   function section(text, tag) {
@@ -251,11 +321,11 @@ effort: low
     .replace(/\{\{\s*[A-Za-z0-9_]+\s*\}\}/g, (m) => `<span class="vr">${m}</span>`);
 
   const EFFORT_WORDS = {
-    low: "it's a quick, simple task",
-    medium: "the default; fine for everyday tasks",
+    low: "a quick, simple task",
+    medium: "the default, fine for everyday tasks",
     high: "it needs careful reasoning",
-    xhigh: "it's a long, hard task",
-    max: "only worth it when accuracy matters most",
+    xhigh: "a long, hard task",
+    max: "only when accuracy matters most",
   };
 
   function render(streaming) {
@@ -263,23 +333,22 @@ effort: low
     const sheet = $("sheet");
     if (!p.prompt) {
       sheet.innerHTML = streaming
-        ? `<div class="placeholder">Writing your prompt… <span class="caret"></span></div>`
-        : `<div class="placeholder">Your prompt appears here.</div>`;
+        ? `<div class="empty">Writing your prompt<span class="caret"></span></div>`
+        : `<div class="empty">Your prompt appears here.</div>`;
     } else {
       sheet.innerHTML = `<pre>${highlight(p.prompt)}${streaming ? '<span class="caret"></span>' : ""}</pre>`;
+      if (streaming) sheet.scrollTop = sheet.scrollHeight;
     }
-    $("exampleFlag").hidden = !state.example;
-    $("copyBtn").disabled = !p.prompt;
+    $("copyBtn").disabled = !p.prompt || streaming;
 
     const done = !!p.prompt && !streaming;
-    const tip = $("tip");
-    tip.hidden = !(done && p.effort);
-    if (!tip.hidden) tip.innerHTML = `Best run on Opus 5.5 at <b>${esc(p.effort)} effort</b><span>${esc(EFFORT_WORDS[p.effort] || "")}</span>`;
-
+    $("fill").hidden = !(done && /\{\{/.test(p.prompt));
+    const eff = $("effort");
+    eff.hidden = !(done && p.effort);
+    if (!eff.hidden) eff.innerHTML = `Run it at <b>${esc(p.effort)} effort</b> <span>· ${esc(EFFORT_WORDS[p.effort] || "")}</span>`;
     $("whyBox").hidden = !(done && p.notes.length);
     $("notes").innerHTML = p.notes.map((n) => `<li>${highlight(n)}</li>`).join("");
     $("tweakForm").hidden = !(done && state.sample);
-    $("foot").hidden = !(p.prompt && /\{\{/.test(p.prompt));
   }
 
   // ---------- Requests ----------
@@ -309,7 +378,7 @@ Change only what that calls for and keep the rest. Reply in the same structure.`
 
   // Used only when this page can't reach Claude.
   function buildLocal(ask) {
-    const t = ask.trim().replace(/\s+$/, "");
+    const t = ask.trim();
     return `<prompt>
 ${t}${/[.!?]$/.test(t) ? "" : "."}
 
@@ -343,11 +412,10 @@ effort: medium
   async function run(input) {
     const msg = $("formMsg");
     msg.className = "msg"; msg.textContent = "";
-    state.example = false;
     state.raw = "";
     state.parsed = null;
     render(true);
-    $("sheet").closest(".card").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (window.matchMedia("(max-width: 899px)").matches) $("outTitle").scrollIntoView({ behavior: "smooth", block: "start" });
 
     if (!state.sample) {
       state.raw = buildLocal(state.ask);
@@ -390,7 +458,7 @@ effort: medium
   $("ask").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); $("form").requestSubmit(); } });
   $("stop").addEventListener("click", () => state.ctl?.abort());
   document.querySelectorAll(".idea").forEach((b) => b.addEventListener("click", () => {
-    $("ask").value = IDEAS[b.textContent] || b.textContent;
+    $("ask").value = IDEAS[b.textContent.trim()] || b.textContent.trim();
     $("ask").focus();
   }));
   $("tweakForm").addEventListener("submit", (e) => {
@@ -400,29 +468,31 @@ effort: medium
     $("tweak").value = "";
     run(tweakRequest(change));
   });
-  $("copyBtn").addEventListener("click", async (e) => {
-    const btn = e.currentTarget, text = state.parsed?.prompt;
+
+  let copyTimer;
+  function copied(label) {
+    $("copyIcon").hidden = true; $("checkIcon").hidden = false; $("copyLabel").textContent = label;
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => { $("copyIcon").hidden = false; $("checkIcon").hidden = true; $("copyLabel").textContent = "Copy prompt"; }, 1800);
+  }
+  $("copyBtn").addEventListener("click", async () => {
+    const text = state.parsed?.prompt;
     if (!text) return;
-    try { await navigator.clipboard.writeText(text); btn.textContent = "Copied"; }
+    try { await navigator.clipboard.writeText(text); copied("Copied"); }
     catch {
       const pre = $("sheet").querySelector("pre");
       if (pre) { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
-      btn.textContent = "Selected, press Ctrl+C";
+      $("copyLabel").textContent = "Selected, press Ctrl+C";
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => { $("copyLabel").textContent = "Copy prompt"; }, 2400);
     }
-    setTimeout(() => (btn.textContent = "Copy"), 1600);
   });
 
-  // ---------- Boot ----------
+  // ---------- Boot: last prompt, or the landlord email as a starting point ----------
   const last = store.get("opg.last", null);
-  if (last && last.raw) {
-    state.ask = last.ask || "";
-    state.raw = last.raw;
-    state.example = false;
-    $("ask").value = state.ask;
-  } else {
-    state.ask = EXAMPLE_ASK;
-    state.raw = EXAMPLE_RAW;
-  }
+  if (last && last.raw) { state.ask = last.ask || ""; state.raw = last.raw; }
+  else { state.ask = FIRST_ASK; state.raw = FIRST_RAW; }
+  $("ask").value = state.ask;
   state.parsed = parse(state.raw, true);
   render(false);
 
