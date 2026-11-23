@@ -99,6 +99,13 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
 
 .ideas { display: flex; flex-wrap: wrap; gap: var(--s-2); }
 
+/* the prompt kind: two options, the ink pill marks the chosen one (click only) */
+.seg { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; padding: 3px; border: 1px solid var(--line-strong); border-radius: var(--r-sm); background: var(--surface); }
+.seg button { height: var(--btn-h-sm); border: 0; border-radius: calc(var(--r-sm) - 3px); background: transparent; color: var(--ink); font: 500 var(--t-small)/1 var(--font-text); cursor: pointer; transition: background-color var(--m-out) var(--m-ease), color var(--m-out) var(--m-ease); }
+.seg button:hover { background: color-mix(in oklab, var(--surface) 88%, var(--ink)); transition-duration: var(--m-in); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.label .hint { font-weight: 400; }
+
 /* buttons: one pair, solid look */
 .btn {
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
@@ -148,7 +155,7 @@ details.why ul { margin: var(--s-3) 0 0; padding-left: var(--s-5); display: grid
 .foot p { margin: 0; font-size: var(--t-small); color: var(--ink); }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn, textarea, input { transition-property: opacity, color, background-color, border-color; }
+  .btn, .seg button, textarea, input { transition-property: opacity, color, background-color, border-color; }
   .btn:hover, .btn:active { transform: none; }
   .caret, :focus-visible { animation: none; }
 }
@@ -174,15 +181,18 @@ details.why ul { margin: var(--s-3) 0 0; padding-left: var(--s-5); display: grid
     <div class="wrap">
       <div class="app">
         <form class="pane" id="form" novalidate>
-          <div class="pane__head"><h2 class="pane__title">Task description</h2></div>
-          <label class="label" for="ask">What should Claude do?</label>
-          <textarea id="ask" placeholder="Write a friendly email asking my landlord to fix the heating"></textarea>
-          <div class="ideas" id="ideas" aria-label="Starting points">
-            <button type="button" class="btn btn--secondary btn--sm idea">Explain a topic simply</button>
-            <button type="button" class="btn btn--secondary btn--sm idea">Review code for bugs</button>
-            <button type="button" class="btn btn--secondary btn--sm idea">Summarize an article</button>
-            <button type="button" class="btn btn--secondary btn--sm idea">Write a cover letter</button>
+          <div class="pane__head"><h2 class="pane__title" id="inTitle">Task description</h2></div>
+          <div class="seg" role="group" aria-label="Kind of prompt">
+            <button type="button" id="modeNew" aria-pressed="true">New chat</button>
+            <button type="button" id="modeFollow" aria-pressed="false">Follow-up</button>
           </div>
+          <label class="label" for="ask" id="askLabel">What should Claude do?</label>
+          <textarea id="ask" placeholder="Write a friendly email asking my landlord to fix the heating"></textarea>
+          <div id="ctxField" hidden>
+            <label class="label" for="ctx">Claude's last reply <span class="hint">· optional, makes the follow-up more precise</span></label>
+            <textarea id="ctx" placeholder="Paste Claude's last answer, or a line about what the chat is about" style="min-height:120px;margin-top:var(--s-2)"></textarea>
+          </div>
+          <div class="ideas" id="ideas" aria-label="Starting points"></div>
           <div class="btn-row">
             <button type="submit" class="btn btn--primary" id="go">Write the prompt</button>
             <button type="button" class="btn btn--secondary" id="stop" hidden>Stop</button>
@@ -263,10 +273,22 @@ effort: (low, medium, high, xhigh or max: low for quick simple tasks, medium for
 </notes>`;
 
   const IDEAS = {
-    "Explain a topic simply": "Explain a topic I don't know anything about, in simple language, with an everyday example, so I actually understand it.",
-    "Review code for bugs": "Look through my code and point out real bugs and risky spots, explaining each one and how to fix it. Skip style nitpicks.",
-    "Summarize an article": "Summarize a long article into the key points I need to know, in a few short paragraphs.",
-    "Write a cover letter": "Write a cover letter for a job I'm applying to, based on my CV and the job description, that sounds like a real person and not a template.",
+    new: {
+      "Explain a topic simply": "Explain a topic I don't know anything about, in simple language, with an everyday example, so I actually understand it.",
+      "Review code for bugs": "Look through my code and point out real bugs and risky spots, explaining each one and how to fix it. Skip style nitpicks.",
+      "Summarize an article": "Summarize a long article into the key points I need to know, in a few short paragraphs.",
+      "Write a cover letter": "Write a cover letter for a job I'm applying to, based on my CV and the job description, that sounds like a real person and not a template.",
+    },
+    follow: {
+      "Make it shorter": "Make your last answer shorter and tighter without losing anything important.",
+      "Fix what's wrong": "Some of your last answer is wrong or doesn't fit what I need. Fix it.",
+      "Go deeper": "Go deeper on the most important part of your last answer, with more detail and a concrete example.",
+      "Change the tone": "Keep the content of your last answer but change the tone to sound more natural and less formal.",
+    },
+  };
+  const MODE_TEXT = {
+    new: { title: "Task description", label: "What should Claude do?", ph: "Write a friendly email asking my landlord to fix the heating", out: "Opus 5.5 prompt" },
+    follow: { title: "Follow-up", label: "What should Claude do next?", ph: "Make the email shorter and mention I've already asked once by phone", out: "Opus 5.5 follow-up" },
   };
 
   const FIRST_ASK = "Write a friendly email asking my landlord to fix the heating";
@@ -289,7 +311,7 @@ effort: low
 - It asks for a short, polite email that still makes clear the repair is urgent.
 </notes>`;
 
-  const state = { sample: null, ctl: null, raw: "", parsed: null, ask: "" };
+  const state = { sample: null, ctl: null, raw: "", parsed: null, ask: "", ctx: "", mode: "new", reqMode: "new" };
 
   // ---------- Parsing & rendering ----------
   function section(text, tag) {
@@ -340,6 +362,7 @@ effort: low
       if (streaming) sheet.scrollTop = sheet.scrollHeight;
     }
     $("copyBtn").disabled = !p.prompt || streaming;
+    $("outTitle").textContent = MODE_TEXT[state.reqMode].out;
 
     const done = !!p.prompt && !streaming;
     $("fill").hidden = !(done && /\{\{/.test(p.prompt));
@@ -352,21 +375,42 @@ effort: low
   }
 
   // ---------- Requests ----------
-  function newRequest(ask) {
-    return `${GUIDE}
+  const FOLLOW_RULES = `<follow_up>
+The person is partway through a conversation with Claude and will send this prompt as their next message in that same chat. Claude already has everything said earlier, so:
+- Do not restate the original task, background or details that are already in the conversation. Refer to them directly ("your last answer", "the email you wrote", "the second option").
+- Say exactly what to change, keep or add, and why, so Claude can apply it with judgment instead of starting over.
+- Say whether Claude should give the full revised version or only the changed part, whichever suits the request.
+- Keep it as short as the change needs, usually a few sentences. No XML scaffolding unless new material is being added.
+- If the earlier reply is given in <previous_reply>, use it to be specific about which parts to change, but do not paste it back into the prompt.
+- Use {{SNAKE_CASE}} placeholders only for new information the person still has to add.
+</follow_up>`;
 
-<request>
-${ask}
-</request>
-
-The request is either a description of something the person wants Claude to do, or an existing prompt they want improved. If it's a description, write a prompt for it. If it's an existing prompt, rewrite it for Opus 5.5: keep its purpose, its inputs (in their original variable syntax) and its output format, and remove what Opus 5.5 doesn't need, such as "think step by step", shouted rules, or temperature settings.`;
-  }
-  function tweakRequest(change) {
-    return `${GUIDE}
+  function requestBlock() {
+    if (state.reqMode === "follow") {
+      const prev = state.ctx.trim() ? `\n\n<previous_reply>\n${state.ctx.trim().slice(0, 60000)}\n</previous_reply>` : "";
+      return `${FOLLOW_RULES}${prev}
 
 <request>
 ${state.ask}
 </request>
+
+Write the follow-up message for this request.`;
+    }
+    return `<request>
+${state.ask}
+</request>
+
+The request is either a description of something the person wants Claude to do, or an existing prompt they want improved. If it's a description, write a prompt for it. If it's an existing prompt, rewrite it for Opus 5.5: keep its purpose, its inputs (in their original variable syntax) and its output format, and remove what Opus 5.5 doesn't need, such as "think step by step", shouted rules, or temperature settings.`;
+  }
+  function newRequest() {
+    return `${GUIDE}
+
+${requestBlock()}`;
+  }
+  function tweakRequest(change) {
+    return `${GUIDE}
+
+${requestBlock()}
 
 <current_prompt>
 ${state.parsed?.prompt || ""}
@@ -379,6 +423,15 @@ Change only what that calls for and keep the rest. Reply in the same structure.`
   // Used only when this page can't reach Claude.
   function buildLocal(ask) {
     const t = ask.trim();
+    if (state.reqMode === "follow") return `<prompt>
+${t}${/[.!?]$/.test(t) ? "" : "."} Keep everything else from your last answer as it is, and give me the full updated version.
+</prompt>
+<settings>
+effort: medium
+</settings>
+<notes>
+- This is a basic version made without Claude. Open this page in Claude to get a follow-up written by Opus 5.5.
+</notes>`;
     return `<prompt>
 ${t}${/[.!?]$/.test(t) ? "" : "."}
 
@@ -446,21 +499,51 @@ effort: medium
     }
   }
 
-  function save() { store.set("opg.last", { ask: state.ask, raw: state.raw }); }
+  function save() { store.set("opg.last", { ask: state.ask, ctx: state.ctx, mode: state.reqMode, raw: state.raw }); }
+
+  function setMode(mode) {
+    state.mode = mode;
+    const t = MODE_TEXT[mode];
+    $("modeNew").setAttribute("aria-pressed", String(mode === "new"));
+    $("modeFollow").setAttribute("aria-pressed", String(mode === "follow"));
+    $("inTitle").textContent = t.title;
+    $("askLabel").textContent = t.label;
+    $("ask").placeholder = t.ph;
+    $("ctxField").hidden = mode !== "follow";
+    $("ideas").innerHTML = "";
+    Object.keys(IDEAS[mode]).forEach((name) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "btn btn--secondary btn--sm idea"; b.textContent = name;
+      b.disabled = !!state.ctl;
+      $("ideas").append(b);
+    });
+  }
+  $("modeNew").addEventListener("click", () => { if (state.mode !== "new") { setMode("new"); $("ask").focus(); } });
+  $("modeFollow").addEventListener("click", () => {
+    if (state.mode === "follow") return;
+    if ($("ask").value.trim() === FIRST_ASK) $("ask").value = "";
+    setMode("follow");
+    $("ask").focus();
+  });
 
   $("form").addEventListener("submit", (e) => {
     e.preventDefault();
     const ask = $("ask").value.trim();
     if (!ask) { const m = $("formMsg"); m.className = "msg err"; m.textContent = "Type what you want Claude to do first."; $("ask").focus(); return; }
     state.ask = ask;
-    run(newRequest(ask));
+    state.ctx = state.mode === "follow" ? $("ctx").value : "";
+    state.reqMode = state.mode;
+    run(newRequest());
   });
-  $("ask").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); $("form").requestSubmit(); } });
+  ["ask", "ctx"].forEach((id) => $(id).addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); $("form").requestSubmit(); } }));
   $("stop").addEventListener("click", () => state.ctl?.abort());
-  document.querySelectorAll(".idea").forEach((b) => b.addEventListener("click", () => {
-    $("ask").value = IDEAS[b.textContent.trim()] || b.textContent.trim();
+  $("ideas").addEventListener("click", (e) => {
+    const b = e.target.closest(".idea");
+    if (!b) return;
+    const name = b.textContent.trim();
+    $("ask").value = IDEAS[state.mode][name] || name;
     $("ask").focus();
-  }));
+  });
   $("tweakForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const change = $("tweak").value.trim();
@@ -490,9 +573,14 @@ effort: medium
 
   // ---------- Boot: last prompt, or the landlord email as a starting point ----------
   const last = store.get("opg.last", null);
-  if (last && last.raw) { state.ask = last.ask || ""; state.raw = last.raw; }
+  if (last && last.raw) {
+    state.ask = last.ask || ""; state.raw = last.raw;
+    state.ctx = last.ctx || ""; state.reqMode = last.mode === "follow" ? "follow" : "new";
+  }
   else { state.ask = FIRST_ASK; state.raw = FIRST_RAW; }
+  setMode(state.reqMode);
   $("ask").value = state.ask;
+  $("ctx").value = state.ctx;
   state.parsed = parse(state.raw, true);
   render(false);
 
